@@ -51,6 +51,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.3)
+    elo (0.1.0)
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.9.18)
@@ -164,6 +165,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
+  elo
   jbuilder (~> 2.5)
   jquery-rails
   kaminari (~> 0.17.0)
@@ -180,4 +182,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.13.6
+   1.14.3
