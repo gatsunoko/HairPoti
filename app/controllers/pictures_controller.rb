@@ -4,7 +4,7 @@ class PicturesController < ApplicationController
   # GET /pictures
   # GET /pictures.json
   def index
-    @pictures = Picture.all
+    @pictures = Picture.all.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   # GET /pictures/1

@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Pictures</h1>
-
+<%= link_to 'New Picture', new_picture_path %>
 <table>
   <thead>
     <tr>
@@ -10,10 +10,17 @@
     </tr>
   </thead>
 
+<div class="feed_page">
+  <div class="feed_title"><%= page_entries_info @pictures %></div>
+  <div class="feed">
+    <%= paginate @pictures %>
+  </div>
+</div>
+
   <tbody>
     <% @pictures.each do |picture| %>
       <tr>
-        <td><%= picture.url %></td>
+        <td><%= image_tag(picture.url + 'media/?size=t') %></td>
         <td><%= link_to 'Show', picture %></td>
         <td><%= link_to 'Edit', edit_picture_path(picture) %></td>
         <td><%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -22,6 +29,11 @@
   </tbody>
 </table>
 
-<br>
+<div class="feed_page">
+  <div class="feed_title"><%= page_entries_info @pictures %></div>
+  <div class="feed">
+    <%= paginate @pictures %>
+  </div>
+</div>
 
-<%= link_to 'New Picture', new_picture_path %>
+<br>
