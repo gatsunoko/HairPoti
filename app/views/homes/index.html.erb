@@ -1,2 +1,9 @@
 <%= link_to '登録画面', pictures_path %>
 <%= link_to 'バトル', conflict_index_path %>
+
+<% @pictures.each.with_index(1) do |picture, i| %>
+  <div>
+    <p><%= i %>位 <%= picture.rating %>ポイント</p>
+    <%= image_tag(picture.url + 'media/?size=t') %>
+  </div>
+<% end -%>

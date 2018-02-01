@@ -1,10 +1,11 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /pictures
   # GET /pictures.json
   def index
-    @pictures = Picture.all.order(created_at: :desc).page(params[:page]).per(10)
+    @pictures = Picture.all.order(id: :desc).page(params[:page]).per(10)
   end
 
   # GET /pictures/1
@@ -26,10 +27,11 @@ class PicturesController < ApplicationController
   def create
     @picture = Picture.new(picture_params)
     @picture.url.sub!(/\?.*/, "")
+    @picture.user_id = current_user.id
 
     respond_to do |format|
       if @picture.save
-        format.html { redirect_to @picture, notice: 'Picture was successfully created.' }
+        format.html { redirect_to pictures_path, notice: 'Picture was successfully created.' }
         format.json { render :show, status: :created, location: @picture }
       else
         format.html { render :new }
