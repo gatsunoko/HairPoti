@@ -1,9 +1,25 @@
-<%= link_to '登録画面', pictures_path %>
-<%= link_to 'バトル', conflict_index_path %>
+<div class="top_header" >
+  <%= link_to '登録画面', pictures_path %>
+  <%= link_to 'バトル', conflict_index_path %>
+</div>
 
-<% @pictures.each.with_index(1) do |picture, i| %>
-  <div>
-    <p><%= i %>位 <%= picture.rating %>ポイント</p>
-    <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
-  </div>
+<div class="all_ranking">
+  <p>全体ランキング</p>
+  <% @pictures.each.with_index(1) do |picture, i| %>
+    <div>
+      <p><%= i %>位 <%= picture.rating %>ポイント</p>
+      <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
+    </div>
+  <% end -%>
+</div>
+<% if user_signed_in? %>
+<div class="user_ranking">
+  <p>あなたの中のランキング</p>
+  <% @user_pictures.each.with_index(1) do |picture, i| %>
+    <div>
+      <p><%= i %>位 <%= picture.rating %>ポイント</p>
+      <%= link_to(image_tag(picture.picture.url + 'media/?size=t'), picture_path(picture.picture)) %>
+    </div>
+  <% end -%>
+</div>
 <% end -%>

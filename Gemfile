@@ -33,6 +33,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'therubyracer', platforms: :ruby #本番環境に必要
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 
 gem 'dotenv-rails'
