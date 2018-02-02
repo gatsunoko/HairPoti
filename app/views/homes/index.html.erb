@@ -4,6 +4,6 @@
 <% @pictures.each.with_index(1) do |picture, i| %>
   <div>
     <p><%= i %>位 <%= picture.rating %>ポイント</p>
-    <%= image_tag(picture.url + 'media/?size=t') %>
+    <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
   </div>
 <% end -%>
