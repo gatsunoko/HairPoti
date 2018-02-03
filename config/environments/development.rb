@@ -57,9 +57,9 @@ Rails.application.configure do
 
   config.action_mailer.smtp_settings = {
     :enable_starttls_auto => true,
-    :address => "smtp4.gmoserver.jp",
+    :address => ENV['MAIL_SERVER'],
     :port => 587,
-    :domain => 'smtp4.gmoserver.jp',
+    :domain => ENV['MAIL_SERVER'],
     :user_name => ENV['EMAIL_ADDRESS'], #gmailアドレス
     :password => ENV['MAIL_PASSWORD'], #gmailパスワード
     :authentication => 'login',
