@@ -1,7 +1,7 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show]
-  before_action :is_mine, only: [:edit, :update, :destoy]
+  before_action :is_mine, only: [:edit, :update]
 
   # GET /pictures
   # GET /pictures.json
@@ -58,9 +58,10 @@ class PicturesController < ApplicationController
   # DELETE /pictures/1
   # DELETE /pictures/1.json
   def destroy
+    redirect_to root_path and return unless is_admin
     @picture.destroy
     respond_to do |format|
-      format.html { redirect_to pictures_url, notice: 'Picture was successfully destroyed.' }
+      format.html { redirect_to pictures_url, notice: 'Picture was successfully destroyed.' } and return
       format.json { head :no_content }
     end
   end
@@ -78,7 +79,7 @@ class PicturesController < ApplicationController
 
     def is_mine
       unless @picture.user_id == current_user.id
-        redirect_to root_path
+        redirect_to root_path and return
       end
     end
 end
