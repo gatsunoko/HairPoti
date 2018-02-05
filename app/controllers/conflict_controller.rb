@@ -41,6 +41,7 @@ class ConflictController < ApplicationController
       user_lose.rating = lose.rating
       user_win.win += 1
       user_lose.lose += 1
+      user_win.voting_at = Time.now
       user_win.save
       user_lose.save
     end

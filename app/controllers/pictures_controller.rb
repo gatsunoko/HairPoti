@@ -2,6 +2,7 @@ class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show]
   before_action :is_mine, only: [:edit, :update]
+  before_action :is_admin, only: [:edit, :update, :destroy]
 
   # GET /pictures
   # GET /pictures.json
@@ -58,7 +59,6 @@ class PicturesController < ApplicationController
   # DELETE /pictures/1
   # DELETE /pictures/1.json
   def destroy
-    redirect_to root_path and return unless is_admin
     @picture.destroy
     respond_to do |format|
       format.html { redirect_to pictures_url, notice: 'Picture was successfully destroyed.' } and return
