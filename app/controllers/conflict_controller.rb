@@ -17,6 +17,8 @@ class ConflictController < ApplicationController
 
     winer.rating = win.rating
     loser.rating = lose.rating
+    winer.win += 1
+    loser.lose += 1
     winer.save
     loser.save
 
@@ -40,6 +42,8 @@ class ConflictController < ApplicationController
       lose.loses_from(win)
       user_win.rating = win.rating
       user_lose.rating = lose.rating
+      user_win.win += 1
+      user_lose.lose += 1
       user_win.save
       user_lose.save
     end
