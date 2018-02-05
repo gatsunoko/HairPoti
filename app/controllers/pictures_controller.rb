@@ -1,13 +1,16 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show]
-  before_action :is_mine, only: [:edit, :update]
   before_action :is_admin, only: [:edit, :update, :destroy]
 
   # GET /pictures
   # GET /pictures.json
   def index
-    @pictures = Picture.where(user_id: current_user.id).order(id: :desc).page(params[:page]).per(10)
+    if current_user.admin
+      @pictures = Picture.all.order(id: :desc).page(params[:page]).per(10)
+    else
+      @pictures = Picture.where(user_id: current_user.id).order(id: :desc).page(params[:page]).per(10)
+    end
   end
 
   # GET /pictures/1
@@ -76,11 +79,5 @@ class PicturesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def picture_params
       params.require(:picture).permit(:url)
-    end
-
-    def is_mine
-      unless @picture.user_id == current_user.id
-        redirect_to root_path and return
-      end
     end
 end

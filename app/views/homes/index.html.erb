@@ -13,10 +13,19 @@
 
 <div class="top_contents">
   <div class="all_ranking">
-    <p>全体ランキング</p>
-    <% @pictures.each.with_index(1) do |picture, i| %>
+    <p>ポイントランキング</p>
+    <% @rankings.each.with_index(1) do |picture, i| %>
       <div>
         <p><%= i %>位 <%= picture.rating %>ポイント</p>
+        <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
+      </div>
+    <% end -%>
+  </div>
+  <div class="win_count">
+    <p>投票された数ランキング</p>
+    <% @win_counts.each.with_index(1) do |picture, i| %>
+      <div>
+        <p><%= i %>位 <%= picture.win %>回</p>
         <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
       </div>
     <% end -%>
@@ -24,7 +33,7 @@
   <% if user_signed_in? %>
     <div class="user_ranking">
       <p>あなたの中のランキング</p>
-      <% @user_ranking.each.with_index(1) do |picture, i| %>
+      <% @user_rankings.each.with_index(1) do |picture, i| %>
         <div>
           <p><%= i %>位 <%= picture.rating %>ポイント</p>
           <%= link_to(image_tag(picture.picture.url + 'media/?size=t'), picture_path(picture.picture)) %>
@@ -33,7 +42,7 @@
     </div>
     <div class="user_history">
       <p>投票履歴</p>
-      <% @user_history.each.with_index(1) do |picture, i| %>
+      <% @user_histories.each.with_index(1) do |picture, i| %>
         <div>
           <p><%= picture.rating %>ポイント</p>
           <%= link_to(image_tag(picture.picture.url + 'media/?size=t'), picture_path(picture.picture)) %>
