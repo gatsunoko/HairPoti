@@ -1,9 +1,6 @@
 class ConflictController < ApplicationController
   def index
-    @picture1 = Picture.where('id >= ?', rand(Picture.first.id..Picture.last.id)).first
-    begin
-      @picture2 = Picture.where('id >= ?', rand(Picture.first.id..Picture.last.id)).first
-    end while @picture1.id == @picture2.id
+    set_picture
   end
 
   def elo
@@ -48,6 +45,14 @@ class ConflictController < ApplicationController
       user_lose.save
     end
 
-    redirect_to conflict_index_path
+    set_picture
   end
+
+  private
+    def set_picture
+      @picture1 = Picture.where('id >= ?', rand(Picture.first.id..Picture.last.id)).first
+      begin
+        @picture2 = Picture.where('id >= ?', rand(Picture.first.id..Picture.last.id)).first
+      end while @picture1.id == @picture2.id
+    end
 end
