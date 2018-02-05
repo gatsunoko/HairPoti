@@ -2,11 +2,45 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.top_header {
-  width: 100%;
+.top_text {
+  text-align: center;
+  p {
+    font-size: 18px;
+    margin: 15px 0;
+  }
 }
-.all_ranking,
-.user_ranking {
-  width: 200px;
-  display: inline-block;
+.top_button_area {
+  width: 100%;
+  margin: 15px 0;
+  a {
+    text-decoration: none;
+  }
+  .conflict_link {
+    text-align: center;
+    width: 220px;
+    height: 45px;
+    background: #6FFF6C;
+    margin: 0 auto;
+    border-radius: 15px;
+    p {
+      font-size: 24px;
+      color: white;
+      line-height: 180%;
+    }
+  }
+  .conflict_link:hover {
+    background: #65E763;
+    p {
+      color: #DCDCDC;
+    }
+  }
+}
+
+.top_contents {
+  text-align: center;
+  .all_ranking,
+  .user_ranking {
+    width: 200px;
+    display: inline-block;
+  }
 }

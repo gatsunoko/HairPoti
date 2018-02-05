@@ -6,20 +6,28 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
   </head>
 
   <body>
-    <div class="contants">
-      <div class="header">
-        <% if user_signed_in? %>
-            <%= link_to 'プロフィール変更', edit_user_registration_path %>
-            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-        <% else %>
-            <%= link_to 'サインアップ', new_user_registration_path %>
-            <%= link_to 'ログイン', new_user_session_path %>
-        <% end %>
-        <%= link_to 'トップへ', root_path %>
+    <div class="header">
+      <div class="navbar">
+        <div class="logo_area">
+          <%= link_to 'トップへ', root_path %>
+        </div>
+        <div class="signed">
+          <% if user_signed_in? %>
+              <%#= link_to 'プロフィール変更', edit_user_registration_path %>
+              <%= link_to '登録画面', pictures_path %>
+              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+          <% else %>
+              <%= link_to 'サインアップ', new_user_registration_path %>
+              <%= link_to 'ログイン', new_user_session_path %>
+          <% end %>
+        </div>
       </div>
+    </div>
+    <div class="contants">
       <%= yield %>
     </div>
   </body>

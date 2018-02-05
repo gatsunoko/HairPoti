@@ -1,25 +1,35 @@
-<div class="top_header" >
-  <%= link_to '登録画面', pictures_path %>
-  <%= link_to 'バトル', conflict_index_path %>
+<div class="top_text">
+  <p>投票に参加ボタンを押すと、２枚のママコーデが表示されます、いいと思った物を選んでください。</p>
+  <p>ログインして投票に参加すると、あなただけのランキングが作成されたり、投票履歴を見たりする事ができます。</p>
 </div>
 
-<div class="all_ranking">
-  <p>全体ランキング</p>
-  <% @pictures.each.with_index(1) do |picture, i| %>
-    <div>
-      <p><%= i %>位 <%= picture.rating %>ポイント</p>
-      <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
+<div class="top_button_area" >
+  <%= link_to conflict_index_path do  %>
+    <div class="conflict_link">
+      <p>投票に参加</p>
     </div>
   <% end -%>
 </div>
-<% if user_signed_in? %>
-<div class="user_ranking">
-  <p>あなたの中のランキング</p>
-  <% @user_pictures.each.with_index(1) do |picture, i| %>
-    <div>
-      <p><%= i %>位 <%= picture.rating %>ポイント</p>
-      <%= link_to(image_tag(picture.picture.url + 'media/?size=t'), picture_path(picture.picture)) %>
+
+<div class="top_contents">
+  <div class="all_ranking">
+    <p>全体ランキング</p>
+    <% @pictures.each.with_index(1) do |picture, i| %>
+      <div>
+        <p><%= i %>位 <%= picture.rating %>ポイント</p>
+        <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
+      </div>
+    <% end -%>
+  </div>
+  <% if user_signed_in? %>
+    <div class="user_ranking">
+      <p>あなたの中のランキング</p>
+      <% @user_pictures.each.with_index(1) do |picture, i| %>
+        <div>
+          <p><%= i %>位 <%= picture.rating %>ポイント</p>
+          <%= link_to(image_tag(picture.picture.url + 'media/?size=t'), picture_path(picture.picture)) %>
+        </div>
+      <% end -%>
     </div>
   <% end -%>
 </div>
-<% end -%>
