@@ -3,24 +3,14 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .embed {
-  position: relative;
-  width: 100%;
   text-align: center;
-}
-.embed:before {
-  content:"";
-  display: block;
-  padding-top: 113.19%; /*iframeのアスペクト比*/
-}
-.embed iframe{
-  $width: 750px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  margin: auto;
   width: 100%;
   height: 100%;
-  max-width: $width;
-  max-height: $width * 1.16;
+}
+.embed iframe {
+  $width: 750px;
+  width: $width;
+  height: $width * 1.16;
+  max-width: 90%;
+  max-height: 100%;
 }

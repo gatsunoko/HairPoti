@@ -45,6 +45,26 @@ class PicturesController < ApplicationController
     end
   end
 
+  def bulk_new
+    
+  end
+
+  def bulk_create
+    #raise.params.inspect
+    urls = params[:urls]
+    urls = urls.gsub(/\r\n|\r|\n/, ",")#改行をカンマに変更
+    urls = urls.split(",")#ひとつの文字列だったspをカンマで区切って配列にする
+
+    urls.each do |url|
+      url.sub!(/\?.*/, "")
+      picture = Picture.new(url: url, user_id: current_user.id)
+      picture.valid?
+      picture.save
+    end
+
+    redirect_to pictures_path
+  end
+
   # PATCH/PUT /pictures/1
   # PATCH/PUT /pictures/1.json
   def update

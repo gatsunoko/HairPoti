@@ -1,0 +1,11 @@
+<%= form_tag(bulk_create_pictures_path) do |f| %>
+
+  <div class="field">
+    <%= label_tag :urls %>
+    <%= text_area_tag :urls %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag %>
+  </div>
+<% end %>
