@@ -2,9 +2,11 @@
 
 <div>
   <%= link_to 'Edit', edit_picture_path(@picture) %> |
-  <%= link_to 'Back', pictures_path %>
+  <%= link_to 'Destroy', @picture, method: :delete, data: { confirm: 'Are you sure?' } %>
 </div>
 
-<div class="embed">
-  <iframe src="<%= @picture.url.gsub(/https:|www./, 'https:' => '', 'www.' => '') %>embed/" frameborder="1" scrolling="no" allowtransparency="true"></iframe>
+<%= link_to 'インスタでみる', @picture.url, target: '_blank' %>
+
+<div class="show_picture_area">
+  <%= image_tag(@picture.url + 'media/?size=l', class: 'show_picture') %>
 </div>
