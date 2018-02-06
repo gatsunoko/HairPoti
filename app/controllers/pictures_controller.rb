@@ -46,7 +46,6 @@ class PicturesController < ApplicationController
   end
 
   def bulk_new
-    
   end
 
   def bulk_create
@@ -54,15 +53,18 @@ class PicturesController < ApplicationController
     urls = params[:urls]
     urls = urls.gsub(/\r\n|\r|\n/, ",")#改行をカンマに変更
     urls = urls.split(",")#ひとつの文字列だったspをカンマで区切って配列にする
+    @success = 0 #登録の成功した数をカウントする変数
+    @fail = 0 #登録の失敗した数をカウントする変数
 
     urls.each do |url|
       url.sub!(/\?.*/, "")
       picture = Picture.new(url: url, user_id: current_user.id)
-      picture.valid?
-      picture.save
+      if picture.save
+        @success += 1 
+      else
+        @fail += 1
+      end
     end
-
-    redirect_to pictures_path
   end
 
   # PATCH/PUT /pictures/1
