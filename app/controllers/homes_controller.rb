@@ -7,4 +7,7 @@ class HomesController < ApplicationController
       @user_histories = UserPicture.where(user_id: current_user.id).where('win > ?', 0).order(voting_at: :desc).limit(5).offset(0)
     end
   end
+
+  def after_signup
+  end
 end
