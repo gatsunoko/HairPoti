@@ -14,3 +14,17 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+function img_blank(picture_id) {
+  $.ajax({
+      url: '/conflict/img_blank',
+      type: 'GET',
+      data: {
+        picture_id: picture_id
+      },
+    })
+    .done(function(response){
+    })
+    .fail(function(xhr){
+    });
+}

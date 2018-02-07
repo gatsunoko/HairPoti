@@ -49,6 +49,12 @@ class ConflictController < ApplicationController
     set_picture
   end
 
+  def img_blank
+    picture = Picture.find(params[:picture_id])
+    picture.destroy
+    redirect_back(fallback_location: root_path)
+  end
+
   private
     def set_picture
       @picture1 = Picture.where('id >= ?', rand(Picture.first.id..Picture.last.id)).first

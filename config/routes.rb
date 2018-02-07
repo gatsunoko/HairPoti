@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   get 'homes/after_signup'
   get 'conflict/index'
   get 'conflict/elo'
+  get 'conflict/img_blank'
 end
