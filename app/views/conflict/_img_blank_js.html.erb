@@ -1,0 +1,20 @@
+<script>
+function img_blank(picture_id) {
+  $.ajax({
+      url: '/conflict/img_blank',
+      type: 'GET',
+      data: {
+        picture_id: picture_id
+      },
+    })
+    .done(function(response){
+      console.log("a");
+      console.log(<%= @picture2.id %>);
+      $('#conflict').html("<%= escape_javascript(render 'conflict/elo', picture1: @picture1, picture2: @picture2) %>");
+    })
+    .fail(function(xhr){
+      console.log("b");
+      console.log(<%= @picture2.id %>);
+    });
+}
+</script>
