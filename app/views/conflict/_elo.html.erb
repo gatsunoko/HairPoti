@@ -8,6 +8,6 @@
 </div>
 
 <div class="next_picture">
-  <%= image_tag(@next1.url + 'media/?size=l', class: 'next_picture1') %>
-  <%= image_tag(@next2.url + 'media/?size=l', class: 'next_picture2') %>
+  <%= image_tag(@next1.url + 'media/?size=l', class: 'next_picture1', onError: "img_blank(#{@next1.id})") %>
+  <%= image_tag(@next2.url + 'media/?size=l', class: 'next_picture2', onError: "img_blank(#{@next2.id})") %>
 </div>

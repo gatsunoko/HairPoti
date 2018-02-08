@@ -50,6 +50,10 @@ class ConflictController < ApplicationController
 
       @picture1 = Picture.find params[:next1]
       @picture2 = Picture.find params[:next2]
+
+      while @picture1.picture_present == false || @picture2.picture_present == false
+        set_picture
+      end
     rescue
       set_picture
     end
@@ -61,8 +65,6 @@ class ConflictController < ApplicationController
       picture = Picture.find(params[:picture_id])
       picture.picture_present = false
       picture.save
-      set_picture
-      next_picture
     rescue
 
     end
