@@ -20,6 +20,7 @@
         <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
       </div>
     <% end -%>
+    <%= link_to 'もっと見る', point_ranking_pictures_path, class: 'more' %>
   </div>
   <div class="win_count">
     <p>投票された数ランキング</p>
@@ -29,6 +30,7 @@
         <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
       </div>
     <% end -%>
+    <%= link_to 'もっと見る', win_ranking_pictures_path, class: 'more' %>
   </div>
   <% if user_signed_in? %>
     <div class="user_ranking">
@@ -39,6 +41,7 @@
           <%= link_to(image_tag(picture.picture.url + 'media/?size=t'), picture_path(picture.picture)) %>
         </div>
       <% end -%>
+      <%= link_to 'もっと見る', my_point_ranking_pictures_path, class: 'more' %>
     </div>
     <div class="user_history">
       <p>投票履歴</p>
@@ -48,6 +51,11 @@
           <%= link_to(image_tag(picture.picture.url + 'media/?size=t'), picture_path(picture.picture)) %>
         </div>
       <% end -%>
+      <%= link_to 'もっと見る', my_histories_pictures_path, class: 'more' %>
     </div>
   <% end -%>
+</div>
+
+<div class="footer">
+  footer
 </div>

@@ -1,6 +1,6 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, only: [:index, :new, :create, :bulk_new, :bulk_create, :edit, :update, :destroy, :my_point_ranking, :my_histories]
   before_action :is_admin, only: [:edit, :update, :destroy]
 
   # GET /pictures
@@ -90,6 +90,26 @@ class PicturesController < ApplicationController
     #   format.html { redirect_back(fallback_location: root_path) } and return
     #   format.json { head :no_content }
     # end
+  end
+
+  def point_ranking
+    @pictures = Picture.all.order(rating: :desc).limit(100).offset(0).page(params[:page]).per(10)
+    render 'ranking'
+  end
+
+  def win_ranking
+    @pictures = Picture.all.order(win: :desc).limit(100).offset(0).page(params[:page]).per(10)
+    render 'ranking'
+  end
+
+  def my_point_ranking
+    @pictures = UserPicture.where(user_id: current_user.id).order(rating: :desc).limit(100).offset(0).page(params[:page]).per(10)
+    render 'ranking'
+  end
+
+  def my_histories
+    @pictures = UserPicture.where(user_id: current_user.id).where('win > ?', 0).order(voting_at: :desc).limit(100).offset(0).page(params[:page]).per(10)
+    render 'ranking'
   end
 
   private

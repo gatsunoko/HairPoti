@@ -1,0 +1,29 @@
+<div class="rankings_area">
+
+  <div class="feed_page">
+    <div class="feed_title"><%= page_entries_info @pictures %></div>
+    <div class="feed">
+      <%= paginate @pictures %>
+    </div>
+  </div>
+
+  <% @pictures.each.with_index(1) do |picture, i| %>
+    <div>
+      <p><%= i + ((@pictures.current_page - 1) * 10) %>位 <%= picture.rating %>ポイント</p>
+      <% if controller.action_name == 'point_ranking' ||
+            controller.action_name == 'win_ranking' %>
+        <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
+      <% else %>
+        <%= link_to(image_tag(picture.picture.url + 'media/?size=t'), picture_path(picture.picture)) %>
+      <% end -%>
+    </div>
+  <% end -%>
+
+  <div class="feed_page">
+    <div class="feed_title"><%= page_entries_info @pictures %></div>
+    <div class="feed">
+      <%= paginate @pictures %>
+    </div>
+  </div>
+
+</div>
