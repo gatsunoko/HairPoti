@@ -4,6 +4,14 @@
 </div>
 
 <div class="top_button_area" >
+  <% unless user_signed_in? %>
+    <%= link_to new_user_session_path do  %>
+      <div class="login_link">
+        <p>ログイン</p>
+      </div>
+    <% end -%>
+  <% end -%>
+
   <%= link_to conflict_index_path do  %>
     <div class="conflict_link">
       <p>投票に参加</p>
