@@ -1,6 +1,7 @@
 class ConflictController < ApplicationController
   def index
     set_picture
+    next_picture
   end
 
   def elo
@@ -46,7 +47,9 @@ class ConflictController < ApplicationController
       user_lose.save
     end
 
-    set_picture
+    @picture1 = Picture.find params[:next1]
+    @picture2 = Picture.find params[:next2]
+    next_picture
   end
 
   def img_blank
@@ -61,5 +64,12 @@ class ConflictController < ApplicationController
       begin
         @picture2 = Picture.where('id >= ?', rand(Picture.first.id..Picture.last.id)).first
       end while @picture1.id == @picture2.id
+    end
+
+    def next_picture
+      @next1 = Picture.where('id >= ?', rand(Picture.first.id..Picture.last.id)).first
+      begin
+        @next2 = Picture.where('id >= ?', rand(Picture.first.id..Picture.last.id)).first
+      end while @next1.id == @next2.id
     end
 end
