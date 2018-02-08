@@ -10,16 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180205120421) do
+ActiveRecord::Schema.define(version: 20180208134236) do
 
   create_table "pictures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "url"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "rating",     default: 1500, null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "rating",          default: 1500, null: false
     t.integer  "user_id"
-    t.integer  "win",        default: 0,    null: false
-    t.integer  "lose",       default: 0,    null: false
+    t.integer  "win",             default: 0,    null: false
+    t.integer  "lose",            default: 0,    null: false
+    t.boolean  "picture_present", default: true, null: false
     t.index ["user_id"], name: "index_pictures_on_user_id", using: :btree
   end
 

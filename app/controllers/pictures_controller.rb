@@ -1,7 +1,7 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:index, :new, :create, :bulk_new, :bulk_create, :edit, :update, :destroy, :my_point_ranking, :my_histories]
-  before_action :is_admin, only: [:edit, :update, :destroy]
+  before_action :is_admin, only: [:edit, :update, :destroy, :blank_pictures]
 
   # GET /pictures
   # GET /pictures.json
@@ -90,6 +90,11 @@ class PicturesController < ApplicationController
     #   format.html { redirect_back(fallback_location: root_path) } and return
     #   format.json { head :no_content }
     # end
+  end
+
+  def blank_pictures
+    @pictures = Picture.where(picture_present: false).order(id: :desc).page(params[:page]).per(20)
+    render 'index'
   end
 
   def point_ranking

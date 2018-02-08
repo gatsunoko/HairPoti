@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get :win_ranking
       get :my_point_ranking
       get :my_histories
+      get :blank_pictures
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

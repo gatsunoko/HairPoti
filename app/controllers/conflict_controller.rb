@@ -59,7 +59,8 @@ class ConflictController < ApplicationController
   def img_blank
     begin
       picture = Picture.find(params[:picture_id])
-      picture.destroy
+      picture.picture_present = false
+      picture.save
       set_picture
       next_picture
     rescue
@@ -71,17 +72,17 @@ class ConflictController < ApplicationController
 
   private
     def set_picture
-      Picture.find( Picture.pluck(:id).sample )
+      Picture.find( Picture.where(picture_present: true).pluck(:id).sample )
       @picture1 = Picture.find( Picture.pluck(:id).sample )
       begin
-        @picture2 = Picture.find( Picture.pluck(:id).sample )
+        @picture2 = Picture.find( Picture.where(picture_present: true).pluck(:id).sample )
       end while @picture1.id == @picture2.id
     end
 
     def next_picture
-      @next1 = Picture.find( Picture.pluck(:id).sample )
+      @next1 = Picture.find( Picture.where(picture_present: true).pluck(:id).sample )
       begin
-        @next2 = Picture.find( Picture.pluck(:id).sample )
+        @next2 = Picture.find( Picture.where(picture_present: true).pluck(:id).sample )
       end while @next1.id == @next2.id
     end
 end
