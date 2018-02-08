@@ -93,22 +93,26 @@ class PicturesController < ApplicationController
   end
 
   def point_ranking
-    @pictures = Picture.all.order(rating: :desc).limit(100).offset(0).page(params[:page]).per(10)
+    pictures_array = Picture.all.order(rating: :desc).limit(100).offset(0).pluck(:id)
+    @pictures = Picture.where(id: pictures_array).order(rating: :desc).page(params[:page]).per(10)
     render 'ranking'
   end
 
   def win_ranking
-    @pictures = Picture.all.order(win: :desc).limit(100).offset(0).page(params[:page]).per(10)
+    pictures_array = Picture.all.order(win: :desc).limit(100).offset(0).pluck(:id)
+    @pictures = Picture.where(id: pictures_array).order(win: :desc).limit(100).offset(0).page(params[:page]).per(10)
     render 'ranking'
   end
 
   def my_point_ranking
-    @pictures = UserPicture.where(user_id: current_user.id).order(rating: :desc).limit(100).offset(0).page(params[:page]).per(10)
+    pictures_array = UserPicture.where(user_id: current_user.id).order(rating: :desc).limit(100).offset(0).pluck(:id)
+    @pictures = UserPicture.where(id: pictures_array).order(rating: :desc).page(params[:page]).per(10)
     render 'ranking'
   end
 
   def my_histories
-    @pictures = UserPicture.where(user_id: current_user.id).where('win > ?', 0).order(voting_at: :desc).limit(100).offset(0).page(params[:page]).per(10)
+    pictures_array = UserPicture.where(user_id: current_user.id).where('win > ?', 0).order(voting_at: :desc).limit(100).offset(0).pluck(:id)
+    @pictures = UserPicture.where(id: pictures_array).order(voting_at: :desc).page(params[:page]).per(10)
     render 'ranking'
   end
 
