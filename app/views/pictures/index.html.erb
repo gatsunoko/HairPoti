@@ -21,7 +21,7 @@
   <tbody>
     <% @pictures.each do |picture| %>
       <tr>
-        <td><%= image_tag(picture.url + 'media/?size=t') %></td>
+        <td><%= image_tag(picture.picture_url) %></td>
         <td><%= picture.rating %></td>
         <td><%= link_to 'Show', picture %></td>
         <% if current_user.admin %>

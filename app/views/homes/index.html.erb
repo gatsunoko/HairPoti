@@ -25,7 +25,7 @@
     <% @rankings.each.with_index(1) do |picture, i| %>
       <div>
         <p><%= i %>位 <%= picture.rating %>ポイント</p>
-        <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
+        <%= link_to(image_tag(picture.picture_url), picture_path(picture)) %>
       </div>
     <% end -%>
     <%= link_to 'もっと見る', point_ranking_pictures_path, class: 'more' %>
@@ -35,7 +35,7 @@
     <% @win_counts.each.with_index(1) do |picture, i| %>
       <div>
         <p><%= i %>位 <%= picture.win %>回</p>
-        <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
+        <%= link_to(image_tag(picture.picture_url), picture_path(picture)) %>
       </div>
     <% end -%>
     <%= link_to 'もっと見る', win_ranking_pictures_path, class: 'more' %>
@@ -46,7 +46,7 @@
       <% @user_rankings.each.with_index(1) do |picture, i| %>
         <div>
           <p><%= i %>位 <%= picture.rating %>ポイント</p>
-          <%= link_to(image_tag(picture.picture.url + 'media/?size=t'), picture_path(picture.picture)) %>
+          <%= link_to(image_tag(picture.picture.picture_url), picture_path(picture.picture)) %>
         </div>
       <% end -%>
       <%= link_to 'もっと見る', my_point_ranking_pictures_path, class: 'more' %>
@@ -56,7 +56,7 @@
       <% @user_histories.each.with_index(1) do |picture, i| %>
         <div>
           <p><%= picture.rating %>ポイント</p>
-          <%= link_to(image_tag(picture.picture.url + 'media/?size=t'), picture_path(picture.picture)) %>
+          <%= link_to(image_tag(picture.picture.picture_url), picture_path(picture.picture)) %>
         </div>
       <% end -%>
       <%= link_to 'もっと見る', my_histories_pictures_path, class: 'more' %>

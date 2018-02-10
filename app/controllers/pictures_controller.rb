@@ -1,3 +1,6 @@
+require 'open-uri' # URLにアクセスするためのライブラリの読み込み
+require 'nokogiri' # Nokogiriライブラリの読み込み
+
 class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:index, :new, :create, :bulk_new, :bulk_create, :edit, :update, :destroy, :my_point_ranking, :my_histories]
@@ -31,7 +34,18 @@ class PicturesController < ApplicationController
   # POST /pictures.json
   def create
     @picture = Picture.new(picture_params)
-    @picture.url.sub!(/\?.*/, "")
+    hotpepper = Nokogiri::HTML.parse(url_set(@picture.url), nil, 'utf-8')
+    hotpepper.css('#contents').each do |doc|
+      p '7777777777777777777777777777777'
+      article_link('#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > p.detailTitle > a',
+                    '#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > p.fs10.fgGray',
+                    '#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > div > ul > li:nth-child(1)',
+                    '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(4) > dl:nth-child(2) > dd',
+                    '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(4) > dl:nth-child(3) > dd',
+                    '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(4) > dl:nth-child(4) > dd',
+                    '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fl > div.pr > img',
+                    doc)
+    end
     @picture.user_id = current_user.id
 
     respond_to do |format|
@@ -130,5 +144,24 @@ class PicturesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def picture_params
       params.require(:picture).permit(:url)
+    end
+
+    def article_link(shop_name, shop_name_kana, shop_address, length, color, image, picture_url, doc)
+      @picture.shop_name = doc.css(shop_name).text
+      @picture.shop_name_kana = doc.css(shop_name_kana).text
+      @picture.shop_address = doc.css(shop_address).text
+      @picture.length = doc.css(length).text
+      @picture.color = doc.css(color).text
+      @picture.image = doc.css(image).text
+      @picture.picture_url = doc.css(picture_url)[0][:src]
+    end
+
+    def url_set(url)
+      charset = nil
+      html = open(url) do |f|
+        charset = f.charset # 文字種別を取得
+        f.read # htmlを読み込んで変数htmlに渡す
+      end
+      return html
     end
 end

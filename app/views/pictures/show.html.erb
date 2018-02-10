@@ -8,5 +8,5 @@
 <%= link_to 'インスタでみる', @picture.url, target: '_blank' %>
 
 <div class="show_picture_area">
-  <%= image_tag(@picture.url + 'media/?size=l', class: 'show_picture', onError: "img_blank(#{@picture.id})") %>
+  <%= image_tag(@picture.picture_url, class: 'show_picture', onError: "img_blank(#{@picture.id})") %>
 </div>
