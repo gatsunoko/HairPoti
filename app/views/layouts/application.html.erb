@@ -3,10 +3,9 @@
   <head>
     <title>DottiNail</title>
     <%= csrf_meta_tags %>
-
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
   </head>
 
   <body>
@@ -21,7 +20,7 @@
               <% if current_user.admin %>
                 <%= link_to '正常に表示されなかった写真たち', blank_pictures_pictures_path %>
               <% end -%>
-              <%= link_to 'インスタURL登録画面', pictures_path %>
+              <%= link_to 'URL登録画面', pictures_path %>
               <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
           <% else %>
               <%= link_to 'ユーザー登録', new_user_registration_path %>

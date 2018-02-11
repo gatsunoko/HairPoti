@@ -3,8 +3,8 @@ require 'nokogiri' # Nokogiriライブラリの読み込み
 
 class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:index, :new, :create, :bulk_new, :bulk_create, :edit, :update, :destroy, :my_point_ranking, :my_histories]
-  before_action :is_admin, only: [:edit, :update, :destroy, :blank_pictures]
+  before_action :authenticate_user!, only: [:index, :new, :create, :bulk_new, :bulk_create, :collect_new, :collect_call, :edit, :update, :destroy, :my_point_ranking, :my_histories]
+  before_action :is_admin, only: [:edit, :update, :destroy, :blank_pictures, :collect_new, :collect_call]
 
   # GET /pictures
   # GET /pictures.json
@@ -36,10 +36,11 @@ class PicturesController < ApplicationController
     @picture = Picture.new(picture_params)
     hotpepper = Nokogiri::HTML.parse(url_set(@picture.url), nil, 'utf-8')
     hotpepper.css('#contents').each do |doc|
-      p '7777777777777777777777777777777'
       article_link('#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > p.detailTitle > a',
                     '#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > p.fs10.fgGray',
                     '#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > div > ul > li:nth-child(1)',
+                    '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(2) > div.cFix.mT10 > div.oh.pR10 > p.mT5.fs14.b > a',
+                    '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(2) > div.cFix.mT10 > div.oh.pR10 > p.mT10.wbba',
                     '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(4) > dl:nth-child(2) > dd',
                     '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(4) > dl:nth-child(3) > dd',
                     '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(4) > dl:nth-child(4) > dd',
@@ -72,13 +73,60 @@ class PicturesController < ApplicationController
 
     urls.each do |url|
       url.sub!(/\?.*/, "")
-      picture = Picture.new(url: url, user_id: current_user.id)
-      if picture.save
+      @picture = Picture.new(url: url, user_id: current_user.id)
+      hotpepper = Nokogiri::HTML.parse(url_set(@picture.url), nil, 'utf-8')
+      hotpepper.css('#contents').each do |doc|
+        article_link('#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > p.detailTitle > a',
+                      '#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > p.fs10.fgGray',
+                      '#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > div > ul > li:nth-child(1)',
+                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(2) > div.cFix.mT10 > div.oh.pR10 > p.mT5.fs14.b > a',
+                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(2) > div.cFix.mT10 > div.oh.pR10 > p.mT10.wbba',
+                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(4) > dl:nth-child(2) > dd',
+                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(4) > dl:nth-child(3) > dd',
+                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(4) > dl:nth-child(4) > dd',
+                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fl > div.pr > img',
+                      doc)
+      end
+      if @picture.save
         @success += 1 
       else
         @fail += 1
       end
     end
+  end
+
+  def collect_new
+  end
+
+  def collect_call  
+    @success = 0 #登録の成功した数をカウントする変数
+    @fail = 0 #登録の失敗した数をカウントする変数
+    hotpepper_parent = Nokogiri::HTML.parse(url_set(params[:url]), nil, 'utf-8')
+    hotpepper_parent.css('#contents').each do |hotpepper|
+      hotpepper.css('div.pr.oh.jscHoverTarget > p > a').each do |doc|
+        hotpepper_child = Nokogiri::HTML.parse(url_set(doc[:href]), nil, 'utf-8')
+        hotpepper_child.css('#contents').each do |child_doc|
+          @picture = Picture.new(url: doc[:href], user_id: current_user.id)
+          article_link('#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > p.detailTitle > a',
+                        '#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > p.fs10.fgGray',
+                        '#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > div > ul > li:nth-child(1)',
+                        '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(2) > div.cFix.mT10 > div.oh.pR10 > p.mT5.fs14.b > a',
+                        '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(2) > div.cFix.mT10 > div.oh.pR10 > p.mT10.wbba',
+                        '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(4) > dl:nth-child(2) > dd',
+                        '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(4) > dl:nth-child(3) > dd',
+                        '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(4) > dl:nth-child(4) > dd',
+                        '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fl > div.pr > img',
+                        child_doc)
+          if @picture.save
+            @success += 1 
+          else
+            @fail += 1
+          end
+        end
+      end
+    end
+
+    render 'bulk_create'
   end
 
   # PATCH/PUT /pictures/1
@@ -146,10 +194,12 @@ class PicturesController < ApplicationController
       params.require(:picture).permit(:url)
     end
 
-    def article_link(shop_name, shop_name_kana, shop_address, length, color, image, picture_url, doc)
+    def article_link(shop_name, shop_name_kana, shop_address, stylist_name, stylist_profile, length, color, image, picture_url, doc)
       @picture.shop_name = doc.css(shop_name).text
       @picture.shop_name_kana = doc.css(shop_name_kana).text
       @picture.shop_address = doc.css(shop_address).text
+      @picture.stylist_name = doc.css(stylist_name).text
+      @picture.stylist_profile = doc.css(stylist_profile).text
       @picture.length = doc.css(length).text
       @picture.color = doc.css(color).text
       @picture.image = doc.css(image).text

@@ -1,0 +1,11 @@
+<%= form_tag(collect_call_pictures_path) do |f| %>
+
+  <div class="field">
+    <%= label_tag :url %>
+    <%= text_field_tag :url %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag %>
+  </div>
+<% end %>

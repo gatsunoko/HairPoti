@@ -5,8 +5,17 @@
   <%= link_to 'Destroy', @picture, method: :delete, data: { confirm: 'Are you sure?' } %>
 </div>
 
-<%= link_to 'インスタでみる', @picture.url, target: '_blank' %>
-
+<%= link_to 'hpbでみる', @picture.url, target: '_blank' %>
+<div class="show_text_area">
+  <h2><%= @picture.shop_name %></h2>
+  <p><%= @picture.shop_name_kana %></p><br>
+  <p>住所:<%= @picture.shop_address %></p><br>
+  <p>スタイリスト:<%= @picture.stylist_name %></p><br>
+  <p><%= simple_format(@picture.stylist_profile) %></p><br>
+  <p>長さ:<%= @picture.length %></p>
+  <p>カラー:<%= @picture.color %></p>
+  <p>イメージ:<%= @picture.image %></p>
+</div>
 <div class="show_picture_area">
   <%= image_tag(@picture.picture_url, class: 'show_picture', onError: "img_blank(#{@picture.id})") %>
 </div>

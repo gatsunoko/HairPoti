@@ -1,6 +1,12 @@
 // Place all the styles related to the pictures controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.show_text_area {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
 .show_picture_area {
   /*width: 100%;*/
   position: relative;

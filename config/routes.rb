@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations', confirmations: 'users/confirmations' }
   resources :pictures do
     collection do
+      get :collect_new
+      post :collect_call
       get :bulk_new
       post :bulk_create
       get :point_ranking

@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20180210212221) do
     t.string   "shop_name"
     t.string   "shop_name_kana"
     t.string   "shop_address"
+    t.string   "stylist_name"
+    t.text     "stylist_profile", limit: 65535
     t.string   "length"
     t.string   "color"
     t.string   "image"
