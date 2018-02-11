@@ -32,26 +32,27 @@
     <%= link_to 'もっと見る', point_ranking_pictures_path, class: 'more' %>
   </div>
   <div class="win_count">
-    <p>投票された数ランキング</p>
-    <% @win_counts.each.with_index(1) do |picture, i| %>
+    <p>ミディアム</p>
+    <% @midiamu_ranking.each.with_index(1) do |picture, i| %>
       <div>
-        <p><%= i %>位 <%= picture.win %>回</p>
+        <p><%= i %>位 <%= picture.rating %>ポイント</p>
         <%= link_to(image_tag(picture.picture_url), picture_path(picture)) %>
       </div>
     <% end -%>
     <%= link_to 'もっと見る', win_ranking_pictures_path, class: 'more' %>
   </div>
+  <div class="win_count">
+    <p>ロング</p>
+    <% @long_ranking.each.with_index(1) do |picture, i| %>
+      <div>
+        <p><%= i %>位 <%= picture.rating %>ポイント</p>
+        <%= link_to(image_tag(picture.picture_url), picture_path(picture)) %>
+      </div>
+    <% end -%>
+    <%= link_to 'もっと見る', win_ranking_pictures_path, class: 'more' %>
+  </div>
+
   <% if user_signed_in? %>
-    <div class="user_ranking">
-      <p>あなたの中のランキング</p>
-      <% @user_rankings.each.with_index(1) do |picture, i| %>
-        <div>
-          <p><%= i %>位 <%= picture.rating %>ポイント</p>
-          <%= link_to(image_tag(picture.picture.picture_url), picture_path(picture.picture)) %>
-        </div>
-      <% end -%>
-      <%= link_to 'もっと見る', my_point_ranking_pictures_path, class: 'more' %>
-    </div>
     <div class="user_history">
       <p>投票履歴</p>
       <% @user_histories.each.with_index(1) do |picture, i| %>
