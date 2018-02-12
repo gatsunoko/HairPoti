@@ -1,17 +1,21 @@
 class ConflictController < ApplicationController
+
+  include AjaxHelper 
+
   def index
     set_picture(nil)
     next_picture(nil)
     @area = nil
+    @count = 0
+    session[:voting_id] = Array.new
   end
 
   def area_ranking
     set_picture(params[:area])
     next_picture(params[:area])
     @area = params[:area]
-    p '------------------------------------------------'
-    p params[:area]
-    p '------------------------------------------------'
+    @count = 0
+    session[:voting_id] = Array.new
 
     render 'index'
   end
@@ -22,6 +26,8 @@ class ConflictController < ApplicationController
       loser = Picture.find(params[:lose])
       win = Elo::Player.new(rating: winer.rating, k_factor: 12)
       lose = Elo::Player.new(rating: loser.rating, k_factor: 12)
+
+      session[:voting_id].push(winer.id)
 
       win.wins_from(lose)
       lose.loses_from(win)
@@ -72,6 +78,17 @@ class ConflictController < ApplicationController
     next_picture(params[:area])
 
     @area = params[:area]
+    @count = params[:count].to_i + 1
+
+    if @count >= 10
+      respond_to do |format|
+        format.js { render ajax_redirect_to(conflict_result_path) }
+      end
+    end
+  end
+
+  def result
+    @pictures = Picture.where(id: session[:voting_id]).order(['field(id, ?)', session[:voting_id].reverse])
   end
 
   def img_blank

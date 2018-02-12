@@ -1,0 +1,7 @@
+<div class="rankings_area">
+  <% @pictures.each.with_index(1) do |picture, i| %>
+    <div>
+      <%= link_to(image_tag(picture.picture_url), picture_path(picture)) %>
+    </div>
+  <% end -%>
+</div>

@@ -1,10 +1,10 @@
 <div class="card1_area">
   <%= link_to(image_tag(@picture1.picture_url, class: 'card1', onError: "img_blank(#{@picture1.id})"),
-        conflict_elo_path(win: @picture1.id, lose: @picture2.id, next1: @next1.id, next2: @next2.id, area: @area), remote: true) %>
+        conflict_elo_path(win: @picture1.id, lose: @picture2.id, next1: @next1.id, next2: @next2.id, area: @area, count: @count), remote: true) %>
 </div>
 <div class="card2_area">
   <%= link_to(image_tag(@picture2.picture_url, class: 'card2', onError: "img_blank(#{@picture2.id})"),
-        conflict_elo_path(win: @picture2.id, lose: @picture1.id, next1: @next1.id, next2: @next2.id, area: @area), remote: true) %>
+        conflict_elo_path(win: @picture2.id, lose: @picture1.id, next1: @next1.id, next2: @next2.id, area: @area, count: @count), remote: true) %>
 </div>
 
 <div class="next_picture">

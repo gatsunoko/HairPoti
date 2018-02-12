@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   get 'conflict/area_ranking'
   get 'conflict/elo'
   get 'conflict/img_blank'
+  get 'conflict/result'
 end
