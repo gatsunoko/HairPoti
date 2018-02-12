@@ -14,7 +14,13 @@
 
   <%= link_to conflict_index_path do  %>
     <div class="conflict_link">
-      <p>投票に参加</p>
+      <p>全国の投票</p>
+    </div>
+  <% end -%>
+
+  <%= link_to(conflict_area_ranking_path(area: '愛知')) do  %>
+    <div class="conflict_link">
+      <p>愛知県の投票</p>
     </div>
   <% end -%>
 </div>

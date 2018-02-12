@@ -1,7 +1,19 @@
 class ConflictController < ApplicationController
   def index
-    set_picture
-    next_picture
+    set_picture(nil)
+    next_picture(nil)
+    @area = nil
+  end
+
+  def area_ranking
+    set_picture(params[:area])
+    next_picture(params[:area])
+    @area = params[:area]
+    p '------------------------------------------------'
+    p params[:area]
+    p '------------------------------------------------'
+
+    render 'index'
   end
 
   def elo
@@ -52,12 +64,14 @@ class ConflictController < ApplicationController
       @picture2 = Picture.find params[:next2]
 
       while @picture1.picture_present == false || @picture2.picture_present == false
-        set_picture
+        set_picture(params[:area])
       end
     rescue
-      set_picture
+      set_picture(params[:area])
     end
-    next_picture
+    next_picture(params[:area])
+
+    @area = params[:area]
   end
 
   def img_blank
@@ -73,18 +87,18 @@ class ConflictController < ApplicationController
   end
 
   private
-    def set_picture
-      Picture.find( Picture.where(picture_present: true).pluck(:id).sample )
+    def set_picture(area)
+      Picture.find( Picture.where(picture_present: true).area_search(area).pluck(:id).sample )
       @picture1 = Picture.find( Picture.pluck(:id).sample )
       begin
-        @picture2 = Picture.find( Picture.where(picture_present: true).pluck(:id).sample )
+        @picture2 = Picture.find( Picture.where(picture_present: true).area_search(area).pluck(:id).sample )
       end while @picture1.id == @picture2.id
     end
 
-    def next_picture
-      @next1 = Picture.find( Picture.where(picture_present: true).pluck(:id).sample )
+    def next_picture(area)
+      @next1 = Picture.find( Picture.where(picture_present: true).area_search(area).pluck(:id).sample )
       begin
-        @next2 = Picture.find( Picture.where(picture_present: true).pluck(:id).sample )
+        @next2 = Picture.find( Picture.where(picture_present: true).area_search(area).pluck(:id).sample )
       end while @next1.id == @next2.id
     end
 end
