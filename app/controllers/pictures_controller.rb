@@ -165,15 +165,15 @@ class PicturesController < ApplicationController
     render 'ranking'
   end
 
-  def win_ranking
-    pictures_array = Picture.all.order(win: :desc).limit(100).offset(0).pluck(:id)
+  def midiamu_ranking
+    pictures_array = Picture.where('length = ?', 'ミディアム').order(rating: :desc).limit(100).offset(0).pluck(:id)
     @pictures = Picture.where(id: pictures_array).order(win: :desc).limit(100).offset(0).page(params[:page]).per(10)
     render 'ranking'
   end
 
-  def my_point_ranking
-    pictures_array = UserPicture.where(user_id: current_user.id).order(rating: :desc).limit(100).offset(0).pluck(:id)
-    @pictures = UserPicture.where(id: pictures_array).order(rating: :desc).page(params[:page]).per(10)
+  def long_ranking
+    pictures_array = Picture.where('length = ? OR length = ?', 'ロング', 'セミロング').order(rating: :desc).limit(100).offset(0).pluck(:id)
+    @pictures = Picture.where(id: pictures_array).order(rating: :desc).page(params[:page]).per(10)
     render 'ranking'
   end
 

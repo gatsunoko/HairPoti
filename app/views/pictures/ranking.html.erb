@@ -9,17 +9,13 @@
 
   <% @pictures.each.with_index(1) do |picture, i| %>
     <div>
-      <% if controller.action_name == 'point_ranking' ||
-            controller.action_name == 'my_point_ranking' %>
+      <% unless controller.action_name == 'my_histories' %>
         <p><%= i + ((@pictures.current_page - 1) * 10) %>位 <%= picture.rating %>ポイント</p>
-      <% elsif controller.action_name == 'win_ranking' %>
-        <p><%= i %>位 <%= picture.win %>回</p>
       <% end -%>
-      <% if controller.action_name == 'point_ranking' ||
-            controller.action_name == 'win_ranking' %>
-        <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
+      <% unless controller.action_name == 'my_histories' %>
+        <%= link_to(image_tag(picture.picture_url), picture_path(picture)) %>
       <% else %>
-        <%= link_to(image_tag(picture.picture.url + 'media/?size=t'), picture_path(picture.picture)) %>
+        <%= link_to(image_tag(picture.picture.picture_url), picture_path(picture.picture)) %>
       <% end -%>
     </div>
   <% end -%>

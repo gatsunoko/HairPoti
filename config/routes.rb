@@ -7,8 +7,8 @@ Rails.application.routes.draw do
       get :bulk_new
       post :bulk_create
       get :point_ranking
-      get :win_ranking
-      get :my_point_ranking
+      get :midiamu_ranking
+      get :long_ranking
       get :my_histories
       get :blank_pictures
     end
