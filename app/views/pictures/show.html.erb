@@ -9,6 +9,15 @@
 
 <%= link_to 'hpbでみる', @picture.url, target: '_blank' %>
 <div class="show_text_area">
+
+  <div class="top_button_area" >
+    <%= link_to :back do  %>
+      <div class="conflict_link">
+        <p>戻る</p>
+      </div>
+    <% end -%>
+  </div>
+
   <h2><%= @picture.shop_name %></h2>
   <p><%= @picture.shop_name_kana %></p><br>
   <p>住所:<%= @picture.shop_address %></p><br>
