@@ -1,7 +1,26 @@
 <div class="rankings_area">
+  <h2>10回の投票履歴</h2>
+  <p>画像をクリックすると詳細が見れます</p>
+
+  <div class="top_button_area" >
+    <%= link_to(root_path) do  %>
+      <div class="conflict_link">
+        <p>トップへ戻る</p>
+      </div>
+    <% end -%>
+  </div>
+
   <% @pictures.each.with_index(1) do |picture, i| %>
     <div>
       <%= link_to(image_tag(picture.picture_url), picture_path(picture)) %>
     </div>
   <% end -%>
+
+  <div class="top_button_area" >
+    <%= link_to(root_path) do  %>
+      <div class="conflict_link">
+        <p>トップへ戻る</p>
+      </div>
+    <% end -%>
+  </div>
 </div>

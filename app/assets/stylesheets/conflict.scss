@@ -11,4 +11,6 @@
 }
 .card1, .card2 {
   width: 100%;
+  max-height: 600px;
+  object-fit: contain;
 }

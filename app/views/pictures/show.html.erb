@@ -1,9 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<div>
-  <%= link_to 'Edit', edit_picture_path(@picture) %> |
-  <%= link_to 'Destroy', @picture, method: :delete, data: { confirm: 'Are you sure?' } %>
-</div>
+<% if user_signed_in? && current_user.admin %>
+  <div>
+    <%= link_to 'Edit', edit_picture_path(@picture) %> |
+    <%= link_to 'Destroy', @picture, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+<% end -%>
 
 <%= link_to 'hpbでみる', @picture.url, target: '_blank' %>
 <div class="show_text_area">
