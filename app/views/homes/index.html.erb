@@ -22,14 +22,14 @@
 <div class="top_contents">
   <h2>写真をクリックすると詳細画面に飛びます。</h2>
   <div class="all_ranking">
-    <p>ポイントランキング</p>
-    <% @rankings.each.with_index(1) do |picture, i| %>
+    <p>ショート</p>
+    <% @short_rankings.each.with_index(1) do |picture, i| %>
       <div>
         <p><%= i %>位 <%= picture.rating %>ポイント</p>
         <%= link_to(image_tag(picture.picture_url), picture_path(picture)) %>
       </div>
     <% end -%>
-    <%= link_to 'もっと見る', point_ranking_pictures_path, class: 'more' %>
+    <%= link_to 'もっと見る', short_ranking_pictures_path, class: 'more' %>
   </div>
   <div class="win_count">
     <p>ミディアム</p>

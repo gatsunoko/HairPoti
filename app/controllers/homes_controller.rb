@@ -1,6 +1,6 @@
 class HomesController < ApplicationController
   def index
-    @rankings = Picture.all.order(rating: :desc).limit(5).offset(0)
+    @short_rankings = Picture.where('length = ? OR length = ?', 'ショート', 'ベリーショート').order(rating: :desc).limit(5).offset(0)
     @midiamu_ranking = Picture.where('length = ?', 'ミディアム').order(rating: :desc).limit(5).offset(0)
     @long_ranking = Picture.where('length = ? OR length = ?', 'ロング', 'セミロング').order(rating: :desc).limit(5).offset(0)
     if user_signed_in?

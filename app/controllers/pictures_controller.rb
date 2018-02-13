@@ -206,15 +206,15 @@ class PicturesController < ApplicationController
     render 'bulk_create'
   end
 
-  def point_ranking
-    pictures_array = Picture.all.order(rating: :desc).limit(100).offset(0).pluck(:id)
+  def short_ranking
+    pictures_array = Picture.where('length = ? OR length = ?', 'ショート', 'ベリーショート').order(rating: :desc).limit(100).offset(0).pluck(:id)
     @pictures = Picture.where(id: pictures_array).order(rating: :desc).page(params[:page]).per(10)
     render 'ranking'
   end
 
   def midiamu_ranking
     pictures_array = Picture.where('length = ?', 'ミディアム').order(rating: :desc).limit(100).offset(0).pluck(:id)
-    @pictures = Picture.where(id: pictures_array).order(win: :desc).limit(100).offset(0).page(params[:page]).per(10)
+    @pictures = Picture.where(id: pictures_array).order(rating: :desc).limit(100).offset(0).page(params[:page]).per(10)
     render 'ranking'
   end
 

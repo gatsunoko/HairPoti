@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       post :collect_call
       get :bulk_new
       post :bulk_create
-      get :point_ranking
+      get :short_ranking
       get :midiamu_ranking
       get :long_ranking
       get :my_histories
