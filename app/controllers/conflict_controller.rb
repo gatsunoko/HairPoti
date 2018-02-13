@@ -1,11 +1,16 @@
 class ConflictController < ApplicationController
 
+  before_action :picture_count, only: [:index]
+
   include AjaxHelper 
 
   def index
+    session[:area_default] = params[:area]
+    session[:length_default] = params[:length]
+
     set_picture(params[:area], params[:length])
     next_picture(params[:area], params[:length])
-    @area = nil
+    @area = params[:area]
     @length = params[:length]
     @count = 0
     session[:voting_id] = Array.new
@@ -107,18 +112,22 @@ class ConflictController < ApplicationController
   end
 
   private
+    #該当する写真が5枚以下なら投票画面に行かない
+    def picture_count
+       redirect_back(fallback_location: root_path) if Picture.where(picture_present: true).area_search(params[:area]).length_search(params[:length]).count <= 5
+    end
+
     def set_picture(area, length)
-      Picture.find( Picture.where(picture_present: true).area_search(area).length_search(length).pluck(:id).sample )
-      @picture1 = Picture.find( Picture.pluck(:id).sample )
+      @picture1 = Picture.find( Picture.where(picture_present: true).area_search(area).length_search(length).pluck(:id).sample)
       begin
-        @picture2 = Picture.find( Picture.where(picture_present: true).area_search(area).length_search(length).pluck(:id).sample )
+        @picture2 = Picture.find(Picture.where(picture_present: true).area_search(area).length_search(length).pluck(:id).sample)
       end while @picture1.id == @picture2.id
     end
 
     def next_picture(area, length)
-      @next1 = Picture.find( Picture.where(picture_present: true).area_search(area).length_search(length).pluck(:id).sample )
+      @next1 = Picture.find(Picture.where(picture_present: true).area_search(area).length_search(length).pluck(:id).sample)
       begin
-        @next2 = Picture.find( Picture.where(picture_present: true).area_search(area).length_search(length).pluck(:id).sample )
+        @next2 = Picture.find(Picture.where(picture_present: true).area_search(area).length_search(length).pluck(:id).sample)
       end while @next1.id == @next2.id
     end
 end

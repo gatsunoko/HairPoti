@@ -13,14 +13,9 @@
   <% end -%>
 
   <%= form_tag(conflict_index_path) do %>
-    <%= select_tag :length, options_for_select(['すべて', 'ショート', 'ミディアム', 'ロング', 'ヘアセット']), onChange: 'length_change(value)' %>
-    <%= submit_tag '全国の投票', class: 'conflict_link' %>
-  <% end -%>
-
-  <%= form_tag(conflict_area_ranking_path) do %>
-    <%= select_tag :length, options_for_select(['すべて', 'ショート', 'ミディアム', 'ロング', 'ヘアセット']), onChange: 'length_change(value)' %>
-    <%= hidden_field_tag :area, '愛知' %>
-    <%= submit_tag '愛知県の投票', class: 'conflict_link' %>
+    <%= select_tag :area, options_for_select(['全国', '東京', '愛知'], selected: @area_default) %>
+    <%= select_tag :length, options_for_select(['すべて', 'ベリーショート', 'ショート', 'ミディアム', 'セミロング', 'ロング', 'ヘアセット'], selected: @length_default) %>
+    <%= submit_tag '投票', class: 'conflict_link' %>
   <% end -%>
 </div>
 

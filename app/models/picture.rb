@@ -4,8 +4,10 @@ class Picture < ApplicationRecord
 
   has_many :user_pictures, dependent: :destroy
 
-  scope :area_search, ->(area) {  
-    where('shop_address like ?', area+'%') if area.present?
+  scope :area_search, ->(area) {
+    if area.present? && area != '全国'
+      where('shop_address like ?', area+'%')
+    end
   }
 
   scope :length_search, ->(length) {
