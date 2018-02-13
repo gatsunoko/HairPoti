@@ -19,6 +19,22 @@ class PicturesController < ApplicationController
   # GET /pictures/1
   # GET /pictures/1.json
   def show
+    if @picture.length.blank?
+      hotpepper = Nokogiri::HTML.parse(url_set(@picture.url), nil, 'utf-8')
+      hotpepper.css('#contents').each do |doc|
+        article_link('#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > p.detailTitle > a',
+                      '#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > p.fs10.fgGray',
+                      '#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > div > ul > li:nth-child(1)',
+                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(2) > div.cFix.mT10 > div.oh.pR10 > p.mT5.fs14.b > a',
+                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(2) > div.cFix.mT10 > div.oh.pR10 > p.mT10.wbba',
+                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(3) > dl:nth-child(2) > dd',
+                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(3) > dl:nth-child(3) > dd',
+                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(3) > dl:nth-child(4) > dd',
+                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fl > div.pr > img',
+                      doc)
+      end
+      @picture.save
+    end
   end
 
   # GET /pictures/new
@@ -157,6 +173,37 @@ class PicturesController < ApplicationController
   def blank_pictures
     @pictures = Picture.where(picture_present: false).order(id: :desc).page(params[:page]).per(20)
     render 'index'
+  end
+
+  def length_blanks
+    @success = 0 #登録の成功した数をカウントする変数
+    @fail = 0 #登録の失敗した数をカウントする変数
+    @pictures = Picture.where('length = ?', '')
+    @pictures.each do |picture|
+      @picture = Picture.find(picture)
+      if @picture.length.blank?
+        hotpepper = Nokogiri::HTML.parse(url_set(@picture.url), nil, 'utf-8')
+        hotpepper.css('#contents').each do |doc|
+          article_link('#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > p.detailTitle > a',
+                        '#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > p.fs10.fgGray',
+                        '#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > div > ul > li:nth-child(1)',
+                        '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(2) > div.cFix.mT10 > div.oh.pR10 > p.mT5.fs14.b > a',
+                        '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(2) > div.cFix.mT10 > div.oh.pR10 > p.mT10.wbba',
+                        '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(3) > dl:nth-child(2) > dd',
+                        '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(3) > dl:nth-child(3) > dd',
+                        '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(3) > dl:nth-child(4) > dd',
+                        '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fl > div.pr > img',
+                        doc)
+        end
+        if @picture.save
+          @success += 1 
+        else
+          @fail += 1
+        end
+      end
+    end
+
+    render 'bulk_create'
   end
 
   def point_ranking

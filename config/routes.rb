@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get :long_ranking
       get :my_histories
       get :blank_pictures
+      get :length_blanks
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
