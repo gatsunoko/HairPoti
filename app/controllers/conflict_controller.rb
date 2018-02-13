@@ -120,14 +120,16 @@ class ConflictController < ApplicationController
     def set_picture(area, length)
       @picture1 = Picture.find( Picture.where(picture_present: true).area_search(area).length_search(length).pluck(:id).sample)
       begin
-        @picture2 = Picture.find(Picture.where(picture_present: true).area_search(area).length_search(length).pluck(:id).sample)
+        second_length = @picture1.length
+        @picture2 = Picture.find(Picture.where(picture_present: true).area_search(area).length_search(second_length).pluck(:id).sample)
       end while @picture1.id == @picture2.id
     end
 
     def next_picture(area, length)
       @next1 = Picture.find(Picture.where(picture_present: true).area_search(area).length_search(length).pluck(:id).sample)
       begin
-        @next2 = Picture.find(Picture.where(picture_present: true).area_search(area).length_search(length).pluck(:id).sample)
+        second_length = @next1.length
+        @next2 = Picture.find(Picture.where(picture_present: true).area_search(area).length_search(second_length).pluck(:id).sample)
       end while @next1.id == @next2.id
     end
 end
