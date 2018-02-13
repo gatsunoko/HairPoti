@@ -1,5 +1,4 @@
 <div class="rankings_area">
-
   <div class="feed_page">
     <div class="feed_title"><%= page_entries_info @pictures %></div>
     <div class="feed">
@@ -7,10 +6,12 @@
     </div>
   </div>
 
+  <p class="show_guide_text">画像をクリックすると詳細が見れます</p>
+
   <% @pictures.each.with_index(1) do |picture, i| %>
     <div>
       <% unless controller.action_name == 'my_histories' %>
-        <p><%= i + ((@pictures.current_page - 1) * 10) %>位 <%= picture.rating %>ポイント</p>
+        <p><%= i + ((@pictures.current_page - 1) * 10) %>位</p>
       <% end -%>
       <% unless controller.action_name == 'my_histories' %>
         <%= link_to(image_tag(picture.picture_url), picture_path(picture)) %>

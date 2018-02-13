@@ -33,12 +33,16 @@
     }
   }
   .conflict_link {
-    background: #6FFF6C;
+    background: #FF0000;
+    color: white;
+    p {
+      color: white;
+    }
   }
   .conflict_link:hover {
-    background: #65E763;
+    background: #C91616;
     p {
-      color: #DCDCDC;
+      color: #1200FF;
     }
   }
   .login_link {

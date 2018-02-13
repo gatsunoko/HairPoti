@@ -25,7 +25,7 @@
     <p>ショート</p>
     <% @short_rankings.each.with_index(1) do |picture, i| %>
       <div>
-        <p><%= i %>位 <%= picture.rating %>ポイント</p>
+        <p><%= i %>位</p>
         <%= link_to(image_tag(picture.picture_url), picture_path(picture)) %>
       </div>
     <% end -%>
@@ -35,7 +35,7 @@
     <p>ミディアム</p>
     <% @midiamu_ranking.each.with_index(1) do |picture, i| %>
       <div>
-        <p><%= i %>位 <%= picture.rating %>ポイント</p>
+        <p><%= i %>位</p>
         <%= link_to(image_tag(picture.picture_url), picture_path(picture)) %>
       </div>
     <% end -%>
@@ -45,7 +45,7 @@
     <p>ロング</p>
     <% @long_ranking.each.with_index(1) do |picture, i| %>
       <div>
-        <p><%= i %>位 <%= picture.rating %>ポイント</p>
+        <p><%= i %>位</p>
         <%= link_to(image_tag(picture.picture_url), picture_path(picture)) %>
       </div>
     <% end -%>
@@ -57,7 +57,7 @@
       <p>投票履歴</p>
       <% @user_histories.each.with_index(1) do |picture, i| %>
         <div>
-          <p><%= picture.rating %>ポイント</p>
+          <p><%= i %>回前</p>
           <%= link_to(image_tag(picture.picture.picture_url), picture_path(picture.picture)) %>
         </div>
       <% end -%>
