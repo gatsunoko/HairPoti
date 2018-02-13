@@ -12,16 +12,15 @@
     <% end -%>
   <% end -%>
 
-  <%= link_to conflict_index_path do  %>
-    <div class="conflict_link">
-      <p>全国の投票</p>
-    </div>
+  <%= form_tag(conflict_index_path) do %>
+    <%= select_tag :length, options_for_select(['すべて', 'ショート', 'ミディアム', 'ロング', 'ヘアセット']), onChange: 'length_change(value)' %>
+    <%= submit_tag '全国の投票', class: 'conflict_link' %>
   <% end -%>
 
-  <%= link_to(conflict_area_ranking_path(area: '愛知')) do  %>
-    <div class="conflict_link">
-      <p>愛知県の投票</p>
-    </div>
+  <%= form_tag(conflict_area_ranking_path) do %>
+    <%= select_tag :length, options_for_select(['すべて', 'ショート', 'ミディアム', 'ロング', 'ヘアセット']), onChange: 'length_change(value)' %>
+    <%= hidden_field_tag :area, '愛知' %>
+    <%= submit_tag '愛知県の投票', class: 'conflict_link' %>
   <% end -%>
 </div>
 

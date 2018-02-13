@@ -7,4 +7,10 @@ class Picture < ApplicationRecord
   scope :area_search, ->(area) {  
     where('shop_address like ?', area+'%') if area.present?
   }
+
+  scope :length_search, ->(length) {
+    if length.present? && length != 'すべて'
+      where('length = ?', length)
+    end
+  }
 end

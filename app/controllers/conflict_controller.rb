@@ -3,17 +3,19 @@ class ConflictController < ApplicationController
   include AjaxHelper 
 
   def index
-    set_picture(nil)
-    next_picture(nil)
+    set_picture(params[:area], params[:length])
+    next_picture(params[:area], params[:length])
     @area = nil
+    @length = params[:length]
     @count = 0
     session[:voting_id] = Array.new
   end
 
   def area_ranking
-    set_picture(params[:area])
-    next_picture(params[:area])
+    set_picture(params[:area], params[:length])
+    next_picture(params[:area], params[:length])
     @area = params[:area]
+    @length = params[:length]
     @count = 0
     session[:voting_id] = Array.new
 
@@ -70,14 +72,15 @@ class ConflictController < ApplicationController
       @picture2 = Picture.find params[:next2]
 
       while @picture1.picture_present == false || @picture2.picture_present == false
-        set_picture(params[:area])
+        set_picture(params[:area], params[:length])
       end
     rescue
-      set_picture(params[:area])
+      set_picture(params[:area], params[:length])
     end
-    next_picture(params[:area])
+    next_picture(params[:area], params[:length])
 
     @area = params[:area]
+    @length = params[:length]
     @count = params[:count].to_i + 1
 
     if @count >= 10
@@ -104,18 +107,18 @@ class ConflictController < ApplicationController
   end
 
   private
-    def set_picture(area)
-      Picture.find( Picture.where(picture_present: true).area_search(area).pluck(:id).sample )
+    def set_picture(area, length)
+      Picture.find( Picture.where(picture_present: true).area_search(area).length_search(length).pluck(:id).sample )
       @picture1 = Picture.find( Picture.pluck(:id).sample )
       begin
-        @picture2 = Picture.find( Picture.where(picture_present: true).area_search(area).pluck(:id).sample )
+        @picture2 = Picture.find( Picture.where(picture_present: true).area_search(area).length_search(length).pluck(:id).sample )
       end while @picture1.id == @picture2.id
     end
 
-    def next_picture(area)
-      @next1 = Picture.find( Picture.where(picture_present: true).area_search(area).pluck(:id).sample )
+    def next_picture(area, length)
+      @next1 = Picture.find( Picture.where(picture_present: true).area_search(area).length_search(length).pluck(:id).sample )
       begin
-        @next2 = Picture.find( Picture.where(picture_present: true).area_search(area).pluck(:id).sample )
+        @next2 = Picture.find( Picture.where(picture_present: true).area_search(area).length_search(length).pluck(:id).sample )
       end while @next1.id == @next2.id
     end
 end
