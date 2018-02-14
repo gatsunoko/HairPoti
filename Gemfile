@@ -58,6 +58,7 @@ group :test do
   gem "launchy"
   gem "selenium-webdriver"
   gem "shoulda-matchers"
+  gem 'rails-controller-testing'
 end
 
 group :development do
