@@ -76,41 +76,6 @@ class PicturesController < ApplicationController
     end
   end
 
-  def bulk_new
-  end
-
-  def bulk_create
-    #raise.params.inspect
-    urls = params[:urls]
-    urls = urls.gsub(/\r\n|\r|\n/, ",")#改行をカンマに変更
-    urls = urls.split(",")#ひとつの文字列だったspをカンマで区切って配列にする
-    @success = 0 #登録の成功した数をカウントする変数
-    @fail = 0 #登録の失敗した数をカウントする変数
-
-    urls.each do |url|
-      url.sub!(/\?.*/, "")
-      @picture = Picture.new(url: url, user_id: current_user.id)
-      hotpepper = Nokogiri::HTML.parse(url_set(@picture.url), nil, 'utf-8')
-      hotpepper.css('#contents').each do |doc|
-        article_link('#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > p.detailTitle > a',
-                      '#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > p.fs10.fgGray',
-                      '#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > div > ul > li:nth-child(1)',
-                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(2) > div.cFix.mT10 > div.oh.pR10 > p.mT5.fs14.b > a',
-                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(2) > div.cFix.mT10 > div.oh.pR10 > p.mT10.wbba',
-                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(4) > dl:nth-child(2) > dd',
-                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(4) > dl:nth-child(3) > dd',
-                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(4) > dl:nth-child(4) > dd',
-                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fl > div.pr > img',
-                      doc)
-      end
-      if @picture.save
-        @success += 1 
-      else
-        @fail += 1
-      end
-    end
-  end
-
   def collect_new
   end
 
@@ -226,7 +191,7 @@ class PicturesController < ApplicationController
 
   def my_histories
     pictures_array = UserPicture.where(user_id: current_user.id).where('win > ?', 0).order(voting_at: :desc).limit(100).offset(0).pluck(:id)
-    @pictures = UserPicture.where(id: pictures_array).order(voting_at: :desc).page(params[:page]).per(10)
+    @pictures = UserPicture.where(id: pictures_array).order(voting_at: :desc).page(params[:page]).per(10).includes(:picture)
     render 'ranking'
   end
 

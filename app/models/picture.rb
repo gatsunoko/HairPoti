@@ -12,8 +12,8 @@ class Picture < ApplicationRecord
   }
 
   scope :length_search, ->(length) {
-    if length.present? && length != 'すべて'
-      where('length = ?', length)
+    if length.present?
+      where(length: length)
     end
   }
 

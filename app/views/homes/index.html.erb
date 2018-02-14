@@ -13,8 +13,46 @@
   <% end -%>
 
   <%= form_tag(conflict_index_path) do %>
-    <%= select_tag :area, options_for_select(['全国', '東京', '愛知'], selected: @area_default) %>
-    <%= select_tag :length, options_for_select(['すべて', 'ベリーショート', 'ショート', 'ミディアム', 'セミロング', 'ロング', 'ヘアセット'], selected: @length_default) %>
+    <%= select_tag :area, options_for_select(['全国', '東京', '愛知'], selected: @area_default) %><br><br>
+    <%#= select_tag :length, options_for_select(['すべて', 'ベリーショート', 'ショート', 'ミディアム', 'セミロング', 'ロング', 'ヘアセット', 'ミセス'], selected: @length_default) %>
+    <label>
+      <% value = session[:length_default].include?("ベリーショート") ? true : false %>
+      <%= check_box_tag 'length[]', 'ベリーショート', checked = value %>
+      <span>ベリーショート</span>
+    </label>
+    <label>
+      <% value = session[:length_default].include?("ショート") ? true : false %>
+      <%= check_box_tag 'length[]', 'ショート', checked = value %>
+      <span>ショート</span>
+    </label>
+    <label>
+      <% value = session[:length_default].include?("ミディアム") ? true : false %>
+      <%= check_box_tag 'length[]', 'ミディアム', checked = value %>
+      <span>ミディアム</span>
+    </label>
+    <br>
+    <label>
+      <% value = session[:length_default].include?("セミロング") ? true : false %>
+      <%= check_box_tag 'length[]', 'セミロング', checked = value %>
+      <span>セミロング</span>
+    </label>
+    <label>
+      <% value = session[:length_default].include?("ロング") ? true : false %>
+      <%= check_box_tag 'length[]', 'ロング', checked = value %>
+      <span>ロング</span>
+    </label>
+    <label>
+      <% value = session[:length_default].include?("ヘアセット") ? true : false %>
+      <%= check_box_tag 'length[]', 'ヘアセット', checked = value %>
+      <span>ヘアセット</span>
+    </label>
+    <label>
+      <% value = session[:length_default].include?("ミセス") ? true : false %>
+      <%= check_box_tag 'length[]', 'ミセス', checked = value %>
+      <span>ミセス</span>
+    </label>
+    <br>
+    <br>
     <%= submit_tag '投票', class: 'conflict_link' %>
   <% end -%>
 </div>

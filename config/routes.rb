@@ -4,8 +4,6 @@ Rails.application.routes.draw do
     collection do
       get :collect_new
       post :collect_call
-      get :bulk_new
-      post :bulk_create
       get :short_ranking
       get :midiamu_ranking
       get :long_ranking

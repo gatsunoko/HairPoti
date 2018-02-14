@@ -6,6 +6,14 @@
     </div>
   </div>
 
+  <div class="top_button_area" >
+    <%= link_to :back do  %>
+      <div class="conflict_link">
+        <p>戻る</p>
+      </div>
+    <% end -%>
+  </div>
+
   <p class="show_guide_text">画像をクリックすると詳細が見れます</p>
 
   <% @likes.each.with_index(1) do |like, i| %>
