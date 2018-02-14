@@ -1,1 +1,1 @@
-$('#like_area').html("<%= escape_javascript(render 'like') %>");
+$('#like_area<%= @picture.id.to_s %>').html("<%= escape_javascript(render 'like', picture: @picture) %>");

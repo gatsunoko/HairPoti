@@ -12,8 +12,9 @@
   <p class="show_guide_text">画像をクリックすると詳細が見れます</p>
 
   <% @pictures.each.with_index(1) do |picture, i| %>
-    <div>
+    <div class="result_picture_area">
       <%= link_to(image_tag(picture.picture_url), picture_path(picture)) %>
+      <%= render 'likes/like', picture: picture %>
     </div>
   <% end -%>
 
