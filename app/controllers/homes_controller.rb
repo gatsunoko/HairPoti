@@ -16,7 +16,7 @@ class HomesController < ApplicationController
     if session[:length_default].present?
       @length_default = session[:length_default]
     else
-      @length_default = 'すべて'
+      @length_default = Array.new
     end
   end
 
