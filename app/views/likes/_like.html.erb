@@ -1,0 +1,9 @@
+<% if user_signed_in? %>
+  <div id="like_area">
+    <% if @picture.like_user(current_user.id) %>
+      <%= link_to 'お気に入り解除', likes_like_path(id: @picture.id), class: 'no', remote: true %>
+    <% else %>
+      <%= link_to 'お気に入りする', likes_like_path(id: @picture.id), class: 'no', remote: true %>
+    <% end -%>
+  </div>
+<% end %>

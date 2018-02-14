@@ -1,0 +1,24 @@
+<div class="rankings_area">
+  <div class="feed_page">
+    <div class="feed_title"><%= page_entries_info @likes %></div>
+    <div class="feed">
+      <%= paginate @likes %>
+    </div>
+  </div>
+
+  <p class="show_guide_text">画像をクリックすると詳細が見れます</p>
+
+  <% @likes.each.with_index(1) do |like, i| %>
+    <div>
+      <%= link_to(image_tag(like.picture.picture_url), picture_path(like.picture)) %>
+    </div>
+  <% end -%>
+
+  <div class="feed_page">
+    <div class="feed_title"><%= page_entries_info @likes %></div>
+    <div class="feed">
+      <%= paginate @likes %>
+    </div>
+  </div>
+
+</div>

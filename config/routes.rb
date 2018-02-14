@@ -22,4 +22,6 @@ Rails.application.routes.draw do
   get 'conflict/elo'
   get 'conflict/img_blank'
   get 'conflict/result'
+  get 'likes/like'
+  get 'likes/likes'
 end
