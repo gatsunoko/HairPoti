@@ -46,6 +46,19 @@ class PicturesController < ApplicationController
                     '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(4) > dl:nth-child(4) > dd',
                     '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fl > div.pr > img',
                     doc)
+
+      if @picture.length.blank?
+        article_link('#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > p.detailTitle > a',
+                      '#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > p.fs10.fgGray',
+                      '#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > div > ul > li:nth-child(1)',
+                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(2) > div.cFix.mT10 > div.oh.pR10 > p.mT5.fs14.b > a',
+                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(2) > div.cFix.mT10 > div.oh.pR10 > p.mT10.wbba',
+                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(3) > dl:nth-child(2) > dd',
+                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(3) > dl:nth-child(3) > dd',
+                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(3) > dl:nth-child(4) > dd',
+                      '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fl > div.pr > img',
+                      child_doc)
+      end
     end
     @picture.user_id = current_user.id
 
@@ -82,6 +95,20 @@ class PicturesController < ApplicationController
                         '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(4) > dl:nth-child(4) > dd',
                         '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fl > div.pr > img',
                         child_doc)
+
+          if @picture.length.blank?
+            article_link('#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > p.detailTitle > a',
+                          '#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > p.fs10.fgGray',
+                          '#mainContents > div.detailHeader.cFix.pr > div > div.pL10.oh.hMin120 > div > div > ul > li:nth-child(1)',
+                          '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(2) > div.cFix.mT10 > div.oh.pR10 > p.mT5.fs14.b > a',
+                          '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(2) > div.cFix.mT10 > div.oh.pR10 > p.mT10.wbba',
+                          '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(3) > dl:nth-child(2) > dd',
+                          '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(3) > dl:nth-child(3) > dd',
+                          '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fr.styleDtlRightColumn > div:nth-child(3) > dl:nth-child(4) > dd',
+                          '#jsiHoverAlphaLayerScope > div.cFix.mT20.pH10 > div.fl > div.pr > img',
+                          child_doc)
+          end
+
           if @picture.save
             @success += 1 
           else
