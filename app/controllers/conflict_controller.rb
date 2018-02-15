@@ -16,17 +16,6 @@ class ConflictController < ApplicationController
     session[:voting_id] = Array.new
   end
 
-  def area_ranking
-    set_picture(params[:area], params[:length])
-    next_picture(params[:area], params[:length])
-    @area = params[:area]
-    @length = params[:length]
-    @count = 0
-    session[:voting_id] = Array.new
-
-    render 'index'
-  end
-
   def elo
     begin
       winer = Picture.find(params[:win])
@@ -114,7 +103,9 @@ class ConflictController < ApplicationController
   private
     #該当する写真が5枚以下なら投票画面に行かない
     def picture_count
-       redirect_back(fallback_location: root_path) if Picture.where(picture_present: true).area_search(params[:area]).length_search(params[:length]).count <= 5
+      if Picture.where(picture_present: true).area_search(params[:area]).length_search(params[:length]).count <= 10
+        redirect_back(fallback_location: root_path) and return
+      end
     end
 
     def set_picture(area, length)

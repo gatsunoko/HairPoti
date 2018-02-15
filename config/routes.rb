@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   root 'homes#index'
   get 'homes/index'
   get 'homes/after_signup'
-  post 'conflict/index'
+  get 'conflict/index'
   get 'conflict/elo'
   get 'conflict/img_blank'
   get 'conflict/result'

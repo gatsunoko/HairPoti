@@ -15,7 +15,7 @@ class PicturesController < ApplicationController
       @pictures = Picture.where(user_id: current_user.id).order(id: :desc).page(params[:page]).per(10)
     end
   end
-
+  
   # GET /pictures/1
   # GET /pictures/1.json
   def show
