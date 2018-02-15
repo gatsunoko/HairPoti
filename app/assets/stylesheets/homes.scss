@@ -55,6 +55,16 @@
     }
   }
 }
+.top_label_area {
+  input[type=checkbox] {
+    width: 24px;
+    height: 24px;
+  }
+  label {
+    font-size: 24px;
+    border: 1px solid black;
+  }
+}
 
 .top_contents {
   text-align: center;
