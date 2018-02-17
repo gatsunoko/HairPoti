@@ -21,19 +21,13 @@ ActiveRecord::Schema.define(version: 20180214015431) do
 
   create_table "pictures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "url"
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
-    t.integer  "rating",                        default: 1500, null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "rating",          default: 1500, null: false
     t.integer  "user_id"
-    t.integer  "win",                           default: 0,    null: false
-    t.integer  "lose",                          default: 0,    null: false
-    t.boolean  "picture_present",               default: true, null: false
-    t.text     "picture_url",     limit: 65535,                null: false
-    t.string   "shop_name"
-    t.string   "shop_name_kana"
-    t.string   "shop_address"
-    t.string   "stylist_name"
-    t.text     "stylist_profile", limit: 65535
+    t.integer  "win",             default: 0,    null: false
+    t.integer  "lose",            default: 0,    null: false
+    t.boolean  "picture_present", default: true, null: false
     t.string   "length"
     t.string   "color"
     t.string   "image"

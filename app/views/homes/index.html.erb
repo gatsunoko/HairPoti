@@ -80,7 +80,7 @@
     <% @short_rankings.each.with_index(1) do |picture, i| %>
       <div>
         <p><%= i %>位</p>
-        <%= link_to(image_tag(picture.picture_url), picture_path(picture)) %>
+        <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
       </div>
     <% end -%>
     <%= link_to 'もっと見る', short_ranking_pictures_path, class: 'more' %>
@@ -90,7 +90,7 @@
     <% @midiamu_ranking.each.with_index(1) do |picture, i| %>
       <div>
         <p><%= i %>位</p>
-        <%= link_to(image_tag(picture.picture_url), picture_path(picture)) %>
+        <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
       </div>
     <% end -%>
     <%= link_to 'もっと見る', midiamu_ranking_pictures_path, class: 'more' %>
@@ -100,7 +100,7 @@
     <% @long_ranking.each.with_index(1) do |picture, i| %>
       <div>
         <p><%= i %>位</p>
-        <%= link_to(image_tag(picture.picture_url), picture_path(picture)) %>
+        <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
       </div>
     <% end -%>
     <%= link_to 'もっと見る', long_ranking_pictures_path, class: 'more' %>
@@ -112,7 +112,7 @@
       <% @user_histories.each.with_index(1) do |picture, i| %>
         <div>
           <p><%= i %>回前</p>
-          <%= link_to(image_tag(picture.picture.picture_url), picture_path(picture.picture)) %>
+          <%= link_to(image_tag(picture.picture.url + 'media/?size=t'), picture_path(picture.picture)) %>
         </div>
       <% end -%>
       <%= link_to 'もっと見る', my_histories_pictures_path, class: 'more' %>

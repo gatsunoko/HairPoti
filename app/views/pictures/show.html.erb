@@ -20,15 +20,10 @@
 
   <%= render 'likes/like', picture: @picture %>
 
-  <h2><%= @picture.shop_name %></h2>
-  <p><%= @picture.shop_name_kana %></p><br>
-  <p>住所:<%= @picture.shop_address %></p><br>
-  <p>スタイリスト:<%= @picture.stylist_name %></p><br>
-  <p><%= simple_format(@picture.stylist_profile) %></p><br>
   <p>長さ:<%= @picture.length %></p>
   <p>カラー:<%= @picture.color %></p>
   <p>イメージ:<%= @picture.image %></p>
 </div>
 <div class="show_picture_area">
-  <%= image_tag(@picture.picture_url, class: 'show_picture', onError: "img_blank(#{@picture.id})") %>
+  <%= image_tag(@picture.url + 'media/?size=l', class: 'show_picture', onError: "img_blank(#{@picture.id})") %>
 </div>

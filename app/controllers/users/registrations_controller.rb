@@ -61,4 +61,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     def after_inactive_sign_up_path_for(resource)
       homes_after_signup_path
     end
+    
+    #パスワード変更画面以外ではパスワード無しでもユーザー情報が更新できるようにする
+    def update_resource(resource, params)
+      if params.has_key?('current_password') #パスワード変更画面かどうか
+        resource.update_with_password(params)
+      else
+        resource.update_without_password(params)
+      end
+    end
 end

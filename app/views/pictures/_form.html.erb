@@ -16,6 +16,16 @@
     <%= f.text_field :url %>
   </div>
 
+  <div class="field">
+    <%= f.label :length %>
+    <%= f.select :length, ['ベリーショート', 'ショート', 'ミディアム', 'セミロング', 'ロング'] %>
+  </div>
+
+  <div class="field">
+    <%= f.label :color %>
+    <%= f.select :color, ['ブラウン・ベージュ系', 'イエロー・オレンジ系', 'レッド・ピンク系', 'アッシュ・ブラック系', 'その他'] %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
