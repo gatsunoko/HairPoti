@@ -7,7 +7,7 @@ class Picture < ApplicationRecord
 
   scope :area_search, ->(area) {
     if area.present? && area != '全国'
-      where('shop_address like ?', area+'%')
+      where('users.shop_address like ?', area+'%').joins(:user).references(:user)
     end
   }
 

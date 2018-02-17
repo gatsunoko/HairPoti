@@ -103,24 +103,32 @@ class ConflictController < ApplicationController
   private
     #該当する写真が5枚以下なら投票画面に行かない
     def picture_count
-      if Picture.where(picture_present: true).length_search(params[:length]).count <= 10
+      if Picture.where(picture_present: true).area_search(params[:area]).length_search(params[:length]).count <= 10
         redirect_back(fallback_location: root_path) and return
       end
     end
 
     def set_picture(area, length)
-      @picture1 = Picture.find( Picture.where(picture_present: true).length_search(length).pluck(:id).sample)
+      @picture1 = Picture.find( Picture.where(picture_present: true).area_search(area).length_search(length).pluck(:id).sample)
+      count = 0
       begin
         second_length = @picture1.length
-        @picture2 = Picture.find(Picture.where(picture_present: true).length_search(second_length).pluck(:id).sample)
+        @picture2 = Picture.find(Picture.where(picture_present: true).area_search(area).length_search(second_length).pluck(:id).sample)
+
+        redirect_to root_path and return if count == 10
+        count += 1
       end while @picture1.id == @picture2.id
     end
 
     def next_picture(area, length)
-      @next1 = Picture.find(Picture.where(picture_present: true).length_search(length).pluck(:id).sample)
+      @next1 = Picture.find(Picture.where(picture_present: true).area_search(area).length_search(length).pluck(:id).sample)
+      count = 0
       begin
         second_length = @next1.length
-        @next2 = Picture.find(Picture.where(picture_present: true).length_search(second_length).pluck(:id).sample)
+        @next2 = Picture.find(Picture.where(picture_present: true).area_search(area).length_search(second_length).pluck(:id).sample)
+
+        redirect_to root_path and return if count == 10
+        count += 1
       end while @next1.id == @next2.id
     end
 end
