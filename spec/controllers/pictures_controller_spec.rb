@@ -18,6 +18,7 @@ RSpec.describe PicturesController, type: :controller do
 
       context 'show' do
         it 'showを表示できる' do 
+          create(:user, id: 1)
           @picture = create(:picture)
           get 'show', params: { id: @picture.id }
           expect(assigns(:picture)).to eq @picture #アクションが正常に実行

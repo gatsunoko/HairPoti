@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe ConflictController, type: :controller do
   describe 'Conflictコントローラテスト' do
     subject do
+      create(:user, id: 1)
       create_list(:picture, record_count, length: 'ショート')
       create_list(:picture, record_count, length: 'ロング')
     end

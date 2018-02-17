@@ -7,6 +7,20 @@
   margin: 0 auto;
 }
 
+.picture_show_stylist_profile_area {
+  margin: 15px 0;
+  .stylist_name,
+  .shop_name {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .profile p {
+    font-size: 14px;
+  }
+  .shop_area {
+    margin: 15px 0;
+  }
+}
 .show_picture_area {
   /*width: 100%;*/
   position: relative;

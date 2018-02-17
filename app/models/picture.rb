@@ -1,6 +1,7 @@
 class Picture < ApplicationRecord
   validates :url, presence: true, uniqueness: true
 
+  belongs_to :user
   has_many :user_pictures, dependent: :destroy
   has_many :likes, dependent: :destroy
 
