@@ -18,9 +18,9 @@
           <% if user_signed_in? %>
               <%#= link_to 'プロフィール変更', edit_user_registration_path %>
               <% if current_user.admin %>
-                <%= link_to '正常に表示されなかった写真たち', blank_pictures_pictures_path %>
-                <%= link_to 'URL登録画面', pictures_path %>
+                <%= link_to '表示されなかった写真たち', blank_pictures_pictures_path %>
               <% end -%>
+              <%= link_to '登録画面', pictures_path %>
               <%= link_to 'お気に入り', likes_likes_path %>
               <%= link_to 'ユーザー情報変更', edit_user_registration_path %>
               <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>

@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<% if user_signed_in? && current_user.admin %>
+<% if user_signed_in? && @picture.user_id == current_user.id %>
   <div>
     <%= link_to 'Edit', edit_picture_path(@picture) %> |
     <%= link_to 'Destroy', @picture, method: :delete, data: { confirm: 'Are you sure?' } %>
   </div>
 <% end -%>
 
-<%= link_to 'hpbでみる', @picture.url, target: '_blank' %>
+<%= link_to 'インスタでみる', @picture.url, target: '_blank' %>
 <div class="show_text_area">
 
   <div class="top_button_area" >

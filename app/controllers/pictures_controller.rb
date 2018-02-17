@@ -4,7 +4,8 @@ require 'nokogiri' # Nokogiriライブラリの読み込み
 class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:index, :new, :create, :bulk_new, :bulk_create, :collect_new, :collect_call, :edit, :update, :destroy, :my_point_ranking, :my_histories]
-  before_action :is_admin, only: [:edit, :update, :destroy, :blank_pictures, :collect_new, :collect_call]
+  before_action :is_admin, only: [:blank_pictures]
+  before_action :is_mine, only: [:edit, :update, :destroy]
 
   # GET /pictures
   # GET /pictures.json
@@ -127,6 +128,10 @@ class PicturesController < ApplicationController
   private
     def set_picture
       @picture = Picture.find(params[:id])
+    end
+
+    def is_mine
+      redirect_back(fallback_location: root_path) and return if @picture.user_id != current_user.id
     end
 
     def picture_params

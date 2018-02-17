@@ -52,20 +52,6 @@
         <%= check_box_tag 'length[]', 'ロング', checked = value %>
         <span>ロング</span>
       </label>
-      <label>
-        <% if session[:length_default].present? %>
-          <% value = session[:length_default].include?("ヘアセット") ? true : false %>
-        <% end -%>
-        <%= check_box_tag 'length[]', 'ヘアセット', checked = value %>
-        <span>ヘアセット</span>
-      </label>
-      <label>
-        <% if session[:length_default].present? %>
-          <% value = session[:length_default].include?("ミセス") ? true : false %>
-        <% end -%>
-        <%= check_box_tag 'length[]', 'ミセス', checked = value %>
-        <span>ミセス</span>
-      </label>
     </div>
     <br>
     <br>
