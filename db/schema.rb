@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180217004546) do
+ActiveRecord::Schema.define(version: 20180218003055) do
 
   create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(version: 20180217004546) do
     t.string   "length"
     t.string   "color"
     t.index ["user_id"], name: "index_pictures_on_user_id", using: :btree
+  end
+
+  create_table "stylists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.string   "shop_name"
+    t.string   "shop_address"
+    t.string   "shop_phone_number"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "user_pictures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -65,9 +74,7 @@ ActiveRecord::Schema.define(version: 20180217004546) do
     t.boolean  "admin",                                default: false, null: false
     t.string   "name"
     t.text     "profile",                limit: 65535
-    t.text     "shop_name",              limit: 65535
-    t.string   "shop_address"
-    t.string   "shop_phone_number"
+    t.integer  "role",                                 default: 1,     null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
