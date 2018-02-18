@@ -1,8 +1,5 @@
 class HomesController < ApplicationController
   def index
-    p '-------------------------'
-    p current_user.role if user_signed_in?
-    p '-------------------------'
     @short_rankings = Picture.where('length = ? OR length = ?', 'ショート', 'ベリーショート').order(rating: :desc).limit(5).offset(0)
     @midiamu_ranking = Picture.where('length = ?', 'ミディアム').order(rating: :desc).limit(5).offset(0)
     @long_ranking = Picture.where('length = ? OR length = ?', 'ロング', 'セミロング').order(rating: :desc).limit(5).offset(0)
