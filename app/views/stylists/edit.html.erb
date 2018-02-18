@@ -1,0 +1,38 @@
+<%= form_for(@user, url: stylist_path(@user), html: { method: :patch }) do |f| %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :profile %><br />
+    <%= f.text_area :profile %>
+  </div>
+
+  <%= f.fields_for :stylist do |s| %>
+    <div class="field">
+      <%= s.label :shop_name %><br />
+      <%= s.text_field :shop_name %>
+    </div>
+
+    <div class="field">
+      <%= s.label :shop_address %><br />
+      <%= s.text_field :shop_address %>
+    </div>
+
+    <div class="field">
+      <%= s.label :shop_phone_number %><br />
+      <%= s.text_field :shop_phone_number %>
+    </div>
+  <% end -%>
+
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>

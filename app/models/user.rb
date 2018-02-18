@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_many :likes
   has_one :stylist
+  accepts_nested_attributes_for :stylist
 
   enum role: { user: 1, stylist: 2, admin: 3 }
 

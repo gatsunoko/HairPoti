@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       get :blank_pictures
     end
   end
+
+  resources :stylists, only: [:edit, :update]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'homes#index'
   get 'homes/index'
