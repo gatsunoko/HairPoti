@@ -14,9 +14,9 @@
         <p><%= i + ((@pictures.current_page - 1) * 10) %>位</p>
       <% end -%>
       <% unless controller.action_name == 'my_histories' %>
-        <%= link_to(image_tag(picture.picture_url), picture_path(picture)) %>
+        <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
       <% else %>
-        <%= link_to(image_tag(picture.picture.picture_url), picture_path(picture.picture)) %>
+        <%= link_to(image_tag(picture.picture.url + 'media/?size=t'), picture_path(picture.picture)) %>
       <% end -%>
     </div>
   <% end -%>
