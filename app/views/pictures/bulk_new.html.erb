@@ -6,6 +6,11 @@
     <%= text_area_tag :urls %>
   </div>
 
+  <div class="field">
+    <%= label_tag :length %>
+    <%= select_tag :length, options_for_select(['ベリーショート', 'ショート', 'ミディアム', 'セミロング', 'ロング']) %>
+  </div>
+
   <div class="actions">
     <%= submit_tag %>
   </div>

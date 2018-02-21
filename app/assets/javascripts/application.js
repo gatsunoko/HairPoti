@@ -16,6 +16,7 @@
 //= require_tree .
 
 function img_blank(picture_id) {
+  console.log('1')
   $.ajax({
       url: '/conflict/img_blank',
       type: 'GET',

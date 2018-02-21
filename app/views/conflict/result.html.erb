@@ -2,6 +2,52 @@
   <h2>10回の投票履歴</h2>
 
   <div class="top_button_area" >
+    <%= form_tag(conflict_index_path, method: :get) do %>
+      <%= select_tag :area, options_for_select(['全国', '東京', '愛知'], selected: @area_default) %><br><br>
+      <%#= select_tag :length, options_for_select(['すべて', 'ベリーショート', 'ショート', 'ミディアム', 'セミロング', 'ロング', 'ヘアセット', 'ミセス'], selected: @length_default) %>
+      <div class="top_label_area">
+        <label>
+          <% if session[:length_default].present? %>
+            <% value = session[:length_default].include?("ベリーショート") ? true : false %>
+          <% end -%>
+          <%= check_box_tag 'length[]', 'ベリーショート', checked = value %>
+          <span>ベリーショート</span>
+        </label>
+        <label>
+          <% if session[:length_default].present? %>
+            <% value = session[:length_default].include?("ショート") ? true : false %>
+          <% end -%>
+          <%= check_box_tag 'length[]', 'ショート', checked = value %>
+          <span>ショート</span>
+        </label>
+        <label>
+          <% if session[:length_default].present? %>
+            <% value = session[:length_default].include?("ミディアム") ? true : false %>
+          <% end -%>
+          <%= check_box_tag 'length[]', 'ミディアム', checked = value %>
+          <span>ミディアム</span>
+        </label>
+        <br>
+        <label>
+          <% if session[:length_default].present? %>
+            <% value = session[:length_default].include?("セミロング") ? true : false %>
+          <% end -%>
+          <%= check_box_tag 'length[]', 'セミロング', checked = value %>
+          <span>セミロング</span>
+        </label>
+        <label>
+          <% if session[:length_default].present? %>
+            <% value = session[:length_default].include?("ロング") ? true : false %>
+          <% end -%>
+          <%= check_box_tag 'length[]', 'ロング', checked = value %>
+          <span>ロング</span>
+        </label>
+      </div>
+      <br>
+      <br>
+      <%= submit_tag '投票を続ける', class: 'conflict_link' %>
+    <% end -%>
+
     <%= link_to(root_path) do  %>
       <div class="conflict_link">
         <p>トップへ戻る</p>

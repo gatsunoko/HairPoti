@@ -62,7 +62,7 @@ class PicturesController < ApplicationController
 
     urls.each do |url|
       url.sub!(/\?.*/, "")
-      picture = Picture.new(url: url, user_id: current_user.id, length: 'ミディアム')
+      picture = Picture.new(url: url, user_id: current_user.id, length: params[:length])
       if picture.save
         @success += 1 
       else
