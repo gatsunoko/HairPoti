@@ -4,7 +4,6 @@ require 'nokogiri' # Nokogiriライブラリの読み込み
 class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:index, :new, :create, :bulk_new, :bulk_create, :collect_new, :collect_call, :edit, :update, :destroy, :my_point_ranking, :my_histories]
-  before_action :is_admin, only: [:blank_pictures]
   before_action :is_mine, only: [:edit, :update, :destroy]
 
   # GET /pictures
@@ -94,11 +93,6 @@ class PicturesController < ApplicationController
     #   format.html { redirect_back(fallback_location: root_path) } and return
     #   format.json { head :no_content }
     # end
-  end
-
-  def blank_pictures
-    @pictures = Picture.where(picture_present: false).order(id: :desc).page(params[:page]).per(20)
-    render 'index'
   end
 
   def short_ranking

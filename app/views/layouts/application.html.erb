@@ -18,7 +18,7 @@
           <% if user_signed_in? %>
               <%#= link_to 'プロフィール変更', edit_user_registration_path %>
               <% if current_user.admin %>
-                <%= link_to '表示されなかった写真たち', blank_pictures_pictures_path %>
+                <%= link_to '管理者ページ', admin_administrator_index_path %>
               <% end -%>
               <% if current_user.stylist? %>
                 <%= link_to '登録画面', pictures_path %>

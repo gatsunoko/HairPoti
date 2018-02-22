@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def is_admin
-    unless current_user.admin?
+    unless current_user.admin? && current_user.admin
       redirect_to root_path and return
     end
   end

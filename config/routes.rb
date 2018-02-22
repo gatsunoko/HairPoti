@@ -8,12 +8,18 @@ Rails.application.routes.draw do
       get :midiamu_ranking
       get :long_ranking
       get :my_histories
-      get :blank_pictures
+      get :multiple_url
     end
   end
 
+  namespace 'admin' do
+    get 'administrator/index'
+    get 'administrator/blank_pictures'
+    get 'administrator/multiple_urls'
+    get 'administrator/multiple_url'
+  end
+
   resources :stylists, only: [:edit, :update]
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'homes#index'
   get 'homes/index'
   get 'homes/after_signup'
