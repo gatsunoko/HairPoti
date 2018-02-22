@@ -26,6 +26,35 @@
     <%= f.select :color, ['ブラウン・ベージュ系', 'イエロー・オレンジ系', 'レッド・ピンク系', 'アッシュ・ブラック系', 'その他'] %>
   </div>
 
+  <% if current_user.admin? %>
+    <%= f.fields_for :picture_option do |s| %>
+      <div class="field">
+        <%= s.label :name %><br />
+        <%= s.text_field :name %>
+      </div>
+
+      <div class="field">
+        <%= s.label :profile %><br />
+        <%= s.text_area :profile %>
+      </div>
+
+      <div class="field">
+        <%= s.label :shop_name %><br />
+        <%= s.text_field :shop_name %>
+      </div>
+
+      <div class="field">
+        <%= s.label :shop_address %><br />
+        <%= s.text_field :shop_address %>
+      </div>
+
+      <div class="field">
+        <%= s.label :shop_phone_number %><br />
+        <%= s.text_field :shop_phone_number %>
+      </div>
+    <% end -%>
+  <% end -%>
+
   <div class="actions">
     <%= f.submit %>
   </div>

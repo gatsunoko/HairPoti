@@ -24,6 +24,7 @@ class PicturesController < ApplicationController
   # GET /pictures/new
   def new
     @picture = Picture.new
+    @picture.build_picture_option if current_user.admin?
   end
 
   # GET /pictures/1/edit
@@ -129,6 +130,6 @@ class PicturesController < ApplicationController
     end
 
     def picture_params
-      params.require(:picture).permit(:url, :length, :color)
+      params.require(:picture).permit(:url, :length, :color, picture_option_attributes: [:id, :destroy, :name, :profile, :shop_name, :shop_address, :shop_phone_number])
     end
 end

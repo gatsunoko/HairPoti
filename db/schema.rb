@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180218003055) do
+ActiveRecord::Schema.define(version: 20180222131648) do
+
+  create_table "admin_picture_options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "picture_id"
+    t.string   "name"
+    t.text     "profile",           limit: 65535
+    t.string   "shop_name"
+    t.string   "shop_address"
+    t.string   "shop_phone_number"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
 
   create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"

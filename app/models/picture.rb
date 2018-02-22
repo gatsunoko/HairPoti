@@ -5,6 +5,8 @@ class Picture < ApplicationRecord
   belongs_to :user
   has_many :user_pictures, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_one :picture_option, class_name: 'Admin::PictureOption', dependent: :destroy
+  accepts_nested_attributes_for :picture_option
 
   scope :area_search, ->(area) {
     if area.present? && area != '全国'
