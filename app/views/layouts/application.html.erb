@@ -20,7 +20,7 @@
               <% if current_user.admin %>
                 <%= link_to '管理者ページ', admin_administrator_index_path %>
               <% end -%>
-              <% if current_user.stylist? %>
+              <% if current_user.stylist? || current_user.admin? %>
                 <%= link_to '登録画面', pictures_path %>
               <% end -%>
               <%= link_to 'お気に入り', likes_likes_path %>

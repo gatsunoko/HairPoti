@@ -1,5 +1,6 @@
 class Picture < ApplicationRecord
   validates :url, presence: true
+  validates :url, :uniqueness => {:scope => :user_id}
 
   belongs_to :user
   has_many :user_pictures, dependent: :destroy
