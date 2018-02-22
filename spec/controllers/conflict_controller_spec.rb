@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ConflictController, type: :controller do
   describe 'Conflictコントローラテスト' do
+    render_views
     subject do
       @user = create(:user, id: 1)
       create(:stylist, user_id: @user.id, shop_address: '愛知')

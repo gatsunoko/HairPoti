@@ -29,6 +29,7 @@ class PicturesController < ApplicationController
 
   # GET /pictures/1/edit
   def edit
+    @picture.build_picture_option if current_user.admin? && @picture.picture_option.blank?
   end
 
   # POST /pictures
@@ -63,6 +64,7 @@ class PicturesController < ApplicationController
     urls.each do |url|
       url.sub!(/\?.*/, "")
       picture = Picture.new(url: url, user_id: current_user.id, length: params[:length])
+      picture.build_picture_option(name: params[:name], profile: params[:profile], shop_name: params[:shop_name], shop_address: params[:shop_address], shop_phone_number: params[:shop_phone_number]) if current_user.admin?
       if picture.save
         @success += 1 
       else
