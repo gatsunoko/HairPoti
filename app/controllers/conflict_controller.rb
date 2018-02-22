@@ -103,9 +103,6 @@ class ConflictController < ApplicationController
   private
     #該当する写真が5枚以下なら投票画面に行かない
     def picture_count
-      p '---------------------------------'
-      p Picture.where(picture_present: true).area_search(params[:area]).length_search(params[:length]).count
-      p '---------------------------------'
       if Picture.where(picture_present: true).area_search(params[:area]).length_search(params[:length]).count <= 10
         redirect_back(fallback_location: root_path) and return
       end

@@ -1,3 +1,4 @@
+
 require 'rails_helper'
 
 RSpec.describe ConflictController, type: :controller do
@@ -32,18 +33,38 @@ RSpec.describe ConflictController, type: :controller do
       end
 
       describe 'パラメーターに合致するレコードが10個以上の場合' do
-        let(:record_count) { 15 }
+        context 'スタイリストが登録した画像のみで10枚以上ある場合' do
+          let(:record_count) { 15 }
 
-        it 'エリアパラメーターが全国でindexが表示できる' do
-          subject
-          get 'index', params: { area: '全国', length: [ 'ショート', 'ロング'] }
-          expect(response).to render_template :index
+          it 'エリアパラメーターが全国でindexが表示できる' do
+            subject
+            get 'index', params: { area: '全国', length: [ 'ショート', 'ロング'] }
+            expect(response).to render_template :index
+          end
+
+          it 'エリアパラメーターが愛知でindexが表示できる' do
+            subject
+            get 'index', params: { area: '愛知', length: [ 'ショート', 'ロング'] }
+            expect(response).to render_template :index
+          end
         end
 
-        it 'エリアパラメーターが愛知でindexが表示できる' do
-          subject
-          get 'index', params: { area: '愛知', length: [ 'ショート', 'ロング'] }
-          expect(response).to render_template :index
+        context '管理者が登録した画像のみで10枚以上ある場合' do
+          before(:each) do
+            @user = create(:user, id: 1)
+            10.times {
+              @picture = create(:picture, length: 'ショート')
+              create(:admin_picture_option, picture_id: @picture.id, shop_address: '愛知')
+
+              @picture = create(:picture, length: 'ロング')  
+              create(:admin_picture_option, picture_id: @picture.id, shop_address: '愛知')
+            }
+          end
+
+          it 'エリアパラメーターが愛知でindexが表示できる' do
+            get 'index', params: { area: '愛知', length: [ 'ショート', 'ロング'] }
+            expect(response).to render_template :index
+          end
         end
       end
     end
