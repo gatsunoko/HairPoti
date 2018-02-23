@@ -11,12 +11,13 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
+//= require infinite-scroll.pkgd.min
 //= require turbolinks
 //= require_tree .
 
 function img_blank(picture_id) {
-  console.log('1')
   $.ajax({
       url: '/conflict/img_blank',
       type: 'GET',

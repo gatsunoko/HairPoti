@@ -11,11 +11,11 @@
 <div class="show_text_area">
 
   <div class="top_button_area" >
-    <%= link_to :back do  %>
+    <a href="javascript:history.back();">
       <div class="conflict_link">
         <p>戻る</p>
       </div>
-    <% end -%>
+    </a>
   </div>
 
   <%= render 'likes/like', picture: @picture %>

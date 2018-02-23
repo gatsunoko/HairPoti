@@ -66,11 +66,11 @@
   }
 }
 
-.top_contents {
+#top_contents {
   text-align: center;
-  .ranking {
+  .ranking,
+  .news {
     margin: 0 auto;
-    padding: 0;
     max-width: 890px;
     .square-wrapper {
       overflow: hidden;
@@ -83,8 +83,6 @@
         img {
           min-width: 100%;
           min-height: 100%;
-          max-width: 100%;
-          height: auto;
           position: absolute;
           top: 50%;
           left: 50%;

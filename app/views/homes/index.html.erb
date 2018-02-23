@@ -59,8 +59,9 @@
   <% end -%>
 </div>
 
-<div class="top_contents">
+<div id="top_contents">
   <h2>写真をクリックすると詳細画面に飛びます。</h2>
+  <h3>おすすめ</h3>
   <div class="ranking">
     <% @ranking.each.with_index(1) do |picture, i| %>
       <div class="square-wrapper">
@@ -70,8 +71,21 @@
       </div>
     <% end -%>
   </div>
-
+  <h3>新着</h3>
+  <%= render 'news' %>
 </div>
+
+<div class="navigation" style="visibility: hidden;">
+  <%= paginate @pictures %>
+</div>
+<%# 無限スクロールのJS %>
+<script>
+  $('#top_contents').infiniteScroll({
+    path: '.navigation a[rel=next]',
+    append: '.news',
+    history: false
+  });
+</script>
 
 <div class="footer">
   footer
