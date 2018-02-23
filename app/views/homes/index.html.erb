@@ -61,49 +61,16 @@
 
 <div class="top_contents">
   <h2>写真をクリックすると詳細画面に飛びます。</h2>
-  <div class="all_ranking">
-    <p>ショート</p>
-    <% @short_rankings.each.with_index(1) do |picture, i| %>
-      <div>
-        <p><%= i %>位</p>
-        <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
+  <div class="ranking">
+    <% @ranking.each.with_index(1) do |picture, i| %>
+      <div class="square-wrapper">
+        <div class="spacer">
+          <%= link_to(image_tag(picture.url + 'media/?size=m'), picture_path(picture)) %>
+        </div>
       </div>
     <% end -%>
-    <%= link_to 'もっと見る', short_ranking_pictures_path, class: 'more' %>
-  </div>
-  <div class="win_count">
-    <p>ミディアム</p>
-    <% @midiamu_ranking.each.with_index(1) do |picture, i| %>
-      <div>
-        <p><%= i %>位</p>
-        <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
-      </div>
-    <% end -%>
-    <%= link_to 'もっと見る', midiamu_ranking_pictures_path, class: 'more' %>
-  </div>
-  <div class="win_count">
-    <p>ロング</p>
-    <% @long_ranking.each.with_index(1) do |picture, i| %>
-      <div>
-        <p><%= i %>位</p>
-        <%= link_to(image_tag(picture.url + 'media/?size=t'), picture_path(picture)) %>
-      </div>
-    <% end -%>
-    <%= link_to 'もっと見る', long_ranking_pictures_path, class: 'more' %>
   </div>
 
-  <% if user_signed_in? %>
-    <div class="user_history">
-      <p>投票履歴</p>
-      <% @user_histories.each.with_index(1) do |picture, i| %>
-        <div>
-          <p><%= i %>回前</p>
-          <%= link_to(image_tag(picture.picture.url + 'media/?size=t'), picture_path(picture.picture)) %>
-        </div>
-      <% end -%>
-      <%= link_to 'もっと見る', my_histories_pictures_path, class: 'more' %>
-    </div>
-  <% end -%>
 </div>
 
 <div class="footer">

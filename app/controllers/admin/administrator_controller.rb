@@ -6,7 +6,7 @@ class Admin::AdministratorController < ApplicationController
   end
 
   def blank_pictures
-    @pictures = Picture.where(picture_present: false).order(id: :desc).page(params[:page]).per(20)
+    @pictures = Picture.where(picture_present: false).order(updated_at: :desc).page(params[:page]).per(20)
     render 'pictures/index'
   end
 
