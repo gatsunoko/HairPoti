@@ -128,7 +128,9 @@ class PicturesController < ApplicationController
     end
 
     def is_mine
-      redirect_back(fallback_location: root_path) and return if @picture.user_id != current_user.id
+      if @picture.user_id != current_user.id && current_user.admin == false
+        redirect_back(fallback_location: root_path) and return
+      end
     end
 
     def picture_params
