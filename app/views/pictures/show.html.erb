@@ -1,4 +1,4 @@
-<% if user_signed_in? && @picture.user_id == current_user.id %>
+<% if user_signed_in? && (@picture.user_id == current_user.id || current_user.admin) %>
   <div>
     <%= link_to 'Edit', edit_picture_path(@picture) %> |
     <%= link_to 'Destroy', @picture, method: :delete, data: { confirm: 'Are you sure?' } %>

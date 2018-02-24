@@ -2,8 +2,9 @@
   <% @pictures.each.with_index(1) do |picture, i| %>
     <div class="square-wrapper">
       <div class="spacer">
-        <%= link_to(image_tag(picture.url + 'media/?size=m', onError: "img_blank(#{picture.id})", alt: '画像読み込みエラー'), picture_path(picture)) %>
+        <%= link_to(image_tag(picture.url + 'media/?size=m', onError: "img_blank(#{picture.id})", alt: '画像読み込みエラー'), picture_path(picture), data: { href: 'load.html', toggle: 'modal', target: "#modal#{picture.id}"}) %>
       </div>
     </div>
+    <%= render 'homes/modal_area', picture: picture %>
   <% end -%>
 </div>

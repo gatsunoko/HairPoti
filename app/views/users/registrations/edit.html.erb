@@ -3,7 +3,7 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
+  <div class="form-group col-sm-6 col-md-4">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
@@ -12,30 +12,30 @@
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+  <div class="form-group col-sm-6 col-md-4">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= f.label :profile %><br />
-    <%= f.text_area :profile %>
+  <div class="form-group col-sm-6 col-md-4">
+    <%= f.label :profile %>
+    <%= f.text_area :profile, class: 'form-control' %>
   </div>
 
   <%= f.fields_for :stylist do |s| %>
-    <div class="field">
-      <%= s.label :shop_name %><br />
-      <%= s.text_field :shop_name %>
+    <div class="form-group col-sm-6 col-md-4">
+      <%= s.label :shop_name %>
+      <%= s.text_field :shop_name, class: 'form-control' %>
     </div>
 
-    <div class="field">
-      <%= s.label :shop_address %><br />
-      <%= s.text_field :shop_address %>
+    <div class="form-group col-sm-6 col-md-4">
+      <%= s.label :shop_address %>
+      <%= s.text_field :shop_address, class: 'form-control' %>
     </div>
 
-    <div class="field">
-      <%= s.label :shop_phone_number %><br />
-      <%= s.text_field :shop_phone_number %>
+    <div class="form-group col-sm-6 col-md-4">
+      <%= s.label :shop_phone_number %>
+      <%= s.text_field :shop_phone_number, class: 'form-control' %>
     </div>
   <% end -%>
 <%

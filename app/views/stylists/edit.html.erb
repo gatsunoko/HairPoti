@@ -1,38 +1,38 @@
 <%= form_for(@user, url: stylist_path(@user), html: { method: :patch }) do |f| %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+  <div class="form-group col-sm-6 col-md-4">
+    <%= f.label :email %>
+    <%= f.email_field :email, autofocus: true, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+  <div class="form-group col-sm-6 col-md-4">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= f.label :profile %><br />
-    <%= f.text_area :profile %>
+  <div class="form-group col-sm-8 col-md-6">
+    <%= f.label :profile %>
+    <%= f.text_area :profile, class: 'form-control' %>
   </div>
 
   <%= f.fields_for :stylist do |s| %>
-    <div class="field">
-      <%= s.label :shop_name %><br />
-      <%= s.text_field :shop_name %>
+    <div class="form-group col-sm-6 col-md-4">
+      <%= s.label :shop_name %>
+      <%= s.text_field :shop_name, class: 'form-control' %>
     </div>
 
-    <div class="field">
-      <%= s.label :shop_address %><br />
-      <%= s.text_field :shop_address %>
+    <div class="form-group col-sm-6 col-md-4">
+      <%= s.label :shop_address %>
+      <%= s.text_field :shop_address, class: 'form-control' %>
     </div>
 
-    <div class="field">
-      <%= s.label :shop_phone_number %><br />
-      <%= s.text_field :shop_phone_number %>
+    <div class="form-group col-sm-6 col-md-4">
+      <%= s.label :shop_phone_number %>
+      <%= s.text_field :shop_phone_number, class: 'form-control' %>
     </div>
   <% end -%>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
+  <div class="form-group col-sm-6 col-md-4">
+    <%= f.submit "Update", class: 'btn btn-primary btn-lg' %>
   </div>
 <% end %>

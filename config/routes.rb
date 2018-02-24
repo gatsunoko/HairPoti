@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'users/registrations', confirmations: 'users/confirmations' }
+  devise_for :users, controllers: { registrations: 'users/registrations', confirmations: 'users/confirmations', sessions: "users/sessions" }
   resources :pictures do
     collection do
       get :bulk_new
