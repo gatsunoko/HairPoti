@@ -6,7 +6,8 @@
   text-align: center;
   p {
     font-size: 18px;
-    margin: 15px 0;
+    padding: 15px 0;
+    margin: 0;
   }
 }
 .top_button_area {
@@ -30,19 +31,6 @@
       padding: 0;
       margin: 0;
       line-height: 200%;
-    }
-  }
-  .conflict_link {
-    background: #FF0000;
-    color: white;
-    p {
-      color: white;
-    }
-  }
-  .conflict_link:hover {
-    background: #C91616;
-    p {
-      color: #1200FF;
     }
   }
   .login_link {

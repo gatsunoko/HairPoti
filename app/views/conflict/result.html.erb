@@ -45,14 +45,10 @@
       </div>
       <br>
       <br>
-      <%= submit_tag '投票を続ける', class: 'conflict_link' %>
+      <%= submit_tag '投票を続ける', class: 'btn btn-primary btn-lg' %>
     <% end -%>
 
-    <%= link_to(root_path) do  %>
-      <div class="conflict_link">
-        <p>トップへ戻る</p>
-      </div>
-    <% end -%>
+    <%= link_to 'トップへ戻る', root_path, class: 'btn btn-success btn-lg' %>        
   </div>
 
   <p class="show_guide_text">画像をクリックすると詳細が見れます</p>
