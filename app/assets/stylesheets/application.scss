@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap";
+
 html {
     height: 100%;
 }
@@ -22,48 +24,10 @@ body {
     margin: 0;
 }
 
-h2 {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.header {
-  width: 100%;
-  height: 45px;
-  background: #FAF6F6;
-  text-align: center;
-}
-.navbar {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding-top: 6px;
-  div {
-    display: inline-block;
-  }
-  .logo_area {
-    width: 49%;
-    text-align: left;
-    a {
-      color: black;
-      font-size: 20px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  }
-  .signed {
-    width: 50%;
-    text-align: right;
-    a {
-      color: black;
-      font-size: 16px;
-      text-decoration: none;
-    }
-  }
-}
 .contants {
   width: 100%;
-  max-width: 1280px;
   margin: 0 auto;
+  background: #FAFAFA;
 }
 
 .show_guide_text {

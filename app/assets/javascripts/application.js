@@ -15,6 +15,8 @@
 //= require jquery_ujs
 //= require infinite-scroll.pkgd.min
 //= require turbolinks
+//= require popper
+//= require bootstrap-sprockets
 //= require_tree .
 
 function img_blank(picture_id) {

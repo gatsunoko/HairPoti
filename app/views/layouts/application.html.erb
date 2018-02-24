@@ -10,36 +10,43 @@
   </head>
 
   <body>
-    <div class="header">
-      <div class="navbar">
-        <div class="logo_area">
-          <%= link_to 'トップへ', root_path %>
-        </div>
-        <div class="signed">
-          <% if user_signed_in? %>
-              <%#= link_to 'プロフィール変更', edit_user_registration_path %>
-              <% if current_user.admin %>
-                <%= link_to '管理者ページ', admin_administrator_index_path %>
-              <% end -%>
-              <% if current_user.stylist? || current_user.admin? %>
-                <%= link_to '登録画面', pictures_path %>
-              <% end -%>
-              <%= link_to 'お気に入り', likes_likes_path %>
-              <% if current_user.stylist? %>
-                <%= link_to 'ユーザー情報変更', edit_stylist_path(current_user.id) %>
+    <header>
+      <div class="container">
+        <nav class="navbar navbar-expand-sm navbar-light">
+          <%= link_to 'トップへ', root_path, class: 'navbar-brand' %>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="menu" class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+              <% if user_signed_in? %>
+                  <%#= link_to 'プロフィール変更', edit_user_registration_path %>
+                  <% if current_user.admin %>
+                    <li class="navbar-item"><%= link_to '管理者ページ', admin_administrator_index_path, class: 'nav-link' %></li>
+                  <% end -%>
+                  <% if current_user.stylist? || current_user.admin? %>
+                    <li class="navbar-item"><%= link_to '登録画面', pictures_path, class: 'nav-link' %></li>
+                  <% end -%>
+                  <li class="navbar-item"><%= link_to 'お気に入り', likes_likes_path, class: 'nav-link' %></li>
+                  <% if current_user.stylist? %>
+                    <li class="navbar-item"><%= link_to 'ユーザー情報変更', edit_stylist_path(current_user.id), class: 'nav-link' %></li>
+                  <% else %>
+                    <li class="navbar-item"><%= link_to 'ユーザー情報変更', edit_user_registration_path, class: 'nav-link' %></li>
+                  <% end -%>
+                  <li class="navbar-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link' %></li>
               <% else %>
-                <%= link_to 'ユーザー情報変更', edit_user_registration_path %>
-              <% end -%>
-              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-          <% else %>
-              <%= link_to 'ユーザー登録', new_user_registration_path %>
-              <%= link_to 'ログイン', new_user_session_path %>
-          <% end %>
-        </div>
+                  <li class="navbar-item"><%= link_to 'ユーザー登録', new_user_registration_path, class: 'nav-link' %></li>
+                  <li class="navbar-item"><%= link_to 'ログイン', new_user_session_path, class: 'nav-link' %></li>
+              <% end %>
+            </ul>
+          </div>
+        </nav>
       </div>
-    </div>
+    </header>
     <div class="contants">
-      <%= yield %>
+      <div class="container px-0">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>
