@@ -1,0 +1,2 @@
+<% link_title = @picture.picture_present ? '非表示にする' : '表示するようにする' %>
+<%= link_to link_title.to_s, admin_administrator_image_present_path(id: @picture.id), remote: true %>

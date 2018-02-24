@@ -4,6 +4,11 @@
   <div>
     <%= link_to 'Edit', edit_picture_path(@picture) %> |
     <%= link_to 'Destroy', @picture, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% if current_user.admin %>
+      <div id="image_present">
+        <%= render 'admin/administrator/image_present' %>
+      </div>
+    <% end -%>
   </div>
 <% end -%>
 
@@ -43,5 +48,5 @@
   <p>カラー:<%= @picture.color %></p>
 </div>
 <div class="show_picture_area">
-  <%= image_tag(@picture.url + 'media/?size=l', class: 'show_picture', onError: "img_blank(#{@picture.id})") %>
+  <%= image_tag(@picture.url + 'media/?size=l', class: 'show_picture', onError: "img_blank(#{@picture.id})", alt: '画像読み込みエラー') %>
 </div>

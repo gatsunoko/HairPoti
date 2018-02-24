@@ -18,4 +18,14 @@ class Admin::AdministratorController < ApplicationController
     url = Picture.find params[:id]
     @pictures = Picture.where('url = ?', url.url)
   end
+
+  def image_present
+    begin
+      @picture = Picture.find(params[:id])
+      @picture.picture_present = @picture.picture_present ? false : true
+      @picture.save
+    rescue
+
+    end
+  end
 end
