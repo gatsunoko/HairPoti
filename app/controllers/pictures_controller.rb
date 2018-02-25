@@ -19,6 +19,7 @@ class PicturesController < ApplicationController
   # GET /pictures/1
   # GET /pictures/1.json
   def show
+    render layout: 'modal_picture'
   end
 
   # GET /pictures/new
