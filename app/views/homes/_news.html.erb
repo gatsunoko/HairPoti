@@ -14,7 +14,7 @@
     <script>
     $(function () {
         //任意のリンクをモーダル内に読み込む
-        $(<%= "modal#{picture.id}" %>).on("show.bs.modal", function(e) {
+        $("<%= "#modal#{picture.id}" %>").on("show.bs.modal", function(e) {
             var link = $(e.relatedTarget); //クリックしたセルのオブジェクトデータ
             $(this).find(".modal-content").load(link.attr("data-href"));
         });
