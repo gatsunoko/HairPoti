@@ -17,6 +17,16 @@ class HomesController < ApplicationController
     end
   end
 
+  def previous
+    @picture = Picture.find params[:id]
+    @previous = Picture.where('id > ?', @picture.id).first
+  end
+
+  def next
+    @picture = Picture.find params[:id]
+  end
+
+
   def after_signup
   end
 end

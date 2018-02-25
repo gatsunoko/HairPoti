@@ -4,7 +4,7 @@
     <%= link_to 'Destroy', @picture, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% if current_user.admin %>
       <div id="image_present">
-        <%= render 'admin/administrator/image_present' %>
+        <%= render 'admin/administrator/image_present', picture: @picture %>
       </div>
     <% end -%>
   </div>
@@ -12,8 +12,6 @@
 
 <%= link_to 'インスタでみる', @picture.url, target: '_blank' %>
 <div class="show_text_area">
-
-  <a href="javascript:history.back();" class="btn btn-success btn-lg">戻る</a>
 
   <%= render 'likes/like', picture: @picture %>
 
