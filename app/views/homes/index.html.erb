@@ -67,10 +67,23 @@
   <h2>写真をクリックすると詳細画面に飛びます。</h2>
   <h3>おすすめ</h3>
   <div class="ranking">
-    <% @ranking.each.with_index(1) do |picture, i| %>
+    <% length = @ranking.length %>
+    <% @ranking.each.with_index do |picture, i| %>
       <div class="square-wrapper">
         <div class="spacer">
-          <%= link_to(image_tag(picture.url + 'media/?size=m'), '', data: { href: picture_path(picture), toggle: 'modal', target: "#modal_area"}) %>
+          <% prev_id = (i - 1 < 0) ? nil : @ranking[i - 1].id %>
+          <% next_id = (i + 1 >= length) ? nil : @ranking[i + 1].id %>
+          <div id="prev_next_<%= picture.id %>" style="display: none;">
+            <span class="_prev"><%= prev_id %></span>
+            <span class="_next"><%= next_id %></span>
+          </div>
+          <%= link_to(image_tag(picture.url + 'media/?size=m'),
+              '',
+              data: { href: picture_path(picture,
+                  prev_id: prev_id,
+                  next_id: next_id),
+                toggle: 'modal',
+                target: "#modal_area"}) %>
         </div>
       </div>
     <% end -%>
@@ -98,7 +111,7 @@ $(function () {
 <div class="navigation" style="visibility: hidden;">
   <%= paginate @pictures %>
 </div>
-<%# 無限スクロールのJS %>
+<%# 無限スクロールのJS path の中の append の部分を追加する %>
 <script>
   $('#top_contents').infiniteScroll({
     path: '.navigation a[rel=next]',

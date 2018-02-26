@@ -1,18 +1,5 @@
 <div class="contants">
   <div class="container px-0 py-0">
-    <div class="button_area col-12 row">
-      <div class="col-4">
-        <%#= link_to '前へ', homes_previous_path(id: previous), remote: true %>
-      </div>
-      <div class="col-4 py-2 px-0">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="col-4">
-        <%#= link_to '次へ', homes_next_path, remote: true %>
-      </div>
-    </div>
     <%= yield %>
   </div>
 </div>

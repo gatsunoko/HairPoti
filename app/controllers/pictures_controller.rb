@@ -2,7 +2,7 @@ require 'open-uri' # URLにアクセスするためのライブラリの読み�
 require 'nokogiri' # Nokogiriライブラリの読み込み
 
 class PicturesController < ApplicationController
-  before_action :set_picture, only: [:show, :edit, :update, :destroy]
+  before_action :set_picture, only: [:show, :prev, :next, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:index, :new, :create, :bulk_new, :bulk_create, :collect_new, :collect_call, :edit, :update, :destroy, :my_point_ranking, :my_histories]
   before_action :is_mine, only: [:edit, :update, :destroy]
 
@@ -19,7 +19,17 @@ class PicturesController < ApplicationController
   # GET /pictures/1
   # GET /pictures/1.json
   def show
+    @prev_id = params[:prev_id].to_i
+    @next_id = params[:next_id].to_i
     render layout: 'modal_picture'
+  end
+
+  def prev
+    
+  end
+
+  def next
+
   end
 
   # GET /pictures/new

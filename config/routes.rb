@@ -10,6 +10,10 @@ Rails.application.routes.draw do
       get :my_histories
       get :multiple_url
     end
+    member do
+      get :prev
+      get :next
+    end
   end
 
   namespace 'admin' do
