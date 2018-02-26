@@ -1,7 +1,7 @@
 class HomesController < ApplicationController
   def index
     @ranking = Picture.all.where(picture_present: true).order(rating: :desc).limit(9).offset(0)
-    @pictures = Picture.all.where(picture_present: true).order(id: :desc).page(params[:page]).per(12)
+    @pictures = Picture.all.where(picture_present: true).where.not('id IN (?)', @ranking.pluck(:id)).order(id: :desc).page(params[:page]).per(12)
 
     #投票フォームのデフォルト値セット
     if session[:area_default].present?
