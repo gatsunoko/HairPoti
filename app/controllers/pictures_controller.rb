@@ -19,8 +19,6 @@ class PicturesController < ApplicationController
   # GET /pictures/1
   # GET /pictures/1.json
   def show
-    @prev_id = params[:prev_id].to_i
-    @next_id = params[:next_id].to_i
     render layout: 'modal_picture'
   end
 

@@ -62,20 +62,6 @@
   prev = $("#prev_next_<%= @picture.id %> ._prev").text();
   next = $("#prev_next_<%= @picture.id %> ._next").text();
 
-  if(next == "") {
-    page = $("#prev_next_<%= @picture.id %> ._page").text();
-    next_page = Number(page) + 1;
-
-    next = $("#news_"+next_page+" .1 ._current").text();
-    next_url = $("#next_link")[0]['href'];
-    next_url = next_url.replace(/pictures.*next/, 'pictures/'+next+'/next');
-    $("#next_link")[0]['href'] = next_url    
-  } else {
-    next_url = $("#next_link")[0]['href'];
-    next_url = next_url.replace(/pictures.*next/, 'pictures/'+next+'/next');
-    $("#next_link")[0]['href'] = next_url
-  }
-
   if(prev == "") {
     page = $("#prev_next_<%= @picture.id %> ._page").text();
     prev_page = Number(page) - 1;
@@ -95,4 +81,23 @@
     prev_url = prev_url.replace(/pictures.*prev/, 'pictures/'+prev+'/prev');
     $("#prev_link")[0]['href'] = prev_url    
   }
+
+  if(next == "") {
+    page = $("#prev_next_<%= @picture.id %> ._page").text();
+    next_page = Number(page) + 1;
+
+    next = $("#news_"+next_page+" .1 ._current").text();
+    next_url = $("#next_link")[0]['href'];
+    next_url = next_url.replace(/pictures.*next/, 'pictures/'+next+'/next');
+    $("#next_link")[0]['href'] = next_url    
+  } else {
+    next_url = $("#next_link")[0]['href'];
+    next_url = next_url.replace(/pictures.*next/, 'pictures/'+next+'/next');
+    $("#next_link")[0]['href'] = next_url
+  }
+
+  target = $("#picture_link_<%= @picture.id %>");
+  $('html, body').animate({
+    scrollTop: target.offset().top,
+  }, 500);
 </script>

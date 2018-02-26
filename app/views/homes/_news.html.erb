@@ -15,6 +15,7 @@
               onError: "img_blank(#{picture.id})",
               alt: '画像読み込みエラー'),
               '',
+              id: "picture_link_#{picture.id}",
               data: { href: picture_path(picture,
                   prev_id: prev_id,
                   next_id: next_id),

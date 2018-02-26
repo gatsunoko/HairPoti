@@ -81,6 +81,7 @@
           </div>
           <%= link_to(image_tag(picture.url + 'media/?size=m'),
               '',
+              id: "picture_link_#{picture.id}",
               data: { href: picture_path(picture,
                   prev_id: prev_id,
                   next_id: next_id),
