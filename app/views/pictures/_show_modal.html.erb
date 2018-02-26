@@ -77,10 +77,16 @@
   }
 
   if(prev == "") {
-    page = $("#prev_prev_<%= @picture.id %> ._page").text();
-    prev_page = Number(page) + 1;
+    page = $("#prev_next_<%= @picture.id %> ._page").text();
+    prev_page = Number(page) - 1;
 
-    prev = $("#news_"+prev_page+" .12 ._current").text();
+    if(prev_page == 0) {
+      prev_last = 9
+    } else {
+      prev_last = 12
+    }
+
+    prev = $("#news_"+prev_page+" ."+prev_last+" ._current").text();
     prev_url = $("#prev_link")[0]['href'];
     prev_url = prev_url.replace(/pictures.*prev/, 'pictures/'+prev+'/prev');
     $("#prev_link")[0]['href'] = prev_url    

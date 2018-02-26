@@ -66,15 +66,17 @@
 <div id="top_contents">
   <h2>写真をクリックすると詳細画面に飛びます。</h2>
   <h3>おすすめ</h3>
-  <div class="ranking">
+  <div class="ranking" id="news_0">
     <% length = @ranking.length %>
     <% @ranking.each.with_index do |picture, i| %>
       <div class="square-wrapper">
         <div class="spacer">
           <% prev_id = (i - 1 < 0) ? nil : @ranking[i - 1].id %>
           <% next_id = (i + 1 >= length) ? nil : @ranking[i + 1].id %>
-          <div id="prev_next_<%= picture.id %>" style="display: none;">
+          <div id="prev_next_<%= picture.id %>" class="<%= i+1 %>" style="display: none;">
+            <span class="_page">0</span>
             <span class="_prev"><%= prev_id %></span>
+            <span class="_current"><%= picture.id %></span>
             <span class="_next"><%= next_id %></span>
           </div>
           <%= link_to(image_tag(picture.url + 'media/?size=m'),
