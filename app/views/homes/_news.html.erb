@@ -2,23 +2,8 @@
   <% @pictures.each.with_index(1) do |picture, i| %>
     <div class="square-wrapper">
       <div class="spacer">
-        <%= link_to(image_tag(picture.url + 'media/?size=m', onError: "img_blank(#{picture.id})", alt: '画像読み込みエラー'), '', data: { href: picture_path(picture), toggle: 'modal', target: "#modal#{picture.id}"}) %>
+        <%= link_to(image_tag(picture.url + 'media/?size=m', onError: "img_blank(#{picture.id})", alt: '画像読み込みエラー'), '', data: { href: picture_path(picture), toggle: 'modal', target: "#modal_area"}) %>
       </div>
     </div>
-    <div class="modal fade" id=<%= "modal#{picture.id}" %> tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-      <div class="modal-dialog" role="document" style="min-width: 90%;">
-        <div class="modal-content">
-        </div>
-      </div>
-    </div>
-    <script>
-    $(function () {
-        //任意のリンクをモーダル内に読み込む
-        $("<%= "#modal#{picture.id}" %>").on("show.bs.modal", function(e) {
-            var link = $(e.relatedTarget); //クリックしたセルのオブジェクトデータ
-            $(this).find(".modal-content").load(link.attr("data-href"));
-        });
-    });
-    </script>
   <% end -%>
 </div>
