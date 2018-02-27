@@ -1,13 +1,13 @@
 <div class="button_area col-12 row">
-  <div class="col-4">
+  <div class="col-4 text-center">
       <%= link_to '前へ', prev_picture_path(1), id: 'prev_link', remote: true %>
   </div>
   <div class="col-4 py-2 px-0">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="display: block; width: 100%; margin: 0 auto;">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="col-4">
+  <div class="col-4 text-center">
     <%= link_to '次へ', next_picture_path(1), id: 'next_link', remote: true %>
   </div>
 </div>
