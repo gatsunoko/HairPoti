@@ -103,11 +103,24 @@
 </div>
 <script>
 $(function () {
-  //任意のリンクをモーダル内に読み込む
+  <%# 任意のリンクをモーダル内に読み込む %>
   $('#modal_area').on("show.bs.modal", function(e) {
-    var link = $(e.relatedTarget); //クリックしたセルのオブジェクトデータ
+    var link = $(e.relatedTarget); <%# クリックしたセルのオブジェクトデータ %>
     $(this).find(".modal-content").load(link.attr("data-href"));
   });
+});
+
+<%# キーボードでモーダルウィンドウを次へ行ったり前へ行ったりするコード %>
+$(window).keyup(function(e){
+  if($('#modal_area').is(':visible')) {
+    if(e.keyCode == 37){
+      $("#prev_link")[0].click();
+
+    }
+    if(e.keyCode == 39){
+      $("#next_link")[0].click();  
+    } 
+  }
 });
 </script>
 
