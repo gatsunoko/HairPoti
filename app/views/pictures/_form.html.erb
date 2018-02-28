@@ -11,51 +11,51 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group col-sm-6 col-md-4">
     <%= f.label :url %>
-    <%= f.text_field :url %>
+    <%= f.text_field :url, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group col-sm-6 col-md-4">
     <%= f.label :length %>
-    <%= f.select :length, ['ベリーショート', 'ショート', 'ミディアム', 'セミロング', 'ロング'] %>
+    <%= f.select :length, ['ベリーショート', 'ショート', 'ミディアム', 'セミロング', 'ロング'], {}, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group col-sm-6 col-md-4">
     <%= f.label :color %>
-    <%= f.select :color, ['ブラウン・ベージュ系', 'イエロー・オレンジ系', 'レッド・ピンク系', 'アッシュ・ブラック系', 'その他'] %>
+    <%= f.select :color, ['ブラウン・ベージュ系', 'イエロー・オレンジ系', 'レッド・ピンク系', 'アッシュ・ブラック系', 'その他'], {}, class: 'form-control' %>
   </div>
 
   <% if current_user.admin? %>
     <%= f.fields_for :picture_option do |s| %>
-      <div class="field">
-        <%= s.label :name %><br />
-        <%= s.text_field :name %>
+      <div class="form-group col-sm-6 col-md-4">
+        <%= s.label :name %>
+        <%= s.text_field :name, class: 'form-control' %>
       </div>
 
-      <div class="field">
-        <%= s.label :profile %><br />
-        <%= s.text_area :profile %>
+      <div class="form-group col-sm-10 col-md-7">
+        <%= s.label :profile %>
+        <%= s.text_area :profile, class: 'form-control' %>
       </div>
 
-      <div class="field">
-        <%= s.label :shop_name %><br />
-        <%= s.text_field :shop_name %>
+      <div class="form-group col-sm-6 col-md-4">
+        <%= s.label :shop_name %>
+        <%= s.text_field :shop_name, class: 'form-control' %>
       </div>
 
-      <div class="field">
-        <%= s.label :shop_address %><br />
-        <%= s.text_field :shop_address %>
+      <div class="form-group col-sm-6 col-md-4">
+        <%= s.label :shop_address %>
+        <%= s.text_field :shop_address, class: 'form-control' %>
       </div>
 
-      <div class="field">
-        <%= s.label :shop_phone_number %><br />
-        <%= s.text_field :shop_phone_number %>
+      <div class="form-group col-sm-6 col-md-4">
+        <%= s.label :shop_phone_number %>
+        <%= s.text_field :shop_phone_number, class: 'form-control' %>
       </div>
     <% end -%>
   <% end -%>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary btn-lg' %>
   </div>
 <% end %>

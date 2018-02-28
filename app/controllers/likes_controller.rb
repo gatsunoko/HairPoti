@@ -3,7 +3,7 @@ class LikesController < ApplicationController
   before_action :authenticate_user!
 
   def likes
-    @likes = Like.where('user_id = ?', current_user.id).order(created_at: :desc).page(params[:page]).per(10)
+    @likes = Like.where('user_id = ?', current_user.id).order(created_at: :desc).includes(:picture).page(params[:page]).per(12)
   end
 
   def like

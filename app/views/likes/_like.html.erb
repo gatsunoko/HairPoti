@@ -1,9 +1,13 @@
 <% if user_signed_in? %>
-  <div id="like_area<%= picture.id.to_s %>">
+  <div class="text-center" id="like_area<%= picture.id.to_s %>">
     <% if picture.like_user(current_user.id) %>
-      <%= link_to 'お気に入り解除', likes_like_path(id: picture.id), class: 'no', remote: true %>
+      <%= link_to likes_like_path(id: picture.id), remote: true do %>
+        <%= image_tag('heart.png') %>
+      <% end -%>
     <% else %>
-      <%= link_to 'お気に入りする', likes_like_path(id: picture.id), class: 'no', remote: true %>
+      <%= link_to likes_like_path(id: picture.id), remote: true do %>
+        <%= image_tag('heart_empty.png') %>
+      <% end -%>
     <% end -%>
   </div>
 <% end %>

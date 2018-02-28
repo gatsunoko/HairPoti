@@ -1,12 +1,12 @@
-<div class="news" id="news_<%= @pictures.current_page %>">
-  <% length = @pictures.length %>
-  <% @pictures.each.with_index do |picture, i| %>
+<div class="news" id="news_<%= pictures.current_page %>">
+  <% length = pictures.length %>
+  <% pictures.each.with_index do |picture, i| %>
     <div class="square-wrapper">
       <div class="spacer">
-        <% prev_id = (i - 1 < 0) ? nil : @pictures[i - 1].id %>
-        <% next_id = (i + 1 >= length) ? nil : @pictures[i + 1].id %>
+        <% prev_id = (i - 1 < 0) ? nil : pictures[i - 1].id %>
+        <% next_id = (i + 1 >= length) ? nil : pictures[i + 1].id %>
         <div id="prev_next_<%= picture.id %>" class="<%= i+1 %>" style="display: none;">
-          <span class="_page"><%= @pictures.current_page %></span>
+          <span class="_page"><%= pictures.current_page %></span>
           <span class="_prev"><%= prev_id %></span>
           <span class="_current"><%= picture.id %></span>
           <span class="_next"><%= next_id %></span>

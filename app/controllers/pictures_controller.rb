@@ -5,14 +5,15 @@ class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :prev, :next, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:index, :new, :create, :bulk_new, :bulk_create, :collect_new, :collect_call, :edit, :update, :destroy, :my_point_ranking, :my_histories]
   before_action :is_mine, only: [:edit, :update, :destroy]
+  before_action :is_admin, only: [:bulk_new, :bulk_create]
 
   # GET /pictures
   # GET /pictures.json
   def index
     if current_user.admin
-      @pictures = Picture.all.order(id: :desc).page(params[:page]).per(10)
+      @pictures = Picture.all.order(id: :desc).page(params[:page]).per(12)
     else
-      @pictures = Picture.where(user_id: current_user.id).order(id: :desc).page(params[:page]).per(10)
+      @pictures = Picture.where(user_id: current_user.id).order(id: :desc).page(params[:page]).per(12)
     end
   end
   

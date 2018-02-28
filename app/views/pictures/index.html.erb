@@ -1,41 +1,27 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Pictures</h1>
-<%= link_to 'URL登録', new_picture_path %><br>
-<%= link_to '一括登録', bulk_new_pictures_path %><br>
-<table>
-  <thead>
-    <tr>
-      <th>Url</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= link_to 'URL登録', new_picture_path, class: 'btn btn-primary btn-lg' %>
+<% if current_user.admin %>
+  <%= link_to '一括登録', bulk_new_pictures_path, class: 'btn btn-primary btn-lg' %>
+<% end -%>
 
-<div class="feed_page">
-  <div class="feed_title"><%= page_entries_info @pictures %></div>
-  <div class="feed">
-    <%= paginate @pictures %>
-  </div>
+
+<div id="top_contents">
+  <h2>写真をクリックすると詳細画面に飛びます。</h2>
+  <%= render 'homes/news', pictures: @pictures %>
 </div>
 
-  <tbody>
-    <% @pictures.each do |picture| %>
-      <tr>
-        <td><%= link_to(image_tag(picture.url + 'media/?size=t'), picture) %></td>
-        <td><%= picture.rating %></td>
-        <td><%= link_to 'Show', picture %></td>
-        <td><%= link_to 'Edit', edit_picture_path(picture) %></td>
-        <td><%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render 'homes/modal_window' %>
 
-<div class="feed_page">
-  <div class="feed_title"><%= page_entries_info @pictures %></div>
-  <div class="feed">
-    <%= paginate @pictures %>
-  </div>
+<div class="navigation" style="visibility: hidden;">
+  <%= paginate @pictures %>
 </div>
-
-<br>
+<%# 無限スクロールのJS path の中の append の部分を追加する %>
+<script>
+  $('#top_contents').infiniteScroll({
+    path: '.navigation a[rel=next]',
+    append: '.news',
+    history: false
+  });
+</script>

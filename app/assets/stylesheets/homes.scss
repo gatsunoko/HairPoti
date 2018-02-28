@@ -10,39 +10,6 @@
     margin: 0;
   }
 }
-.top_button_area {
-  width: 100%;
-  margin: 15px 0;
-  text-align: center;
-  a {
-    text-decoration: none;
-  }
-  .conflict_link,
-  .login_link {
-    text-align: center;
-    width: 220px;
-    height: 45px;
-    margin: 0 auto;
-    border-radius: 15px;
-    display: inline-block;
-    p {
-      font-size: 24px;
-      color: white;
-      padding: 0;
-      margin: 0;
-      line-height: 200%;
-    }
-  }
-  .login_link {
-    background: #213EEB;
-  }
-  .login_link:hover {
-    background: #1C36D2;
-    p {
-      color: #DCDCDC;
-    }
-  }
-}
 .top_label_area {
   input[type=checkbox] {
     width: 24px;

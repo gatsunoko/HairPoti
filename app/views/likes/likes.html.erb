@@ -1,11 +1,4 @@
 <div class="rankings_area">
-  <div class="feed_page">
-    <div class="feed_title"><%= page_entries_info @likes %></div>
-    <div class="feed">
-      <%= paginate @likes %>
-    </div>
-  </div>
-
   <div class="top_button_area" >
     <%= link_to :back do  %>
       <div class="conflict_link">
@@ -14,19 +7,22 @@
     <% end -%>
   </div>
 
-  <p class="show_guide_text">画像をクリックすると詳細が見れます</p>
-
-  <% @likes.each.with_index(1) do |like, i| %>
-    <div>
-      <%= link_to(image_tag(like.picture.url + 'media/?size=t'), picture_path(like.picture)) %>
-    </div>
-  <% end -%>
-
-  <div class="feed_page">
-    <div class="feed_title"><%= page_entries_info @likes %></div>
-    <div class="feed">
-      <%= paginate @likes %>
-    </div>
+  <div id="top_contents">
+    <h2>写真をクリックすると詳細画面に飛びます。</h2>
+    <%= render 'like_pictures' %>
   </div>
+<%= render 'homes/modal_window' %>
+
+<div class="navigation" style="visibility: hidden;">
+  <%= paginate @likes %>
+</div>
+<%# 無限スクロールのJS path の中の append の部分を追加する %>
+<script>
+  $('#top_contents').infiniteScroll({
+    path: '.navigation a[rel=next]',
+    append: '.news',
+    history: false
+  });
+</script>
 
 </div>

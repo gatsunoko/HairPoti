@@ -1,0 +1,27 @@
+<div class="news" id="news_<%= @likes.current_page %>">
+  <% length = @likes.length %>
+  <% @likes.each.with_index do |like, i| %>
+    <div class="square-wrapper">
+      <div class="spacer">
+        <% prev_id = (i - 1 < 0) ? nil : @likes[i - 1].picture.id  %>
+        <% next_id = (i + 1 >= length) ? nil : @likes[i + 1].picture.id %>
+        <div id="prev_next_<%= like.picture.id %>" class="<%= i+1 %>" style="display: none;">
+          <span class="_page"><%= @likes.current_page %></span>
+          <span class="_prev"><%= prev_id %></span>
+          <span class="_current"><%= like.picture.id %></span>
+          <span class="_next"><%= next_id %></span>
+        </div>
+        <%= link_to(image_tag(like.picture.url + 'media/?size=m',
+              onError: "img_blank(#{like.picture.id})",
+              alt: '画像読み込みエラー'),
+              '',
+              id: "picture_link_#{like.picture.id}",
+              data: { href: picture_path(like.picture,
+                  prev_id: prev_id,
+                  next_id: next_id),
+                toggle: 'modal',
+                target: "#modal_area"}) %>
+      </div>
+    </div>
+  <% end -%>
+</div>
