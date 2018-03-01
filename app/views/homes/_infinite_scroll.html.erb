@@ -1,0 +1,9 @@
+<% if pictures.total_pages > 1 %>
+  <script>
+    $('#top_contents').infiniteScroll({
+      path: '.navigation a[rel=next]',
+      append: '.news',
+      history: false,
+    });
+  </script>
+<% end -%>

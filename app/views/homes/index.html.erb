@@ -92,7 +92,7 @@
         </div>
       <% end -%>
     </div>
-  <h3>新着</h3>
+    <h3>新着</h3>
   <% end -%>
   <%= render 'homes/news', pictures: @pictures %>
 </div>
@@ -101,15 +101,14 @@
 
 <div class="navigation" style="visibility: hidden;">
   <%= paginate @pictures %>
+  <%# infinite_scrollでの無限スクロールではリンクパラメータの最後がページ番号でないといけない為、ページ番号の後のパラメータを削除するjs %>
+  <script>
+    $(".navigation a[rel=next]")[0]['href'] = $(".navigation a[rel=next]")[0]['href'].replace(/&utf.*/,"");
+  </script>
 </div>
+
 <%# 無限スクロールのJS path の中の append の部分を追加する %>
-<script>
-  $('#top_contents').infiniteScroll({
-    path: '.navigation a[rel=next]',
-    append: '.news',
-    history: false
-  });
-</script>
+<%= render 'homes/infinite_scroll', pictures: @pictures %>
 
 <div class="footer">
   footer

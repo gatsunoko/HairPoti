@@ -18,10 +18,4 @@
   <%= paginate @pictures %>
 </div>
 <%# 無限スクロールのJS path の中の append の部分を追加する %>
-<script>
-  $('#top_contents').infiniteScroll({
-    path: '.navigation a[rel=next]',
-    append: '.news',
-    history: false
-  });
-</script>
+<%= render 'homes/infinite_scroll', pictures: @pictures %>
