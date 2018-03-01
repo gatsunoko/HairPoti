@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get :long_ranking
       get :my_histories
       get :multiple_url
+      get :search
     end
     member do
       get :prev

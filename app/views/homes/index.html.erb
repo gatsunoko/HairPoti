@@ -65,34 +65,36 @@
 
 <div id="top_contents">
   <h2>写真をクリックすると詳細画面に飛びます。</h2>
-  <h3>おすすめ</h3>
-  <div class="ranking" id="news_0">
-    <% length = @ranking.length %>
-    <% @ranking.each.with_index do |picture, i| %>
-      <div class="square-wrapper">
-        <div class="spacer">
-          <% prev_id = (i - 1 < 0) ? nil : @ranking[i - 1].id %>
-          <% next_id = (i + 1 >= length) ? nil : @ranking[i + 1].id %>
-          <div id="prev_next_<%= picture.id %>" class="<%= i+1 %>" style="display: none;">
-            <span class="_page">0</span>
-            <span class="_prev"><%= prev_id %></span>
-            <span class="_current"><%= picture.id %></span>
-            <span class="_next"><%= next_id %></span>
+  <% if controller.action_name == 'index' %>
+    <h3>おすすめ</h3>
+    <div class="ranking" id="news_0">
+      <% length = @ranking.length %>
+      <% @ranking.each.with_index do |picture, i| %>
+        <div class="square-wrapper">
+          <div class="spacer">
+            <% prev_id = (i - 1 < 0) ? nil : @ranking[i - 1].id %>
+            <% next_id = (i + 1 >= length) ? nil : @ranking[i + 1].id %>
+            <div id="prev_next_<%= picture.id %>" class="<%= i+1 %>" style="display: none;">
+              <span class="_page">0</span>
+              <span class="_prev"><%= prev_id %></span>
+              <span class="_current"><%= picture.id %></span>
+              <span class="_next"><%= next_id %></span>
+            </div>
+            <%= link_to(image_tag(picture.url + 'media/?size=m'),
+                '',
+                id: "picture_link_#{picture.id}",
+                data: { href: picture_path(picture,
+                    prev_id: prev_id,
+                    next_id: next_id),
+                  toggle: 'modal',
+                  target: "#modal_area"}) %>
           </div>
-          <%= link_to(image_tag(picture.url + 'media/?size=m'),
-              '',
-              id: "picture_link_#{picture.id}",
-              data: { href: picture_path(picture,
-                  prev_id: prev_id,
-                  next_id: next_id),
-                toggle: 'modal',
-                target: "#modal_area"}) %>
         </div>
-      </div>
-    <% end -%>
-  </div>
+      <% end -%>
+    </div>
   <h3>新着</h3>
-  <%= render 'news', pictures: @pictures %>
+  <% end -%>
+  <%= render 'homes/news', pictures: @pictures %>
 </div>
 
 <%= render 'homes/modal_window' %>

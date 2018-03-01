@@ -16,6 +16,11 @@ class PicturesController < ApplicationController
       @pictures = Picture.where(user_id: current_user.id).order(id: :desc).page(params[:page]).per(12)
     end
   end
+
+  def search
+    @pictures = Picture.where(picture_present: true).area_search(params[:area]).length_search(params[:length]).page(params[:page]).per(12)
+    render 'homes/index'
+  end
   
   # GET /pictures/1
   # GET /pictures/1.json
