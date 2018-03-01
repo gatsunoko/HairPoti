@@ -51,12 +51,12 @@ RSpec.describe ConflictController, type: :controller do
 
         context '管理者が登録した画像のみで10枚以上ある場合' do
           before(:each) do
-            @user = create(:user, id: 1)
+            @user = create(:user)
             10.times {
-              @picture = create(:picture, length: 'ショート')
+              @picture = create(:picture, length: 'ショート', user_id: @user.id)
               create(:admin_picture_option, picture_id: @picture.id, shop_address: '愛知')
 
-              @picture = create(:picture, length: 'ロング')  
+              @picture = create(:picture, length: 'ロング', user_id: @user.id)  
               create(:admin_picture_option, picture_id: @picture.id, shop_address: '愛知')
             }
           end

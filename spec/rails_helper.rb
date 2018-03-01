@@ -28,6 +28,7 @@ require File.expand_path("spec/support/controller_macros.rb")
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+#ActiveRecord::Base.logger = Logger.new(STDOUT) #RspecのSQLログ出力
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods #FactoryGirlを省略形でかけるようにする
 
