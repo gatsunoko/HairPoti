@@ -11,8 +11,8 @@
     <%= link_to '次へ', next_picture_path(1), id: 'next_link', remote: true %>
   </div>
 </div>
-<div class="row">
-  <div class="col-sm-3">
+<div id="picture_show" class="row">
+  <div class="col-sm-3 order-2 order-md-1">
     <% if user_signed_in? && (@picture.user_id == current_user.id || current_user.admin) %>
       <div>
         <%= link_to '編集', edit_picture_path(@picture), class: 'btn btn-primary btn-lg mx-1', target: '_blank' %>
@@ -53,7 +53,7 @@
       <p>カラー:<%= @picture.color %></p>
     </div>
   </div>
-  <div class="show_picture_area col-sm-9">
+  <div class="show_picture_area col-sm-9 order-1 order-sm-2">
     <%= image_tag(@picture.url + 'media/?size=l', class: 'show_picture', onError: "img_blank(#{@picture.id})", alt: '画像読み込みエラー') %>
   </div>
 </div>
@@ -96,8 +96,44 @@
     $("#next_link")[0]['href'] = next_url
   }
 
+  <%# 無限スクロールをする為、モーダルのバックの中心を今開いてる画像にする %>
   target = $("#picture_link_<%= @picture.id %>");
   $('html, body').animate({
     scrollTop: target.offset().top,
-  }, 500);
+  }, 1);
+
+  <% if browser.device.mobile? %>
+    $('#picture_show').on('touchstart', onTouchStart); //指が触れたか検知
+    $('#picture_show').on('touchmove', onTouchMove); //指が動いたか検知
+    $('#picture_show').on('touchend', onTouchEnd); //指が離れたか検知
+    var direction, position;
+
+    //スワイプ開始時の横方向の座標を格納
+    function onTouchStart(event) {
+      position = getPosition(event);
+      direction = ''; //一度リセットする
+    }
+
+    //スワイプの方向（left／right）を取得
+    function onTouchMove(event) {
+      if (position - getPosition(event) > 100) { // 100px以上移動しなければスワイプと判断しない
+        direction = 'left'; //左と検知
+      } else if (position - getPosition(event) < -100){  // 100px以上移動しなければスワイプと判断しない
+        direction = 'right'; //右と検知
+      }
+    }
+
+    function onTouchEnd(event) {
+      if (direction == 'right'){
+        $("#prev_link")[0].click();
+      } else if (direction == 'left'){
+         $("#next_link")[0].click();
+      }
+    }
+
+    //横方向の座標を取得
+    function getPosition(event) {
+      return event.originalEvent.touches[0].pageX;
+    }
+  <% end -%>
 </script>
