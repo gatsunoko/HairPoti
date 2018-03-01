@@ -75,7 +75,12 @@
     prev = $("#news_"+prev_page+" ."+prev_last+" ._current").text();
     prev_url = $("#prev_link")[0]['href'];
     prev_url = prev_url.replace(/pictures.*prev/, 'pictures/'+prev+'/prev');
-    $("#prev_link")[0]['href'] = prev_url    
+    $("#prev_link")[0]['href'] = prev_url
+
+    <%# 前のリンク先がなかったらリンクを削除 %>
+    if(prev == "") {
+      $("#prev_link").remove();
+    }
   } else {
     prev_url = $("#prev_link")[0]['href'];
     prev_url = prev_url.replace(/pictures.*prev/, 'pictures/'+prev+'/prev');
@@ -89,7 +94,12 @@
     next = $("#news_"+next_page+" .1 ._current").text();
     next_url = $("#next_link")[0]['href'];
     next_url = next_url.replace(/pictures.*next/, 'pictures/'+next+'/next');
-    $("#next_link")[0]['href'] = next_url    
+    $("#next_link")[0]['href'] = next_url
+
+    <%# 次のリンク先がなかったらリンクを削除 %>
+    if(next == "") {
+      $("#next_link").remove();
+    }
   } else {
     next_url = $("#next_link")[0]['href'];
     next_url = next_url.replace(/pictures.*next/, 'pictures/'+next+'/next');
@@ -103,35 +113,39 @@
   }, 1);
 
   <% if browser.device.mobile? %>
-    $('#picture_show').on('touchstart', onTouchStart); //指が触れたか検知
-    $('#picture_show').on('touchmove', onTouchMove); //指が動いたか検知
-    $('#picture_show').on('touchend', onTouchEnd); //指が離れたか検知
+    $('#picture_show').on('touchstart', onTouchStart);<%# 指が触れたか検知 %>
+    $('#picture_show').on('touchmove', onTouchMove);<%# 指が動いたか検知 %>
+    $('#picture_show').on('touchend', onTouchEnd);<%# 指が離れたか検知 %>
     var direction, position;
 
-    //スワイプ開始時の横方向の座標を格納
+    <%# スワイプ開始時の横方向の座標を格納 %>
     function onTouchStart(event) {
       position = getPosition(event);
-      direction = ''; //一度リセットする
+      direction = ''; <%# 一度リセットする %>
     }
 
-    //スワイプの方向（left／right）を取得
+    <%# スワイプの方向（left／right）を取得 %>
     function onTouchMove(event) {
-      if (position - getPosition(event) > 100) { // 100px以上移動しなければスワイプと判断しない
-        direction = 'left'; //左と検知
-      } else if (position - getPosition(event) < -100){  // 100px以上移動しなければスワイプと判断しない
-        direction = 'right'; //右と検知
+      if (position - getPosition(event) > 100) {<%# 100px以上移動しなければスワイプと判断しない %>
+        direction = 'left'; <%# 左と検知 %>
+      } else if (position - getPosition(event) < -100){<%# 100px以上移動しなければスワイプと判断しない %>
+        direction = 'right'; <%# 右と検知 %>
       }
     }
 
     function onTouchEnd(event) {
       if (direction == 'right'){
-        $("#prev_link")[0].click();
+        if($("#prev_link").length) {
+          $("#prev_link")[0].click();
+        }
       } else if (direction == 'left'){
+        if($("#next_link").length) {
          $("#next_link")[0].click();
+        }
       }
     }
 
-    //横方向の座標を取得
+    <%# 横方向の座標を取得 %>
     function getPosition(event) {
       return event.originalEvent.touches[0].pageX;
     }
