@@ -77,7 +77,7 @@ class ConflictController < ApplicationController
     @length = params[:length]
     @count = params[:count].to_i + 1
 
-    if @count >= 10
+    if @count >= 9
       respond_to do |format|
         format.js { render ajax_redirect_to(conflict_result_path) }
       end
@@ -85,7 +85,7 @@ class ConflictController < ApplicationController
   end
 
   def result
-    @pictures = Picture.where(id: session[:voting_id]).order(['field(id, ?)', session[:voting_id].reverse])
+    @pictures = Picture.where(id: session[:voting_id]).order(['field(id, ?)', session[:voting_id].reverse]).page(params[:page]).per(12)
   end
 
   def img_blank

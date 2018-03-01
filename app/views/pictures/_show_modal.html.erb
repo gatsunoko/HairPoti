@@ -15,8 +15,8 @@
   <div class="col-sm-3">
     <% if user_signed_in? && (@picture.user_id == current_user.id || current_user.admin) %>
       <div>
-        <%= link_to '編集', edit_picture_path(@picture), class: 'btn btn-primary btn-lg mx-2' %>
-        <%= link_to '削除', @picture, method: :delete, data: { confirm: '削除してよろしいですか?' }, class: 'btn btn-danger btn-lg' %>
+        <%= link_to '編集', edit_picture_path(@picture), class: 'btn btn-primary btn-lg mx-1', target: '_blank' %>
+        <%= link_to '削除', @picture, method: :delete, data: { confirm: '削除してよろしいですか?' }, class: 'btn btn-danger btn-lg mx-1' %>
         <% if current_user.admin %>
           <div id="image_present">
             <%= render 'admin/administrator/image_present', picture: @picture %>
@@ -25,7 +25,7 @@
       </div>
     <% end -%>
 
-    <%= link_to 'インスタでみる', @picture.url, target: '_blank', class: 'btn btn-secondary btn-lg my-2 mx-2' %>
+    <%= link_to 'インスタでみる', @picture.url, target: '_blank', class: 'btn btn-secondary btn-lg my-2 mx-1' %>
     <div class="show_text_area">
 
       <%= render 'likes/like', picture: @picture %>
@@ -61,8 +61,6 @@
 <script>
   prev = $("#prev_next_<%= @picture.id %> ._prev").text();
   next = $("#prev_next_<%= @picture.id %> ._next").text();
-  console.log(prev);
-  console.log(next);
 
   if(prev == "") {
     page = $("#prev_next_<%= @picture.id %> ._page").text();
