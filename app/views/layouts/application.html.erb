@@ -10,9 +10,9 @@
   </head>
 
   <body>
-    <header>
+    <header id="haeder">
       <div class="container">
-        <nav class="navbar navbar-expand-sm navbar-light">
+        <nav id="navbar" class="navbar navbar-expand-sm navbar-light">
           <%= link_to 'トップへ', root_path, class: 'navbar-brand' %>
           <button class="navbar-toggler" data-toggle="collapse" data-target="#menu">
             <span class="navbar-toggler-icon"></span>
@@ -43,6 +43,22 @@
           </div>
         </nav>
       </div>
+      <script>
+        var menuHeight = $("#haeder").height();
+        console.log(menuHeight);
+        var startPos = 0;
+        $(window).scroll(function(){
+          var currentPos = $(this).scrollTop();
+          if (currentPos > startPos) {
+            if($(window).scrollTop() >= 200) {
+              $("#haeder").css("top", "-" + menuHeight + "px");
+            }
+          } else {
+            $("#haeder").css("top", 0 + "px");
+          }
+          startPos = currentPos;
+        });
+      </script>
     </header>
     <div class="contants">
       <div class="container px-0 py-0">

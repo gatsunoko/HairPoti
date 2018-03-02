@@ -23,12 +23,22 @@ body {
     height: 100%;
     margin: 0;
 }
+#haeder {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  transition: .3s;
+  z-index: 9999;
+}
 
 .contants {
   width: 100%;
   margin: 0 auto;
   background: #FAFAFA;
   overflow: hidden;
+  padding-top: 50px;
 }
 
 .show_guide_text {

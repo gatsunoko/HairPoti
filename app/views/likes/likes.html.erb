@@ -1,26 +1,11 @@
-<div class="rankings_area">
-  <div class="top_button_area" >
-    <%= link_to :back do  %>
-      <p class="btn btn-success btn-lg">戻る</p>
-    <% end -%>
-  </div>
-
-  <div id="top_contents">
-    <h2>写真をクリックすると詳細画面に飛びます。</h2>
-    <%= render 'like_pictures' %>
-  </div>
+<div id="top_contents">
+  <h2>写真をクリックすると詳細画面に飛びます。</h2>
+  <%= render 'like_pictures' %>
+</div>
 <%= render 'homes/modal_window' %>
 
 <div class="navigation" style="visibility: hidden;">
   <%= paginate @likes %>
 </div>
 <%# 無限スクロールのJS path の中の append の部分を追加する %>
-<script>
-  $('#top_contents').infiniteScroll({
-    path: '.navigation a[rel=next]',
-    append: '.news',
-    history: false
-  });
-</script>
-
-</div>
+<%= render 'homes/infinite_scroll', pictures: @likes %>
