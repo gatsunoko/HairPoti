@@ -32,3 +32,19 @@ function img_blank(picture_id) {
     .fail(function(xhr){
     });
 }
+
+$(document).on('turbolinks:load', function() {
+  var menuHeight = $("#haeder").height();
+  var startPos = 0;
+  $(window).scroll(function(){
+    var currentPos = $(this).scrollTop();
+    if (currentPos > startPos) {
+      if($(window).scrollTop() >= 200) {
+        $("#haeder").css("top", "-" + menuHeight + "px");
+      }
+    } else {
+      $("#haeder").css("top", 0 + "px");
+    }
+    startPos = currentPos;
+  });
+});
