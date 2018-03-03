@@ -110,7 +110,7 @@
   target = $("#picture_link_<%= @picture.id %>");
   $('html, body').animate({
     scrollTop: target.offset().top,
-  }, 1);
+  }, 0);
 
   <% if browser.device.mobile? %>
     $('#picture_show').on('touchstart', onTouchStart);<%# 指が触れたか検知 %>
@@ -150,4 +150,8 @@
       return event.originalEvent.touches[0].pageX;
     }
   <% end -%>
+
+  var menuHeight = $("#haeder").height();
+  $("#haeder").css("top", "-" + menuHeight + "px");
+  console.log(menuHeight);
 </script>
