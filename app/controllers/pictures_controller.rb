@@ -33,6 +33,11 @@ class PicturesController < ApplicationController
 
   end
 
+  def next_picture
+    @next_picture = params[:next].present? ? Picture.find(params[:next]) : Picture.none
+    @prev_picture = params[:prev].present? ? Picture.find(params[:prev]) : Picture.none
+  end
+
   # GET /pictures/new
   def new
     @picture = Picture.new

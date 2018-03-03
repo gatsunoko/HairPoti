@@ -27,6 +27,18 @@
   height: auto;
   min-height: 100%;
   text-align: center;
+  .current_picture_area {
+    position: relative;
+    z-index: 2;
+  }
+  #next_picture_area {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 20px;
+    height: 40px;
+    z-index: 1;
+  }
 }
 .show_picture {
   max-width: 100%;

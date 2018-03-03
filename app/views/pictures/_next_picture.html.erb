@@ -1,0 +1,8 @@
+<div id="next_picture_area">
+  <% if next_picture.present? %>
+    <%= image_tag(next_picture.url + 'media/?size=l', class: 'show_picture', alt: '画像読み込みエラー') %>
+  <% end -%>
+  <% if prev_picture.present? %>
+    <%= image_tag(prev_picture.url + 'media/?size=l', class: 'show_picture', alt: '画像読み込みエラー') %>
+  <% end -%>
+</div>
