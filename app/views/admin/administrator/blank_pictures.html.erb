@@ -1,0 +1,18 @@
+<div id="top_contents">
+  <%= form_tag({controller: '/admin/administrator', action: :bulk_destroy }, method: :delete) do %>
+    <%= submit_tag '削除', class: 'btn btn-danger' %>
+    <%= render 'admin/administrator/pictures', pictures: @pictures %>
+  <% end -%>
+</div>
+
+<%= render 'homes/modal_window' %>
+
+<style>
+  .
+</style>
+
+<div class="navigation" style="visibility: hidden;">
+  <%= paginate @pictures %>
+</div>
+<%# 無限スクロールのJS path の中の append の部分を追加する %>
+<%= render 'homes/infinite_scroll', pictures: @pictures %>

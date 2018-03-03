@@ -1,0 +1,30 @@
+<div class="news" id="news_<%= pictures.current_page %>">
+  <% length = pictures.length %>
+  <% pictures.each.with_index do |picture, i| %>
+      <div class="square-wrapper row">
+        <div class="spacer col-12">
+          <% prev_id = (i - 1 < 0) ? nil : pictures[i - 1].id %>
+          <% next_id = (i + 1 >= length) ? nil : pictures[i + 1].id %>
+          <div id="prev_next_<%= picture.id %>" class="<%= i+1 %>" style="display: none;">
+            <span class="_page"><%= pictures.current_page %></span>
+            <span class="_prev"><%= prev_id %></span>
+            <span class="_current"><%= picture.id %></span>
+            <span class="_next"><%= next_id %></span>
+          </div>
+          <%= link_to(image_tag(picture.url + 'media/?size=m',
+                onError: "img_blank(#{picture.id})",
+                alt: '画像読み込みエラー'),
+                '',
+                id: "picture_link_#{picture.id}",
+                data: { href: picture_path(picture,
+                    prev_id: prev_id,
+                    next_id: next_id),
+                  toggle: 'modal',
+                  target: "#modal_area"}) %>
+        </div>
+        <div class="col-12">
+          <%= check_box_tag 'ids[]', picture.id %>        
+        </div>
+      </div>
+  <% end -%>
+</div>

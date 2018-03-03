@@ -6,12 +6,11 @@ class Admin::AdministratorController < ApplicationController
   end
 
   def blank_pictures
-    @pictures = Picture.where(picture_present: false).order(updated_at: :desc).page(params[:page]).per(20)
-    render 'pictures/index'
+    @pictures = Picture.where(picture_present: false).order(updated_at: :desc).page(params[:page]).per(12)
   end
 
   def multiple_urls
-    @pictures = Picture.group(:url).having('count(*) >= 2').order(id: :desc).page(params[:page]).per(20)
+    @pictures = Picture.group(:url).having('count(*) >= 2').order(id: :desc).page(params[:page]).per(12)
   end
 
   def multiple_url
@@ -27,5 +26,10 @@ class Admin::AdministratorController < ApplicationController
     rescue
 
     end
+  end
+
+  def bulk_destroy
+    Picture.where('id IN (?)', params[:ids]).destroy_all
+    redirect_back(fallback_location: root_path)
   end
 end

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     get 'administrator/multiple_urls'
     get 'administrator/multiple_url'
     get 'administrator/image_present'
+    delete 'administrator/bulk_destroy'
   end
 
   resources :stylists, only: [:edit, :update]
