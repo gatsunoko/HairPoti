@@ -109,20 +109,22 @@
     $("#next_link")[0]['href'] = next_url
   }
 
-  if(next != "" || prev != "") {
-    $.ajax({
-        url: "/pictures/next_picture",
-        type: "get",
-        data: {next: next,
-                prev: prev,
-                },
-        dataType: "script",
-        success: function(data) {
-        },
-        error: function(data) {
-        }
-    });
-  }
+  $(".current_picture_area img").bind('load', function() {
+    if(next != "" || prev != "") {
+      $.ajax({
+          url: "/pictures/next_picture",
+          type: "get",
+          data: {next: next,
+                  prev: prev,
+                  },
+          dataType: "script",
+          success: function(data) {
+          },
+          error: function(data) {
+          }
+      });
+    }
+  });
 
   <%# 無限スクロールをする為、モーダルのバックの中心を今開いてる画像にする %>
   target = $("#picture_link_<%= @picture.id %>");
