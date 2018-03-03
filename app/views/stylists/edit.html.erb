@@ -16,12 +16,12 @@
   </div>
 
   <%= f.fields_for :stylist do |s| %>
-    <div class="form-group col-sm-6 col-md-4">
+    <div class="form-group col-sm-8 col-md-6">
       <%= s.label :shop_name %>
       <%= s.text_field :shop_name, class: 'form-control' %>
     </div>
 
-    <div class="form-group col-sm-6 col-md-4">
+    <div class="form-group col-sm-11 col-md-9">
       <%= s.label :shop_address %>
       <%= s.text_field :shop_address, class: 'form-control' %>
     </div>

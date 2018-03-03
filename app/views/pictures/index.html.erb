@@ -1,6 +1,5 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Pictures</h1>
+<h1>登録画面</h1>
 <%= link_to 'URL登録', new_picture_path, class: 'btn btn-primary btn-lg' %>
 <% if current_user.admin %>
   <%= link_to '一括登録', bulk_new_pictures_path, class: 'btn btn-primary btn-lg' %>

@@ -1,42 +1,42 @@
 <%= form_tag(bulk_create_pictures_path) do |f| %>
 
-  <div class="field">
+  <div class="form-group col-sm-8 col-md-6">
     <%= label_tag :urls %>
     <p>改行して複数のURLを同時に登録できます。</p>
-    <%= text_area_tag :urls %>
+    <%= text_area_tag :urls, '', class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group col-sm-6 col-md-4">
     <%= label_tag :length %>
-    <%= select_tag :length, options_for_select(['ベリーショート', 'ショート', 'ミディアム', 'セミロング', 'ロング']) %>
+    <%= select_tag :length, options_for_select(['ベリーショート', 'ショート', 'ミディアム', 'セミロング', 'ロング']), class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group col-sm-6 col-md-4">
     <%= label_tag :name %>
-    <%= text_field_tag :name %>
+    <%= text_field_tag :name, '', class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group col-sm-8 col-md-6">
     <%= label_tag :profile %>
-    <%= text_area_tag :profile %>
+    <%= text_area_tag :profile, '', class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group col-sm-8 col-md-6">
     <%= label_tag :shop_name %>
-    <%= text_field_tag :shop_name %>
+    <%= text_field_tag :shop_name, '', class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group col-sm-11 col-md-9">
     <%= label_tag :shop_address %>
-    <%= text_field_tag :shop_address %>
+    <%= text_field_tag :shop_address, '', class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group col-sm-6 col-md-4">
     <%= label_tag :shop_phone_number %>
-    <%= text_field_tag :shop_phone_number %>
+    <%= text_field_tag :shop_phone_number, '', class: 'form-control' %>
   </div>
 
-  <div class="actions">
-    <%= submit_tag %>
+  <div class="orm-group col-sm-6 col-md-4">
+    <%= submit_tag '登録', class: 'btn btn-primary btn-lg' %>
   </div>
 <% end %>
