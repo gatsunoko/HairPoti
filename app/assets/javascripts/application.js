@@ -33,6 +33,26 @@ function img_blank(picture_id) {
     });
 }
 
+function picture_big(link){
+  $('.text_area').css('display', 'block');
+  $('.square-wrapper').css('width', '100%');
+  //画像を大きいのに変更
+  $('.link_span img').each( function() {
+      $(this)[0]['src'] = $(this)[0]['src'].replace('size=t', 'size=m');
+    });
+  //　クリックした画像の位置までスクロール
+  window.location.href = '#'+link
+  // target = $('#'+link);
+  // $('html, body').animate({
+  //   scrollTop: target.offset().top,
+  // }, 0);
+
+  //onClickイベントを削除
+  $('.link_span').each( function() {
+    $(this)[0]['onclick'] = "";
+  });
+}
+
 $(document).on('turbolinks:load', function() {
   var menuHeight = $("#haeder").height();
   var startPos = 0;

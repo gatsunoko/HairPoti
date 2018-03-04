@@ -1,0 +1,65 @@
+<div class="text-center" >
+  <% unless user_signed_in? %>
+    <%= link_to 'ユーザー登録', new_user_registration_path, class: 'btn btn-info btn-lg' %>
+    <%= link_to 'ログイン', new_user_session_path, class: 'btn btn-primary btn-lg' %>
+  <% end -%>
+</div>
+
+<div id="top_contents">
+  <h2>写真をクリックすると詳細画面に飛びます。</h2>
+  <% if controller.action_name == 'index' %>
+    <h3>おすすめ</h3>
+    <div class="ranking" id="news_0">
+      <% length = @ranking.length %>
+      <% @ranking.each.with_index do |picture, i| %>
+        <div class="square-wrapper">
+          <div class="spacer">
+            <% prev_id = (i - 1 < 0) ? nil : @ranking[i - 1].id %>
+            <% next_id = (i + 1 >= length) ? nil : @ranking[i + 1].id %>
+            <div id="prev_next_<%= picture.id %>" class="<%= i+1 %>" style="display: none;">
+              <span class="_page">0</span>
+              <span class="_prev"><%= prev_id %></span>
+              <span class="_current"><%= picture.id %></span>
+              <span class="_next"><%= next_id %></span>
+            </div>
+            <span onclick="picture_big('link_<%= picture.id %>')" class="link_span" id="link_<%= picture.id %>"><%= image_tag(picture.url + 'media/?size=t') %></span>
+          </div>
+        </div>
+        <div class="text_area">
+          <%= render 'likes/like', picture: picture %>
+
+          <div class="picture_show_stylist_profile_area">
+            <% if picture.user.admin? && picture.picture_option.present? %>
+              <p class="stylist_name">スタイリスト:<%= picture.picture_option.name %></p>
+              <spam class="profile"><%= simple_format(picture.picture_option.profile) %></span>
+              <div class="shop_area">
+                <p class="shop_name">店名:<%= picture.picture_option.shop_name %></p>
+              </div>
+            <% elsif picture.user.stylist.present? %>
+              <p class="stylist_name">スタイリスト:<%= picture.user.name %></p>
+                <spam class="profile"><%= simple_format(picture.user.profile) %></span>
+                <div class="shop_area">
+                  <p class="shop_name">店名:<%= picture.user.stylist.shop_name %></p>
+                </div>
+            <% end -%>
+          </div>
+          <p>長さ:<%= picture.length %></p>
+          <p>カラー:<%= picture.color %></p>
+        </div>
+      <% end -%>
+    </div>
+    <h3>新着</h3>
+  <% end -%>
+  <%= render 'homes/mobile_news', pictures: @pictures %>
+</div>
+
+<div class="navigation" style="visibility: hidden;">
+  <%= paginate @pictures %>
+  <%# infinite_scrollでの無限スクロールではリンクパラメータの最後がページ番号でないといけない為、ページ番号の後のパラメータを削除するjs %>
+  <script>
+    $(".navigation a[rel=next]")[0]['href'] = $(".navigation a[rel=next]")[0]['href'].replace(/&utf.*/,"");
+  </script>
+</div>
+
+<%# 無限スクロールのJS path の中の append の部分を追加する %>
+<%= render 'homes/infinite_scroll', pictures: @pictures %>

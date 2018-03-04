@@ -1,0 +1,39 @@
+<div class="news" id="news_<%= pictures.current_page %>">
+  <% length = pictures.length %>
+  <% pictures.each.with_index do |picture, i| %>
+    <div class="square-wrapper">
+      <div class="spacer">
+        <% prev_id = (i - 1 < 0) ? nil : pictures[i - 1].id %>
+        <% next_id = (i + 1 >= length) ? nil : pictures[i + 1].id %>
+        <div id="prev_next_<%= picture.id %>" class="<%= i+1 %>" style="display: none;">
+          <span class="_page"><%= pictures.current_page %></span>
+          <span class="_prev"><%= prev_id %></span>
+          <span class="_current"><%= picture.id %></span>
+          <span class="_next"><%= next_id %></span>
+        </div>
+        <span onclick="picture_big('link_<%= picture.id %>')" class="link_span" id="link_<%= picture.id %>"><%= image_tag(picture.url + 'media/?size=t') %></span>
+      </div>
+    </div>
+    <div class="text_area">
+      <%= render 'likes/like', picture: picture %>
+
+      <div class="picture_show_stylist_profile_area">
+        <% if picture.user.admin? && picture.picture_option.present? %>
+          <p class="stylist_name">スタイリスト:<%= picture.picture_option.name %></p>
+          <spam class="profile"><%= simple_format(picture.picture_option.profile) %></span>
+          <div class="shop_area">
+            <p class="shop_name">店名:<%= picture.picture_option.shop_name %></p>
+          </div>
+        <% elsif picture.user.stylist.present? %>
+          <p class="stylist_name">スタイリスト:<%= picture.user.name %></p>
+            <spam class="profile"><%= simple_format(picture.user.profile) %></span>
+            <div class="shop_area">
+              <p class="shop_name">店名:<%= picture.user.stylist.shop_name %></p>
+            </div>
+        <% end -%>
+      </div>
+      <p>長さ:<%= picture.length %></p>
+      <p>カラー:<%= picture.color %></p>
+    </div>
+  <% end -%>
+</div>

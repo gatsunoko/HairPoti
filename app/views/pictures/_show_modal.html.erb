@@ -133,6 +133,8 @@
   }, 0);
 
   <% if browser.device.mobile? %>
+    // $('#modal_area').css('opacity', '1');
+
     $('#picture_show').on('touchstart', onTouchStart);<%# 指が触れたか検知 %>
     $('#picture_show').on('touchmove', onTouchMove);<%# 指が動いたか検知 %>
     $('#picture_show').on('touchend', onTouchEnd);<%# 指が離れたか検知 %>
@@ -146,10 +148,13 @@
 
     <%# スワイプの方向（left／right）を取得 %>
     function onTouchMove(event) {
-      if (position - getPosition(event) > 100) {<%# 100px以上移動しなければスワイプと判断しない %>
+      // $('#modal_area').css('opacity', Math.abs(position - getPosition(event)) / 500);
+      if (position - getPosition(event) > 70) {<%# 70px以上移動しなければスワイプと判断しない %>
         direction = 'left'; <%# 左と検知 %>
-      } else if (position - getPosition(event) < -100){<%# 100px以上移動しなければスワイプと判断しない %>
+      } else if (position - getPosition(event) < -70){<%# 70px以上移動しなければスワイプと判断しない %>
         direction = 'right'; <%# 右と検知 %>
+      } else {
+        direction = ''; <%# スワイプ位置を戻したらページ遷移しない %>
       }
     }
 
