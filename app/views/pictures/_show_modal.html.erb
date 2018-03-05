@@ -1,178 +1,73 @@
-<div class="button_area col-12 row">
-  <div class="col-4 text-center">
-      <%= link_to '前へ', prev_picture_path(1), id: 'prev_link', remote: true %>
-  </div>
-  <div class="col-4 py-2 px-0">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="display: block; width: 100%; margin: 0 auto;">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="col-4 text-center">
-    <%= link_to '次へ', next_picture_path(1), id: 'next_link', remote: true %>
-  </div>
-</div>
-<div id="picture_show" class="row">
-  <div class="col-sm-3 order-2 order-md-1">
-    <% if user_signed_in? && (@picture.user_id == current_user.id || current_user.admin) %>
-      <div>
-        <%= link_to '編集', edit_picture_path(@picture), class: 'btn btn-primary btn-lg mx-1', target: '_blank' %>
-        <%= link_to '削除', @picture, method: :delete, data: { confirm: '削除してよろしいですか?' }, class: 'btn btn-danger btn-lg mx-1' %>
-        <% if current_user.admin %>
-          <div id="image_present">
-            <%= render 'admin/administrator/image_present', picture: @picture %>
-          </div>
-        <% end -%>
-      </div>
-    <% end -%>
+<!-- Swiper -->
+<div class="swiper-container">
+  <ul class="swiper-wrapper">
+    <li id="prev_picture" class="swiper-slide">
+      
+    </li>
 
-    <%= link_to 'インスタでみる', @picture.url, target: '_blank', class: 'btn btn-secondary btn-lg my-2 mx-1' %>
-    <div class="show_text_area">
+    <li id="current_picture" class="swiper-slide">
+      <%= render 'show_modal_picture_area', picture: @picture %>
+    </li>
 
-      <%= render 'likes/like', picture: @picture %>
+    <li id="next_picture" class="swiper-slide">
+      
+    </li>
+  </ul>
 
-      <div class="picture_show_stylist_profile_area">
-        <% if @picture.user.admin? && @picture.picture_option.present? %>
-          <p class="stylist_name">スタイリスト:<%= @picture.picture_option.name %></p>
-          <spam class="profile"><%= simple_format(@picture.picture_option.profile) %></span>
-          <div class="shop_area">
-            <p class="shop_name">店名:<%= @picture.picture_option.shop_name %></p>
-            <p>住所:<%= @picture.picture_option.shop_address %></p>
-            <p>電話番号:<%= @picture.picture_option.shop_phone_number %></p>
-          </div>
-        <% elsif @picture.user.stylist.present? %>
-          <p class="stylist_name">スタイリスト:<%= @picture.user.name %></p>
-            <spam class="profile"><%= simple_format(@picture.user.profile) %></span>
-            <div class="shop_area">
-              <p class="shop_name">店名:<%= @picture.user.stylist.shop_name %></p>
-              <p>住所:<%= @picture.user.stylist.shop_address %></p>
-              <p>電話番号:<%= @picture.user.stylist.shop_phone_number %></p>
-            </div>
-        <% end -%>
-      </div>
-      <p>長さ:<%= @picture.length %></p>
-      <p>カラー:<%= @picture.color %></p>
-    </div>
-  </div>
-  <div class="show_picture_area col-sm-9 order-1 order-sm-2">
-    <div class="current_picture_area">
-      <%= image_tag(@picture.url + 'media/?size=l', class: 'show_picture', onError: "img_blank(#{@picture.id})", alt: '画像読み込みエラー') %>
-    </div>    
-    <div id="next_picture_area"><%# ajaxで内容を追加する %></div>
-  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
 </div>
 
 <script>
-  prev = $("#prev_next_<%= @picture.id %> ._prev").text();
-  next = $("#prev_next_<%= @picture.id %> ._next").text();
-
-  if(prev == "") {
-    page = $("#prev_next_<%= @picture.id %> ._page").text();
-    prev_page = Number(page) - 1;
-    <%# 新着が前にある場合、新着のひとつ前をセットする、新着の一番最初だった場合おすすめの最後の数をセットする %>
-    if(prev_page == 0) {
-      prev_last = 9
-    } else {
-      prev_last = 12
-    }
-
-    prev = $("#news_"+prev_page+" ."+prev_last+" ._current").text();
-    prev_url = $("#prev_link")[0]['href'];
-    prev_url = prev_url.replace(/pictures.*prev/, 'pictures/'+prev+'/prev');
-    $("#prev_link")[0]['href'] = prev_url
-
-    <%# 前のリンク先がなかったらリンクを削除 %>
-    if(prev == "") {
-      $("#prev_link").remove();
-    }
-  } else {
-    prev_url = $("#prev_link")[0]['href'];
-    prev_url = prev_url.replace(/pictures.*prev/, 'pictures/'+prev+'/prev');
-    $("#prev_link")[0]['href'] = prev_url    
-  }
-
-  if(next == "") {
-    page = $("#prev_next_<%= @picture.id %> ._page").text();
-    next_page = Number(page) + 1;
-
-    next = $("#news_"+next_page+" .1 ._current").text();
-    next_url = $("#next_link")[0]['href'];
-    next_url = next_url.replace(/pictures.*next/, 'pictures/'+next+'/next');
-    $("#next_link")[0]['href'] = next_url
-
-    <%# 次のリンク先がなかったらリンクを削除 %>
-    if(next == "") {
-      $("#next_link").remove();
-    }
-  } else {
-    next_url = $("#next_link")[0]['href'];
-    next_url = next_url.replace(/pictures.*next/, 'pictures/'+next+'/next');
-    $("#next_link")[0]['href'] = next_url
-  }
-
-  $(".current_picture_area img").bind('load', function() {
-    if(next != "" || prev != "") {
-      $.ajax({
-          url: "/pictures/next_picture",
-          type: "get",
-          data: {next: next,
-                  prev: prev,
-                  },
-          dataType: "script",
-          success: function(data) {
-          },
-          error: function(data) {
-          }
-      });
-    }
+  var swiper = new Swiper('.swiper-container', {
+    initialSlide: 1,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
   });
 
+  swiper.on('reachBeginning', function() { 
+    prev = $("#prev_next_<%= @picture.id %> ._prev").text();
+
+    if(prev == "") {
+      page = $("#prev_next_<%= @picture.id %> ._page").text();
+      prev_page = Number(page) - 1;
+      <%# 新着が前にある場合、新着のひとつ前をセットする、新着の一番最初だった場合おすすめの最後の数をセットする %>
+      if(prev_page == 0) {
+        prev_last = 9
+      } else {
+        prev_last = 12
+      }
+
+      prev = $("#news_"+prev_page+" ."+prev_last+" ._current").text();
+
+      <%# 前のリンク先がなかったらリンクを削除 %>
+      if(prev == "") {
+        $(".prev_link").remove();
+      }
+    } 
+    console.log(prev);
+
+    $.ajax({
+      url: "/pictures/prev_add",
+      type: "get",
+      data: {prev: prev},
+      dataType: "script",
+      success: function(data) {
+      },
+      error: function(data) {
+      }
+    });
+  });
+  swiper.on('reachEnd', function() { console.log("end"); });
+</script>
+
+
+<script>
   <%# 無限スクロールをする為、モーダルのバックの中心を今開いてる画像にする %>
   target = $("#picture_link_<%= @picture.id %>");
   $('html, body').animate({
     scrollTop: target.offset().top,
   }, 0);
-
-  <% if browser.device.mobile? %>
-    // $('#modal_area').css('opacity', '1');
-
-    $('#picture_show').on('touchstart', onTouchStart);<%# 指が触れたか検知 %>
-    $('#picture_show').on('touchmove', onTouchMove);<%# 指が動いたか検知 %>
-    $('#picture_show').on('touchend', onTouchEnd);<%# 指が離れたか検知 %>
-    var direction, position;
-
-    <%# スワイプ開始時の横方向の座標を格納 %>
-    function onTouchStart(event) {
-      position = getPosition(event);
-      direction = ''; <%# 一度リセットする %>
-    }
-
-    <%# スワイプの方向（left／right）を取得 %>
-    function onTouchMove(event) {
-      // $('#modal_area').css('opacity', Math.abs(position - getPosition(event)) / 500);
-      if (position - getPosition(event) > 70) {<%# 70px以上移動しなければスワイプと判断しない %>
-        direction = 'left'; <%# 左と検知 %>
-      } else if (position - getPosition(event) < -70){<%# 70px以上移動しなければスワイプと判断しない %>
-        direction = 'right'; <%# 右と検知 %>
-      } else {
-        direction = ''; <%# スワイプ位置を戻したらページ遷移しない %>
-      }
-    }
-
-    function onTouchEnd(event) {
-      if (direction == 'right'){
-        if($("#prev_link").length) {
-          $("#prev_link")[0].click();
-        }
-      } else if (direction == 'left'){
-        if($("#next_link").length) {
-         $("#next_link")[0].click();
-        }
-      }
-    }
-
-    <%# 横方向の座標を取得 %>
-    function getPosition(event) {
-      return event.originalEvent.touches[0].pageX;
-    }
-  <% end -%>
 </script>

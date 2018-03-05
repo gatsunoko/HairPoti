@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       get :multiple_url
       get :search
       get :next_picture
+      get :prev_add
+      get :next_add
     end
     member do
       get :prev
