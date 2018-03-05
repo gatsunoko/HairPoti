@@ -2,7 +2,7 @@
 <div class="swiper-container">
   <ul class="swiper-wrapper">
     <li id="prev_picture" class="swiper-slide">
-      
+      <%= render 'show_modal_picture_area', picture: @picture %>
     </li>
 
     <li id="current_picture" class="swiper-slide">
@@ -10,7 +10,7 @@
     </li>
 
     <li id="next_picture" class="swiper-slide">
-      
+      <%= render 'show_modal_picture_area', picture: @picture %>
     </li>
   </ul>
 
@@ -47,7 +47,6 @@
         $(".prev_link").remove();
       }
     } 
-    console.log(prev);
 
     $.ajax({
       url: "/pictures/prev_add",
@@ -60,7 +59,22 @@
       }
     });
   });
-  swiper.on('reachEnd', function() { console.log("end"); });
+  swiper.on('reachEnd', function() {
+    next = $(".swiper-slide-active .next_id").text();
+
+    console.log(next);
+
+    $.ajax({
+      url: "/pictures/next_add",
+      type: "get",
+      data: {next: next},
+      dataType: "script",
+      success: function(data) {
+      },
+      error: function(data) {
+      }
+    });
+  });
 </script>
 
 
