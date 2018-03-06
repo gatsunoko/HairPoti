@@ -1,2 +1,26 @@
 swiper.prependSlide("<li class='swiper-slide'><%= escape_javascript(render 'show_modal_picture_area', picture: @picture) %></li>");
 swiper.update();
+
+prev = $("#prev_next_<%= @picture.id %> ._prev").text();
+
+if(prev == "") {
+  page = $("#prev_next_<%= @picture.id %> ._page").text();
+  prev_page = Number(page) - 1;
+  <%# 新着が前にある場合、新着のひとつ前をセットする、新着の一番最初だった場合おすすめの最後の数をセットする %>
+  if(prev_page == 0) {
+    prev_last = 9
+  } else {
+    prev_last = 12
+  }
+
+  prev = $("#news_"+prev_page+" ."+prev_last+" ._current").text();
+
+  <%# 前のリンク先がなかったらリンクを削除 %>
+  // if(prev == "") {
+  //   $(".prev_link").remove();
+  // }
+}
+
+// console.log(prev);
+$("#prev_id").text(prev);
+// console.log($("#prev_id").text());

@@ -1,52 +1,44 @@
 <!-- Swiper -->
 <div class="swiper-container">
   <ul class="swiper-wrapper">
-    <li id="prev_picture" class="swiper-slide">
-      <%= render 'show_modal_picture_area', picture: @picture %>
-    </li>
+<!--     <li id="prev_picture" class="swiper-slide">
+      <%#= render 'show_modal_picture_area', picture: @picture %>
+    </li> -->
 
     <li id="current_picture" class="swiper-slide">
       <%= render 'show_modal_picture_area', picture: @picture %>
     </li>
 
-    <li id="next_picture" class="swiper-slide">
-      <%= render 'show_modal_picture_area', picture: @picture %>
-    </li>
+<!--     <li id="next_picture" class="swiper-slide">
+      <%#= render 'show_modal_picture_area', picture: @picture %>
+    </li> -->
   </ul>
 
   <div class="swiper-button-next"></div>
   <div class="swiper-button-prev"></div>
 </div>
 
+<span id="prev_id">0</span>
+<span id="next_id">0</span>
+
 <script>
   var swiper = new Swiper('.swiper-container', {
     initialSlide: 1,
+    observer: true,
+    observeParents: true,
+    keyboard: {
+      enabled: true,
+      onlyInViewport: false,
+    },
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
   });
 
-  swiper.on('reachBeginning', function() { 
-    prev = $("#prev_next_<%= @picture.id %> ._prev").text();
-
-    if(prev == "") {
-      page = $("#prev_next_<%= @picture.id %> ._page").text();
-      prev_page = Number(page) - 1;
-      <%# 新着が前にある場合、新着のひとつ前をセットする、新着の一番最初だった場合おすすめの最後の数をセットする %>
-      if(prev_page == 0) {
-        prev_last = 9
-      } else {
-        prev_last = 12
-      }
-
-      prev = $("#news_"+prev_page+" ."+prev_last+" ._current").text();
-
-      <%# 前のリンク先がなかったらリンクを削除 %>
-      if(prev == "") {
-        $(".prev_link").remove();
-      }
-    } 
+  <%# swiper移動時のイベント %>
+  swiper.on('reachBeginning', function() {
+    prev = $("#prev_id").text();
 
     $.ajax({
       url: "/pictures/prev_add",
@@ -59,10 +51,9 @@
       }
     });
   });
-  swiper.on('reachEnd', function() {
-    next = $(".swiper-slide-active .next_id").text();
 
-    console.log(next);
+  swiper.on('reachEnd', function() {
+    next = $("#next_id").text();
 
     $.ajax({
       url: "/pictures/next_add",
@@ -75,13 +66,4 @@
       }
     });
   });
-</script>
-
-
-<script>
-  <%# 無限スクロールをする為、モーダルのバックの中心を今開いてる画像にする %>
-  target = $("#picture_link_<%= @picture.id %>");
-  $('html, body').animate({
-    scrollTop: target.offset().top,
-  }, 0);
 </script>

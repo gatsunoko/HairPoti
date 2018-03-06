@@ -11,6 +11,12 @@ $(function () {
     var link = $(e.relatedTarget); <%# クリックしたセルのオブジェクトデータ %>
     $(this).find(".modal-content").load(link.attr("data-href"));
   });
+
+  $('#modal_area').on('hidden.bs.modal', function () {
+    $("#modal_picture_show").remove();
+    swiper.destroy();
+    console.log(swiper.params);
+  })
 });
 
 <%# キーボードでモーダルウィンドウを次へ行ったり前へ行ったりするコード %>

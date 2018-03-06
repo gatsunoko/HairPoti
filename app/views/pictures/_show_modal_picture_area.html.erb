@@ -60,8 +60,27 @@
   </div>
 </div>
 
-<span class="next_id">0</span>
 <script>
+  prev = $("#prev_next_<%= @picture.id %> ._prev").text();
+
+  if(prev == "") {
+    page = $("#prev_next_<%= @picture.id %> ._page").text();
+    prev_page = Number(page) - 1;
+    <%# 新着が前にある場合、新着のひとつ前をセットする、新着の一番最初だった場合おすすめの最後の数をセットする %>
+    if(prev_page == 0) {
+      prev_last = 9
+    } else {
+      prev_last = 12
+    }
+
+    prev = $("#news_"+prev_page+" ."+prev_last+" ._current").text();
+
+    <%# 前のリンク先がなかったらリンクを削除 %>
+    // if(prev == "") {
+    //   $(".prev_link").remove();
+    // }
+  }
+
   next = $("#prev_next_<%= picture.id %> ._next").text();
 
   if(next == "") {
@@ -76,8 +95,7 @@
     // }
   }
 
-  console.log(next);
-  console.log($(".swiper-slide-active .next_id"));
-  $(".swiper-slide-active .next_id").text(next);
-  $(".swiper-slide-next .next_id").text(next);
+  // console.log(next);
+  $("#prev_id").text(prev);
+  $("#next_id").text(next);
 </script>
