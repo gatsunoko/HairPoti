@@ -14,10 +14,6 @@ Rails.application.routes.draw do
       get :prev_add
       get :next_add
     end
-    member do
-      get :prev
-      get :next
-    end
   end
 
   namespace 'admin' do

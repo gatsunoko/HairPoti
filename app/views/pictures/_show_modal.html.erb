@@ -1,29 +1,41 @@
 <!-- Swiper -->
 <div class="swiper-container">
   <ul class="swiper-wrapper">
-<!--     <li id="prev_picture" class="swiper-slide">
-      <%#= render 'show_modal_picture_area', picture: @picture %>
-    </li> -->
+
+    <% if @prev_picture.present? %>
+      <li id="prev_picture" class="swiper-slide">
+        <%= render 'show_modal_picture_area', picture: @prev_picture, number: 0 %>
+      </li>
+    <% end -%>
 
     <li id="current_picture" class="swiper-slide">
-      <%= render 'show_modal_picture_area', picture: @picture %>
+      <%= render 'show_modal_picture_area', picture: @picture, number: 1 %>
     </li>
 
-<!--     <li id="next_picture" class="swiper-slide">
-      <%#= render 'show_modal_picture_area', picture: @picture %>
-    </li> -->
+    <% if @next_picture.present? %>
+      <li id="next_picture" class="swiper-slide">
+        <%= render 'show_modal_picture_area', picture: @next_picture, number: 2 %>
+      </li>
+    <% end -%>
+
   </ul>
 
   <div class="swiper-button-next"></div>
   <div class="swiper-button-prev"></div>
 </div>
 
-<span id="prev_id">0</span>
-<span id="next_id">0</span>
+<div style="display:block;">
+  <span id="prev_id">0</span>
+  <span id="next_id">0</span>
+</div>
 
 <script>
   var swiper = new Swiper('.swiper-container', {
-    initialSlide: 1,
+    <% if @prev_picture.blank? %>
+      initialSlide: 0,
+    <% else %>
+      initialSlide: 1,
+    <% end -%>
     observer: true,
     observeParents: true,
     keyboard: {
@@ -39,31 +51,33 @@
   <%# swiper移動時のイベント %>
   swiper.on('reachBeginning', function() {
     prev = $("#prev_id").text();
-
-    $.ajax({
-      url: "/pictures/prev_add",
-      type: "get",
-      data: {prev: prev},
-      dataType: "script",
-      success: function(data) {
-      },
-      error: function(data) {
-      }
-    });
+    if(prev != "") {
+      $.ajax({
+        url: "/pictures/prev_add",
+        type: "get",
+        data: {prev: prev},
+        dataType: "script",
+        success: function(data) {
+        },
+        error: function(data) {
+        }
+      });
+    }
   });
 
   swiper.on('reachEnd', function() {
     next = $("#next_id").text();
-
-    $.ajax({
-      url: "/pictures/next_add",
-      type: "get",
-      data: {next: next},
-      dataType: "script",
-      success: function(data) {
-      },
-      error: function(data) {
-      }
-    });
+    if(next != "") {
+      $.ajax({
+        url: "/pictures/next_add",
+        type: "get",
+        data: {next: next},
+        dataType: "script",
+        success: function(data) {
+        },
+        error: function(data) {
+        }
+      });
+    }
   });
 </script>

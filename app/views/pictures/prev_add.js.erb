@@ -14,13 +14,6 @@ if(prev == "") {
   }
 
   prev = $("#news_"+prev_page+" ."+prev_last+" ._current").text();
-
-  <%# 前のリンク先がなかったらリンクを削除 %>
-  // if(prev == "") {
-  //   $(".prev_link").remove();
-  // }
 }
 
-// console.log(prev);
 $("#prev_id").text(prev);
-// console.log($("#prev_id").text());
