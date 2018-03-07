@@ -1,10 +1,10 @@
-<div id="top_contents">
+<div id="top_contents" class="infinite_scroll">
   <h2>写真をクリックすると詳細画面に飛びます。</h2>
   <%= render 'like_pictures' %>
 </div>
 <%= render 'homes/modal_window' %>
 
-<div class="navigation" style="visibility: hidden;">
+<div class="navigation" style="display: none;">
   <%= paginate @likes %>
 </div>
 <%# 無限スクロールのJS path の中の append の部分を追加する %>

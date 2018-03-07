@@ -68,3 +68,9 @@ $(document).on('turbolinks:load', function() {
     startPos = currentPos;
   });
 });
+
+// ページ遷移前にinfinit scrollをdestroyしておかないとターボリンクのせいでスクロールするたびにバックでリクエストが飛ぶので、ページ遷移前に破棄する
+// $(document).on('turbolinks:request-start', function() {
+//   console.log( 'before_destroy' );
+//   $('.infinite_scroll').infiniteScroll('destroy');
+// });

@@ -99,7 +99,7 @@
 
 <%= render 'homes/modal_window' %>
 
-<div class="navigation" style="visibility: hidden;">
+<div class="navigation" style="display: none;">
   <%= paginate @pictures %>
   <%# infinite_scrollでの無限スクロールではリンクパラメータの最後がページ番号でないといけない為、ページ番号の後のパラメータを削除するjs %>
   <script>
