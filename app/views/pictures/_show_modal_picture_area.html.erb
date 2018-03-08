@@ -18,7 +18,7 @@
         <%= link_to '編集', edit_picture_path(picture), class: 'btn btn-primary btn-lg mx-1', target: '_blank' %>
         <%= link_to '削除', picture, method: :delete, data: { confirm: '削除してよろしいですか?' }, class: 'btn btn-danger btn-lg mx-1' %>
         <% if current_user.admin %>
-          <div id="image_present">
+          <div class="image_present">
             <%= render 'admin/administrator/image_present', picture: picture %>
           </div>
         <% end -%>
@@ -58,8 +58,6 @@
       <%= image_tag(picture.url + 'media/?size=l', class: 'show_picture', onError: "img_blank(#{picture.id})", alt: '画像読み込みエラー') %>
     </div>
   </div>
-
-  <div class="<%= picture.id %>_present" style="display: none;"></div>
 </div>
 
 <script>

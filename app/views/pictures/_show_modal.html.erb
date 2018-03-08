@@ -24,7 +24,7 @@
   <div class="swiper-button-prev"></div>
 </div>
 
-<div style="display:block;">
+<div style="display:none;">
   <span id="prev_id">0</span>
   <span id="next_id">0</span>
 </div>
@@ -38,6 +38,7 @@
     <% end -%>
     observer: true,
     observeParents: true,
+    autoHeight: true,
     keyboard: {
       enabled: true,
       onlyInViewport: false,
