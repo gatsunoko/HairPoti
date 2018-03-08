@@ -53,6 +53,7 @@ function picture_big(link){
   });
 }
 
+//ナビバーを下にスクロールしたら消えて少しでも上にスクロールしたらだす
 $(document).on('turbolinks:load', function() {
   var menuHeight = $("#haeder").height();
   var startPos = 0;
@@ -70,7 +71,7 @@ $(document).on('turbolinks:load', function() {
 });
 
 // ページ遷移前にinfinit scrollをdestroyしておかないとターボリンクのせいでスクロールするたびにバックでリクエストが飛ぶので、ページ遷移前に破棄する
-// $(document).on('turbolinks:request-start', function() {
-//   console.log( 'before_destroy' );
-//   $('.infinite_scroll').infiniteScroll('destroy');
-// });
+$(document).on('turbolinks:request-start', function() {
+  $('#top_contents').infiniteScroll('destroy');
+  $('#top_contents').remove();
+});

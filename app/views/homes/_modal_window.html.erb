@@ -12,22 +12,10 @@ $(function () {
     $(this).find(".modal-content").load(link.attr("data-href"));
   });
 
+  <%# モーダルウィンドウを閉じる時swiperを破棄する(破棄しておかないと次にswiperを開いた時画面表示がおかしくなる為) %>
   $('#modal_area').on('hidden.bs.modal', function () {
     $("#modal_picture_show").remove();
     swiper.destroy();
   })
 });
-
-<%# キーボードでモーダルウィンドウを次へ行ったり前へ行ったりするコード %>
-// $(window).keyup(function(e){
-//   if($('#modal_area').is(':visible')) {
-//     if(e.keyCode == 37){
-//       $(".swiper-slide-active .prev_link")[0].click();
-
-//     }
-//     if(e.keyCode == 39){
-//       $(".swiper-slide-active .next_link")[0].click();
-//     } 
-//   }
-// });
 </script>

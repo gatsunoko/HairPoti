@@ -12,14 +12,12 @@
     $('#top_contents').on( 'load.infiniteScroll', function( event, response, path ) {
       page = path.replace(/.*page=/, "")
       if(Number(page) > <%= pictures.total_pages %>) {
-      console.log( 'destroy' );
         $('#top_contents').infiniteScroll('destroy');
         return;
       }
     });
 
     $('#top_contents').on( 'append.infiniteScroll', function( event, response, path, items ) {
-      console.log( 'Loaded: ' + path );
       prev_page = Number(page)-1;
 
       <%# 新着が前にある場合、新着のひとつ前をセットする、新着の一番最初だった場合おすすめの最後の数をセットする %>
@@ -32,12 +30,6 @@
       prev = $("#news_"+prev_page+" ."+prev_last+" ._current").text();
       $("#news_"+page+" .1 ._prev").text(prev);
       $("#picture_link_518").attr('data-href', $("#picture_link_518").attr('data-href')+"?prev_id="+prev)
-    });
-
-    <%# ページ遷移前にinfinit scrollをdestroyしておかないとターボリンクのせいでスクロールするたびにバックでリクエストが飛ぶので、ページ遷移前に破棄する %>
-    $(document).on('turbolinks:request-start', function() {
-      console.log( 'before_destroy' );
-      $('#top_contents').infiniteScroll('destroy');
     });
   </script>
 <% end -%>
