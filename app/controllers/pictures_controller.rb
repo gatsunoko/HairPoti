@@ -16,18 +16,19 @@ class PicturesController < ApplicationController
 
   def search
     @pictures = Picture.where(picture_present: true).area_search(params[:area]).length_search(params[:length]).page(params[:page]).per(12)
-    if browser.device.mobile?
-      render 'homes/mobile_index' and return
-    else
-      render 'homes/index' and return
-    end
+    # if browser.device.mobile?
+    #   render 'homes/mobile_index' and return
+    # else
+    #   render 'homes/index' and return
+    # end
+    render 'homes/index' and return
   end
   
   # GET /pictures/1
   # GET /pictures/1.json
   def show
-    @next_picture = Picture.find(params[:next_id]) if params[:next_id].present?
-    @prev_picture = Picture.find(params[:prev_id]) if params[:prev_id].present?
+    @next_picture = Picture.find(params[:next_id]) if params[:next_id].present? && params[:next_id].to_i != 0
+    @prev_picture = Picture.find(params[:prev_id]) if params[:prev_id].present? && params[:prev_id].to_i != 0
     render layout: 'modal_picture'
   end
 
@@ -37,11 +38,11 @@ class PicturesController < ApplicationController
   end
 
   def prev_add
-    @picture = params[:prev].present? ? Picture.find(params[:prev]) : Picture.none
+    @picture = params[:prev].present? && params[:prev].to_i != 0 ? Picture.find(params[:prev]) : Picture.none
   end
 
   def next_add
-    @picture = params[:next].present? ? Picture.find(params[:next]) : Picture.none
+    @picture = params[:next].present? && params[:next].to_i != 0 ? Picture.find(params[:next]) : Picture.none
   end
 
   # GET /pictures/new

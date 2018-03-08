@@ -16,11 +16,12 @@ class HomesController < ApplicationController
       @length_default = Array.new
     end
 
-    if browser.device.mobile?
-      render 'mobile_index' and return
-    else
-      render 'index' and return
-    end
+    # if browser.device.mobile?
+    #   render 'mobile_index' and return
+    # else
+    #   render 'index' and return
+    # end
+    render 'homes/index' and return
   end
 
   def after_signup
