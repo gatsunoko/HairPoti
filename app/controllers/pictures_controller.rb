@@ -1,5 +1,5 @@
 class PicturesController < ApplicationController
-  before_action :set_picture, only: [:show, :prev, :next, :edit, :update, :destroy]
+  before_action :set_picture, only: [:show, :show_modal, :prev, :next, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:index, :new, :create, :bulk_new, :bulk_create, :collect_new, :collect_call, :edit, :update, :destroy, :my_point_ranking, :my_histories]
   before_action :is_mine, only: [:edit, :update, :destroy]
   before_action :is_admin, only: [:bulk_new, :bulk_create]
@@ -27,9 +27,12 @@ class PicturesController < ApplicationController
   # GET /pictures/1
   # GET /pictures/1.json
   def show
+  end
+
+  def show_modal
     @next_picture = Picture.find(params[:next_id]) if params[:next_id].present?
     @prev_picture = Picture.find(params[:prev_id]) if params[:prev_id].present?
-    render layout: 'modal_picture'
+    render action: 'show', layout: 'modal_picture'
   end
 
   def next_picture

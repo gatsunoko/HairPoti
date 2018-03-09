@@ -16,7 +16,7 @@
               alt: '画像読み込みエラー'),
               '',
               id: "picture_link_#{like.picture.id}",
-              data: { href: picture_path(like.picture,
+              data: { href: show_modal_picture_path(like.picture,
                   prev_id: prev_id,
                   next_id: next_id),
                 toggle: 'modal',
