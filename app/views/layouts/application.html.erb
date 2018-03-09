@@ -19,12 +19,12 @@
           </button>
           <div id="menu" class="collapse navbar-collapse">
             <ul class="navbar-nav">
+              <%= render 'pictures/search' %>
               <% if user_signed_in? %>
                   <%#= link_to 'プロフィール変更', edit_user_registration_path %>
                   <% if current_user.admin %>
                     <li class="navbar-item"><%= link_to '管理者ページ', admin_administrator_index_path, class: 'nav-link' %></li>
-                  <% end -%>
-                  <%= render 'pictures/search' %>
+                  <% end -%>                  
                   <% if current_user.stylist? || current_user.admin? %>
                     <li class="navbar-item"><%= link_to '登録画面', pictures_path, class: 'nav-link' %></li>
                   <% end -%>

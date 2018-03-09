@@ -6,6 +6,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
+  validates :profile, length: { maximum: 1000 }
+
   has_many :likes
   has_one :stylist
   accepts_nested_attributes_for :stylist
