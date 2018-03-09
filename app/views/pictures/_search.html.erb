@@ -1,5 +1,5 @@
 <li class="btn-group">
-  <%= link_to(image_tag('search.png'), '', class: '', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }) %>
+  <%= link_to(image_tag('search.png'), '', class: 'py-2', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }) %>
   <div class="dropdown-menu">
     <%= form_tag({controller: '/pictures', action: :search }, method: :get) do %>
       <div class="form-group">

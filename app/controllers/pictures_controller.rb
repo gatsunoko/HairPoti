@@ -27,8 +27,8 @@ class PicturesController < ApplicationController
   # GET /pictures/1
   # GET /pictures/1.json
   def show
-    @next_picture = Picture.find(params[:next_id]) if params[:next_id].present? && params[:next_id].to_i != 0
-    @prev_picture = Picture.find(params[:prev_id]) if params[:prev_id].present? && params[:prev_id].to_i != 0
+    @next_picture = Picture.find(params[:next_id]) if params[:next_id].present?
+    @prev_picture = Picture.find(params[:prev_id]) if params[:prev_id].present?
     render layout: 'modal_picture'
   end
 

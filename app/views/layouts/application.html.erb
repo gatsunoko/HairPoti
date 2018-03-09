@@ -12,7 +12,7 @@
   <body>
     <header id="haeder">
       <div class="container">
-        <nav id="navbar" class="navbar navbar-expand-sm navbar-light">
+        <nav id="navbar" class="navbar navbar-expand-sm navbar-light py-0">
           <%= link_to 'トップへ', root_path, class: 'navbar-brand' %>
           <button class="navbar-toggler" data-toggle="collapse" data-target="#menu">
             <span class="navbar-toggler-icon"></span>
@@ -24,10 +24,11 @@
                   <% if current_user.admin %>
                     <li class="navbar-item"><%= link_to '管理者ページ', admin_administrator_index_path, class: 'nav-link' %></li>
                   <% end -%>
+                  <%= render 'pictures/search' %>
                   <% if current_user.stylist? || current_user.admin? %>
                     <li class="navbar-item"><%= link_to '登録画面', pictures_path, class: 'nav-link' %></li>
                   <% end -%>
-                  <li class="navbar-item"><%= link_to 'お気に入り', likes_likes_path, class: 'nav-link' %></li>
+                  <li class="navbar-item"><%= link_to image_tag('heart_empty.png'), likes_likes_path, class: 'nav-link' %></li>
                   <% if current_user.stylist? %>
                     <li class="navbar-item"><%= link_to 'ユーザー情報変更', edit_stylist_path(current_user.id), class: 'nav-link' %></li>
                   <% else %>
@@ -38,7 +39,6 @@
                   <li class="navbar-item"><%= link_to 'ユーザー登録', new_user_registration_path, class: 'nav-link' %></li>
                   <li class="navbar-item"><%= link_to 'ログイン', new_user_session_path, class: 'nav-link' %></li>
               <% end %>
-              <%= render 'pictures/search' %>
             </ul>
           </div>
         </nav>

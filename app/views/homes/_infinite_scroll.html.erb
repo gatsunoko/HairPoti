@@ -9,7 +9,7 @@
     });
 
     <%# kaminari と infinite scroll の組み合わせだとcheckLastPageが正常に機能せず、最後のページになっても次のページのリクエストを飛ばし続けるので、力業で終了させる %>
-    $('#top_contents').on( 'load.infiniteScroll', function( event, response, path ) {
+    $('#top_contents').on( 'load.infiniteScroll', function(event, response, path) {
       page = path.replace(/.*page=/, "")
       if(Number(page) > <%= pictures.total_pages %>) {
         $('#top_contents').infiniteScroll('destroy');
@@ -17,7 +17,7 @@
       }
     });
 
-    $('#top_contents').on( 'append.infiniteScroll', function( event, response, path, items ) {
+    $('#top_contents').on( 'append.infiniteScroll', function(event, response, path, items) {
       prev_page = Number(page)-1;
 
       <%# 新着が前にある場合、新着のひとつ前をセットする、新着の一番最初だった場合おすすめの最後の数をセットする %>
@@ -26,10 +26,13 @@
       } else {
         prev_last = 12
       }
-
+      <%# 追加される要素の最初のprevに前回のループの最後のIDを入れて、前回のループの最後のnextに今回の最初のIDをいれる %>
       prev = $("#news_"+prev_page+" ."+prev_last+" ._current").text();
+      current = $("#news_"+page+" .1 ._current").text()
       $("#news_"+page+" .1 ._prev").text(prev);
-      $("#picture_link_518").attr('data-href', $("#picture_link_518").attr('data-href')+"?prev_id="+prev)
+      $("#news_"+prev_page+" ."+prev_last+" ._next").text(current);
+      $("#picture_link_"+current).attr('data-href', $("#picture_link_"+current).attr('data-href')+"&prev_id="+prev)
+      $("#picture_link_"+prev).attr('data-href', $("#picture_link_"+prev).attr('data-href')+"&next_id="+current)
     });
   </script>
 <% end -%>
