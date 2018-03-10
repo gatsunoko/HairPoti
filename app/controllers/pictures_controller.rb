@@ -35,11 +35,6 @@ class PicturesController < ApplicationController
     render action: 'show', layout: 'modal_picture'
   end
 
-  def next_picture
-    @next_picture = params[:next].present? ? Picture.find(params[:next]) : Picture.none
-    @prev_picture = params[:prev].present? ? Picture.find(params[:prev]) : Picture.none
-  end
-
   def prev_add
     @picture = params[:prev].present? && params[:prev].to_i != 0 ? Picture.find(params[:prev]) : Picture.none
   end

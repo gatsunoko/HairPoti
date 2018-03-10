@@ -10,7 +10,6 @@ Rails.application.routes.draw do
       get :my_histories
       get :multiple_url
       get :search
-      get :next_picture
       get :prev_add
       get :next_add
     end

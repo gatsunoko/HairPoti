@@ -38,6 +38,7 @@
     observer: true,
     observeParents: true,
     autoHeight: true,
+    preventIntercationOnTransition: true,
     keyboard: {
       enabled: true,
       onlyInViewport: false,
@@ -46,6 +47,11 @@
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
+  });
+
+  <%# swiperが移動した後、画像の大きさにwindowを合わせる為にupdateする %>
+  swiper.on('slideChangeTransitionEnd', function() {
+    swiper.update();
   });
 
   <%# swiper移動時のイベント %>

@@ -13,7 +13,7 @@
     </div>
   </div>
 <% end -%>
-<div id="picture_show" class="row picture_<%= picture.id %>">
+<div class="row picture_<%= picture.id %>">
   <div class="col-sm-3 order-2 order-md-1">
     <% if user_signed_in? && (picture.user_id == current_user.id || current_user.admin) %>
       <div>
@@ -57,7 +57,7 @@
   </div>
   <div class="show_picture_area col-sm-9 order-1 order-sm-2">
     <div class="current_picture_area">
-      <%= image_tag(picture.url + 'media/?size=l', class: 'show_picture', onError: "img_blank(#{picture.id})", alt: '画像読み込みエラー') %>
+      <%= image_tag(picture.url + 'media/?size=l', id: "show_picture_#{picture.id}", class: 'show_picture', onError: "img_blank(#{picture.id})", alt: '画像読み込みエラー') %>
     </div>
   </div>
 </div>
