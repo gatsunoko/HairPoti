@@ -64,6 +64,12 @@
           dataType: "script",
           success: function(data) {
             swiper.update();
+            swiper.allowSlidePrev = false;
+            swiper.allowSlideNext = false;
+            setTimeout(function(){
+              swiper.allowSlidePrev = true;
+              swiper.allowSlideNext = true;
+            },1000);
           },
           error: function(data) {
           }
@@ -81,6 +87,12 @@
           dataType: "script",
           success: function(data) {
             swiper.update();
+            swiper.allowSlidePrev = false;
+            swiper.allowSlideNext = false;
+            setTimeout(function(){
+              swiper.allowSlidePrev = true;
+              swiper.allowSlideNext = true;
+            },1000);
           },
           error: function(data) {
           }
