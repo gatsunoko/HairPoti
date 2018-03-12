@@ -48,3 +48,27 @@ body {
   font-weight: bold;
   padding: 50px 0;
 }
+
+.ajax_loading_left,
+.ajax_loading_right {
+  position: absolute;
+  top: 25px;
+  width: 32px;
+  height: 32px;
+  margin-top: -22px;
+  z-index: 10;
+  cursor: pointer;
+  background-size: 32px 32px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.ajax_loading_left {
+  background-image: image-url("loading.gif");
+  left: 10px;
+  right: auto;
+}
+.ajax_loading_right {
+  background-image: image-url("loading.gif");
+  right: 10px;
+  left: auto;
+}

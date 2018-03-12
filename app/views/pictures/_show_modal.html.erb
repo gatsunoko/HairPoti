@@ -49,7 +49,7 @@
     },
   });
 
-  <%# swiperが移動終了した時ｎイベント %>
+  <%# swiperが移動終了した時のイベント %>
   swiper.on('slideChangeTransitionEnd', function() {
     <%# swiperが移動した後、画像の大きさにwindowを合わせる為にupdateする %>
     swiper.update();
@@ -63,12 +63,12 @@
           data: {prev: prev},
           dataType: "script",
           success: function(data) {
-            swiper.update();
             swiper.allowSlidePrev = false;
-            swiper.allowSlideNext = false;
+            $('.swiper-button-prev').removeClass('swiper-button-prev').addClass('ajax_loading_left');
             setTimeout(function(){
               swiper.allowSlidePrev = true;
-              swiper.allowSlideNext = true;
+              swiper.update();
+              $('.ajax_loading_left').removeClass('ajax_loading_left').addClass('swiper-button-prev');
             },1000);
           },
           error: function(data) {
@@ -86,12 +86,12 @@
           data: {next: next},
           dataType: "script",
           success: function(data) {
-            swiper.update();
-            swiper.allowSlidePrev = false;
             swiper.allowSlideNext = false;
+            $('.swiper-button-next').removeClass('swiper-button-next').addClass('ajax_loading_right');
             setTimeout(function(){
-              swiper.allowSlidePrev = true;
               swiper.allowSlideNext = true;
+              swiper.update();
+              $('.ajax_loading_right').removeClass('ajax_loading_right').addClass('swiper-button-next');
             },1000);
           },
           error: function(data) {
