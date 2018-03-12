@@ -49,41 +49,53 @@
     },
   });
 
-  <%# swiperが移動した後、画像の大きさにwindowを合わせる為にupdateする %>
+  <%# swiperが移動終了した時ｎイベント %>
   swiper.on('slideChangeTransitionEnd', function() {
+    <%# swiperが移動した後、画像の大きさにwindowを合わせる為にupdateする %>
     swiper.update();
+
+    if(swiper.isBeginning) {
+      prev = $("#prev_id").text();
+      if(prev != "") {
+        $.ajax({
+          url: "/pictures/prev_add",
+          type: "get",
+          data: {prev: prev},
+          dataType: "script",
+          success: function(data) {
+            swiper.update();
+          },
+          error: function(data) {
+          }
+        });
+      }
+    }
+
+    if(swiper.isEnd) {
+      next = $("#next_id").text();
+      if(next != "") {
+        $.ajax({
+          url: "/pictures/next_add",
+          type: "get",
+          data: {next: next},
+          dataType: "script",
+          success: function(data) {
+            swiper.update();
+          },
+          error: function(data) {
+          }
+        });
+      } 
+    }
   });
 
   <%# swiper移動時のイベント %>
-  swiper.on('reachBeginning', function() {
-    prev = $("#prev_id").text();
-    if(prev != "") {
-      $.ajax({
-        url: "/pictures/prev_add",
-        type: "get",
-        data: {prev: prev},
-        dataType: "script",
-        success: function(data) {
-        },
-        error: function(data) {
-        }
-      });
-    }
-  });
+  // swiper.on('reachBeginning', function() {
+  //   console.log("prev");
 
-  swiper.on('reachEnd', function() {
-    next = $("#next_id").text();
-    if(next != "") {
-      $.ajax({
-        url: "/pictures/next_add",
-        type: "get",
-        data: {next: next},
-        dataType: "script",
-        success: function(data) {
-        },
-        error: function(data) {
-        }
-      });
-    }
-  });
+  // });
+
+  // swiper.on('reachEnd', function() {
+
+  // });
 </script>
