@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :user do
-    sequence(:email, 1) {|n|"example#{n}@email.com"}
+    sequence(:email, 1) {|n|"admin#{n}@email.com"}
     role 3
     admin true
     sequence(:name, 1) {|n|"#{n}太郎"}

@@ -4,6 +4,8 @@ class PicturesController < ApplicationController
   before_action :is_mine, only: [:edit, :update, :destroy]
   before_action :is_admin, only: [:bulk_new, :bulk_create]
 
+  include ImageUpload
+
   # GET /pictures
   # GET /pictures.json
   def index
@@ -58,16 +60,23 @@ class PicturesController < ApplicationController
   # POST /pictures.json
   def create
     @picture = Picture.new(picture_params)
-    @picture.url.sub!(/\?.*/, "")
     @picture.user_id = current_user.id
 
     respond_to do |format|
       if @picture.save
-        format.html { redirect_to pictures_path, notice: 'Picture was successfully created.' }
-        format.json { render :show, status: :created, location: @picture }
+        if ENV['AWS_S3'].present?
+          @picture.picture_front = picture_up_s3("picture_front", @picture.id, "front")
+          @picture.picture_side = picture_up_s3("picture_side", @picture.id, "side")
+          @picture.picture_back = picture_up_s3("picture_back", @picture.id, "back")
+        else
+          @picture.picture_front = picture_up_dir("picture_front", @picture.id, "front")
+          @picture.picture_side = picture_up_dir("picture_side", @picture.id, "side")
+          @picture.picture_back = picture_up_dir("picture_back", @picture.id, "back")
+        end
+        @picture.save
+        redirect_to root_path and return
       else
-        format.html { render :new }
-        format.json { render json: @picture.errors, status: :unprocessable_entity }
+        render 'new' and return
       end
     end
   end
@@ -156,6 +165,6 @@ class PicturesController < ApplicationController
     end
 
     def picture_params
-      params.require(:picture).permit(:url, :length, :color, picture_option_attributes: [:id, :destroy, :name, :profile, :shop_name, :shop_address, :shop_phone_number])
+      params.require(:picture).permit(:length, :color, picture_option_attributes: [:id, :destroy, :name, :profile, :shop_name, :shop_address, :shop_phone_number])
     end
 end

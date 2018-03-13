@@ -57,7 +57,18 @@
   </div>
   <div class="show_picture_area col-sm-9 order-1 order-sm-2">
     <div class="current_picture_area">
-      <%= image_tag(picture.url + 'media/?size=l', id: "show_picture_#{picture.id}", class: 'show_picture', onError: "img_blank(#{picture.id})", alt: '画像読み込みエラー') %>
+      <% if picture.picture_front.present? %>
+        <p>フロント</p>
+        <%= image_tag(display_picture("l", picture.picture_front), id: "show_picture_#{picture.id}", class: 'show_picture', alt: '画像読み込みエラー') %>
+      <% end -%>
+      <% if picture.picture_side.present? %>
+        <p>サイド</p>
+        <%= image_tag(display_picture("l", picture.picture_side), id: "show_picture_#{picture.id}", class: 'show_picture', alt: '画像読み込みエラー') %>
+      <% end -%>
+      <% if picture.picture_back.present? %>
+        <p>バック</p>
+        <%= image_tag(display_picture("l", picture.picture_back), id: "show_picture_#{picture.id}", class: 'show_picture', alt: '画像読み込みエラー') %>
+      <% end -%>
     </div>
   </div>
 </div>

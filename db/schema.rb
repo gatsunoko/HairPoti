@@ -41,6 +41,9 @@ ActiveRecord::Schema.define(version: 20180222131648) do
     t.boolean  "picture_present", default: true, null: false
     t.string   "length"
     t.string   "color"
+    t.string   "picture_front"
+    t.string   "picture_side"
+    t.string   "picture_back"
     t.index ["user_id"], name: "index_pictures_on_user_id", using: :btree
   end
 
