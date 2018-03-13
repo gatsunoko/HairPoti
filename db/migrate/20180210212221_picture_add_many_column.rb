@@ -5,6 +5,5 @@ class PictureAddManyColumn < ActiveRecord::Migration[5.0]
     add_column :pictures, :picture_front, :string
     add_column :pictures, :picture_side, :string
     add_column :pictures, :picture_back, :string
-    remove_colum :pictures, :url
   end
 end

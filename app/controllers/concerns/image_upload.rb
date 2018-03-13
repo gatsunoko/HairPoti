@@ -2,8 +2,9 @@ module ImageUpload
   require 'kconv'
   require 'rmagick'#require sudo yum install ImageMagick ImageMagick-devel -y
   require 'aws-sdk'
+  AWS.config(access_key_id: ENV["ACCESS_KEY_ID"], secret_access_key: ENV["SECRET_ACCESS_KEY"], region: 'ap-northeast-1') if Rails.env == 'production'
 
-  def picture_up_s3(pic_file, picture_id, i, backet)
+  def picture_up_s3(pic_file, picture_id, i, dir)
     name = 'string'
 
     unless file = params[pic_file].nil?
@@ -25,17 +26,17 @@ module ImageUpload
         original = Magick::Image.from_blob(File.read(file.tempfile)).shift
 
         picture_s = original.resize_to_fit(150, 150)
-        file_full_path="#{ENV['#{backet}']}/s#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase
+        file_full_path="#{dir}/s#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase
         object = bucket.objects[file_full_path]
         object.write(picture_s.to_blob ,:acl => :public_read)
 
         picture_m = original.resize_to_fit(300, 300)
-        file_full_path="#{ENV['#{backet}']}/m#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase
+        file_full_path="#{dir}/m#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase
         object = bucket.objects[file_full_path]
         object.write(picture_m.to_blob ,:acl => :public_read)
 
         picture_l = original.resize_to_fit(800, 800)
-        file_full_path="#{ENV['#{backet}']}/l#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase
+        file_full_path="#{dir}/l#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase
         object = bucket.objects[file_full_path]
         object.write(picture_l.to_blob ,:acl => :public_read)
 

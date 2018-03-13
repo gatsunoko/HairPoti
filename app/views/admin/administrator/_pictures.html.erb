@@ -11,8 +11,7 @@
             <span class="_current"><%= picture.id %></span>
             <span class="_next"><%= next_id %></span>
           </div>
-          <%= link_to(image_tag(picture.url + 'media/?size=m',
-                onError: "img_blank(#{picture.id})",
+          <%= link_to(image_tag(display_picture(size: "m", name: picture.picture_front, backet: 'HAIR_PICTURE_DIR'),
                 alt: '画像読み込みエラー'),
                 '',
                 id: "picture_link_#{picture.id}",

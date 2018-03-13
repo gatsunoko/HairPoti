@@ -65,9 +65,9 @@ class PicturesController < ApplicationController
     respond_to do |format|
       if @picture.save
         if ENV['AWS_S3'].present?
-          @picture.picture_front = picture_up_s3("picture_front", @picture.id, "front", 'HAIR_PICTURE_DIR')
-          @picture.picture_side = picture_up_s3("picture_side", @picture.id, "side", 'HAIR_PICTURE_DIR')
-          @picture.picture_back = picture_up_s3("picture_back", @picture.id, "back", 'HAIR_PICTURE_DIR')
+          @picture.picture_front = picture_up_s3("picture_front", @picture.id, "front", ENV['HAIR_PICTURE_DIR'])
+          @picture.picture_side = picture_up_s3("picture_side", @picture.id, "side", ENV['HAIR_PICTURE_DIR'])
+          @picture.picture_back = picture_up_s3("picture_back", @picture.id, "back", ENV['HAIR_PICTURE_DIR'])
         else
           @picture.picture_front = picture_up_dir("picture_front", @picture.id, "front")
           @picture.picture_side = picture_up_dir("picture_side", @picture.id, "side")
@@ -122,7 +122,16 @@ class PicturesController < ApplicationController
   # DELETE /pictures/1.json
   def destroy
     @picture.destroy
-    redirect_to pictures_path
+    if ENV['AWS_S3'].present?
+      size = ["s", "m", "l"]
+      s3d = AWS::S3.new
+      size.each do |s|
+        s3d.buckets[ENV["AWS_S3_BUCKET"]].objects[ENV['HAIR_PICTURE_DIR']+'/'+s+@picture.picture_front].delete if @picture.picture_side.present?
+        s3d.buckets[ENV["AWS_S3_BUCKET"]].objects[ENV['HAIR_PICTURE_DIR']+'/'+s+@picture.picture_side].delete if @picture.picture_side.present?
+        s3d.buckets[ENV["AWS_S3_BUCKET"]].objects[ENV['HAIR_PICTURE_DIR']+'/'+s+@picture.picture_back].delete if @picture.picture_side.present?
+      end
+    end
+    redirect_to root_path
     # respond_to do |format|
     #   format.html { redirect_back(fallback_location: root_path) } and return
     #   format.json { head :no_content }
