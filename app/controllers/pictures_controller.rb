@@ -65,9 +65,9 @@ class PicturesController < ApplicationController
     respond_to do |format|
       if @picture.save
         if ENV['AWS_S3'].present?
-          @picture.picture_front = picture_up_s3("picture_front", @picture.id, "front")
-          @picture.picture_side = picture_up_s3("picture_side", @picture.id, "side")
-          @picture.picture_back = picture_up_s3("picture_back", @picture.id, "back")
+          @picture.picture_front = picture_up_s3("picture_front", @picture.id, "front", 'HAIR_PICTURE_DIR')
+          @picture.picture_side = picture_up_s3("picture_side", @picture.id, "side", 'HAIR_PICTURE_DIR')
+          @picture.picture_back = picture_up_s3("picture_back", @picture.id, "back", 'HAIR_PICTURE_DIR')
         else
           @picture.picture_front = picture_up_dir("picture_front", @picture.id, "front")
           @picture.picture_side = picture_up_dir("picture_side", @picture.id, "side")

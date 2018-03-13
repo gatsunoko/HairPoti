@@ -9,5 +9,7 @@ function previewFile(name, id) {
 
   if (file) {
     reader.readAsDataURL(file);//ここでreaderのメソッドに引数としてfileを入れます。ここで、readerのaddEventListenerが発火します。
+  } else {
+    $('img[name="' + name + '"]')[0].src = ""//何も選択されなかったらプレビュー空白にする
   }
 }

@@ -11,28 +11,23 @@
     </div>
   <% end %>
 
-  <div class="form-group col-sm-6 col-md-4">
-    <%= f.label :url %>
-    <%= f.text_field :url, class: 'form-control' %>
-  </div>
-
   <% if controller.action_name == "new" %>
     <div class="picture_upload_area form-group col-sm-6 col-md-4">
       <%= f.label :picture_front %>
       <%= f.file_field :picture_front, name: 'picture_front', id: 'picture_front', class: 'form-control', onchange: 'previewFile("picture_front", "#picture_front")' %>
-      <%= image_tag 'noimage.png', name: 'picture_front' %>
+      <%= image_tag '', name: 'picture_front' %>
     </div>
 
     <div class="picture_upload_area form-group col-sm-6 col-md-4">
-      <%= f.label :picture_front %>
+      <%= f.label :picture_side %>
       <%= f.file_field :picture_side, name: 'picture_side', id: 'picture_side', class: 'form-control', onchange: 'previewFile("picture_side", "#picture_side")' %>
-      <%= image_tag 'noimage.png', name: 'picture_side' %>
+      <%= image_tag '', name: 'picture_side' %>
     </div>
 
     <div class="picture_upload_area form-group col-sm-6 col-md-4">
-      <%= f.label :picture_front %>
+      <%= f.label :picture_back %>
       <%= f.file_field :picture_back, name: 'picture_back', id: 'picture_back', class: 'form-control', onchange: 'previewFile("picture_back", "#picture_back")' %>
-      <%= image_tag 'noimage.png', name: 'picture_back' %>
+      <%= image_tag '', name: 'picture_back' %>
     </div>
   <% end -%>
 

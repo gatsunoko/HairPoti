@@ -59,15 +59,15 @@
     <div class="current_picture_area">
       <% if picture.picture_front.present? %>
         <p>フロント</p>
-        <%= image_tag(display_picture("l", picture.picture_front), id: "show_picture_#{picture.id}", class: 'show_picture', alt: '画像読み込みエラー') %>
+        <%= image_tag(display_picture(size: "l", name: picture.picture_front, backet: 'HAIR_PICTURE_DIR'), id: "show_picture_#{picture.id}", class: 'show_picture', alt: '画像読み込みエラー') %>
       <% end -%>
       <% if picture.picture_side.present? %>
         <p>サイド</p>
-        <%= image_tag(display_picture("l", picture.picture_side), id: "show_picture_#{picture.id}", class: 'show_picture', alt: '画像読み込みエラー') %>
+        <%= image_tag(display_picture(size: "l", name: picture.picture_side, backet: 'HAIR_PICTURE_DIR'), id: "show_picture_#{picture.id}", class: 'show_picture', alt: '画像読み込みエラー') %>
       <% end -%>
       <% if picture.picture_back.present? %>
         <p>バック</p>
-        <%= image_tag(display_picture("l", picture.picture_back), id: "show_picture_#{picture.id}", class: 'show_picture', alt: '画像読み込みエラー') %>
+        <%= image_tag(display_picture(size: "l", name: picture.picture_back, backet: 'HAIR_PICTURE_DIR'), id: "show_picture_#{picture.id}", class: 'show_picture', alt: '画像読み込みエラー') %>
       <% end -%>
     </div>
   </div>

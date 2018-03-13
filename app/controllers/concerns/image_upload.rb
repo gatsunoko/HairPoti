@@ -3,35 +3,45 @@ module ImageUpload
   require 'rmagick'#require sudo yum install ImageMagick ImageMagick-devel -y
   require 'aws-sdk'
 
-  def picture_up_s3(pic_file, picture_id, i)
+  def picture_up_s3(pic_file, picture_id, i, backet)
     name = 'string'
 
-    #if PhotoTemporary.where('user_id = ? AND photo_num = ?', current_user.id, i.to_i).count == 0
-      unless file = params[pic_file].nil?
-        s3 = AWS::S3.new
-        bucket = s3.buckets[ENV["AWS_S3_BUCKET"]]
-        file = params[pic_file]
-        name = file.original_filename 
-        ext = name[name.rindex('.') + 1, 4].downcase
+    unless file = params[pic_file].nil?
+      now = Time.now.strftime('%Y%m%d%H%M%S').to_s
+      s3 = AWS::S3.new
+      bucket = s3.buckets[ENV["AWS_S3_BUCKET"]]
+      file = params[pic_file]
+      name = file.original_filename 
+      ext = name[name.rindex('.') + 1, 4].downcase
 
-        perms = ['.jpg', '.jpeg', '.gif', '.png']
-        if !perms.include?(File.extname(name).downcase)
-          #@up_result[name.to_s] = 'アップロードできるのは画像ファイルのみです。'
-        elsif file.size > 10.megabyte
-          #@up_result[name.to_s] = 'ファイルサイズは10MBまでです。'
-        else
-          name = name.kconv(Kconv::SJIS, Kconv::UTF8)
+      perms = ['.jpg', '.jpeg', '.gif', '.png']
+      if !perms.include?(File.extname(name).downcase)
+        #@up_result[name.to_s] = 'アップロードできるのは画像ファイルのみです。'
+      elsif file.size > 10.megabyte
+        #@up_result[name.to_s] = 'ファイルサイズは10MBまでです。'
+      else
+        name = name.kconv(Kconv::SJIS, Kconv::UTF8)
 
-          original = Magick::Image.from_blob(File.read(file.tempfile)).shift
-          minpic = original.resize_to_fill(320, 213)
-          file_full_path="#{ENV['TEMPORARY_PICTURE_DIR']}/temporary_user_#{current_user.id}_#{i.to_s}"+File.extname(name).downcase
-          object = bucket.objects[file_full_path]
-          object.write(minpic.to_blob ,:acl => :public_read)
+        original = Magick::Image.from_blob(File.read(file.tempfile)).shift
 
-          #@up_result[name.to_s] = '画像をアップロードしました。'
-        end
+        picture_s = original.resize_to_fit(150, 150)
+        file_full_path="#{ENV['#{backet}']}/s#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase
+        object = bucket.objects[file_full_path]
+        object.write(picture_s.to_blob ,:acl => :public_read)
+
+        picture_m = original.resize_to_fit(300, 300)
+        file_full_path="#{ENV['#{backet}']}/m#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase
+        object = bucket.objects[file_full_path]
+        object.write(picture_m.to_blob ,:acl => :public_read)
+
+        picture_l = original.resize_to_fit(800, 800)
+        file_full_path="#{ENV['#{backet}']}/l#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase
+        object = bucket.objects[file_full_path]
+        object.write(picture_l.to_blob ,:acl => :public_read)
+
+        return "#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase
       end
-    #end
+    end
   end
 
   def picture_up_dir(pic_file, picture_id, i)

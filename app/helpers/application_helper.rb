@@ -1,9 +1,9 @@
 module ApplicationHelper
-  def display_picture(size, name)
+  def display_picture(params)
     if ENV['AWS_S3'].present?
-      return ENV['AWS_PICTURE_PATH']+ENV['ARTICLE_PICTURE_DIR']+"/"+@article.article_photos[0].original_name
+      return ENV['AWS_PICTURE_PATH']+ENV["#{params[:backet]}"]+"/"+params[:size]+params[:name]
     else
-      return "/docs/#{size}#{name}"
+      return "/docs/#{params[:size]}#{params[:name]}"
     end
   end
 end
