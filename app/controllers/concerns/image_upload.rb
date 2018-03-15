@@ -25,20 +25,24 @@ module ImageUpload
 
         original = Magick::Image.from_blob(File.read(file.tempfile)).shift
 
-        picture_s = original.resize_to_fit(150, 150)
-        file_full_path="#{dir}/s#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase
-        object = bucket.objects[file_full_path]
-        object.write(picture_s.to_blob ,:acl => :public_read)
+        if i != 'profile'
+          picture_s = original.resize_to_fit(150, 150)
+          file_full_path="#{dir}/s#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase
+          object = bucket.objects[file_full_path]
+          object.write(picture_s.to_blob ,:acl => :public_read)
+        end
 
         picture_m = original.resize_to_fit(300, 300)
         file_full_path="#{dir}/m#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase
         object = bucket.objects[file_full_path]
         object.write(picture_m.to_blob ,:acl => :public_read)
 
-        picture_l = original.resize_to_fit(800, 800)
-        file_full_path="#{dir}/l#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase
-        object = bucket.objects[file_full_path]
-        object.write(picture_l.to_blob ,:acl => :public_read)
+        if i != 'profile'
+          picture_l = original.resize_to_fit(800, 800)
+          file_full_path="#{dir}/l#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase
+          object = bucket.objects[file_full_path]
+          object.write(picture_l.to_blob ,:acl => :public_read)
+        end
 
         return "#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase
       end
@@ -68,13 +72,30 @@ module ImageUpload
         picture_m = original.resize_to_fit(300, 300)
         picture_m.write("public/docs/m#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase)
 
-        picture_l = original.resize_to_fit(800, 800)
-        picture_l.write("public/docs/l#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase)
+        if i != 'profile'
+          picture_l = original.resize_to_fit(800, 800)
+          picture_l.write("public/docs/l#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase)
+        end
 
         return "#{now}_#{current_user.id}_#{picture_id}_#{i}"+File.extname(name).downcase
       end
     end
 
     return nil
+  end
+
+  def picture_destroy(arg)
+    if ENV['AWS_S3'].present?
+      size = ["s", "m", "l"]
+      s3d = AWS::S3.new
+      size.each do |s|
+        s3d.buckets[ENV["AWS_S3_BUCKET"]].objects[arg[:dir]+'/'+s+arg[:picture]].delete if arg[:picture].present? && s3d.buckets[ENV["AWS_S3_BUCKET"]].objects[arg[:dir]+'/'+s+arg[:picture]].exists?
+      end
+    else
+      size = ["s", "m", "l"]
+      size.each do |s|
+        File.delete("public/docs/"+s+arg[:picture]) if arg[:picture].present? && File.exist?("public/docs/"+s+arg[:picture])
+      end
+    end
   end
 end

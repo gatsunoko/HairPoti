@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180315032300) do
+ActiveRecord::Schema.define(version: 20180315084607) do
 
   create_table "admin_picture_options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "picture_id"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20180315032300) do
     t.string   "name"
     t.text     "profile",                limit: 65535
     t.integer  "role",                                 default: 1,     null: false
+    t.string   "picture"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

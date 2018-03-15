@@ -15,6 +15,12 @@
     <%= f.text_area :profile, class: 'form-control' %>
   </div>
 
+  <div class="form-group col-sm-8 col-md-6">
+    <%= f.label :picture %>
+    <%= f.file_field :picture, name: 'picture', id: 'picture', class: 'form-control', onchange: 'previewFile("picture", "#picture")' %>
+    <%= image_tag '', name: 'picture' %>
+  </div>
+
   <%= f.fields_for :stylist do |s| %>
     <div class="form-group col-sm-8 col-md-6">
       <%= s.label :shop_name %>
