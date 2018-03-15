@@ -41,6 +41,11 @@
     <%= f.select :color, ['ブラウン・ベージュ系', 'イエロー・オレンジ系', 'レッド・ピンク系', 'アッシュ・ブラック系', 'その他'], {}, class: 'form-control' %>
   </div>
 
+  <div class="form-group col-sm-8 col-md-6">
+    <%= f.label :text %>
+    <%= f.text_area :text, class: 'form-control' %>
+  </div>
+
   <% if current_user.admin? %>
     <%= f.fields_for :picture_option do |s| %>
       <div class="form-group col-sm-6 col-md-4">

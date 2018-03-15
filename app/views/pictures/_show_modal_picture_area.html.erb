@@ -26,24 +26,25 @@
         <% end -%>
       </div>
     <% end -%>
-
-    <%= link_to 'インスタでみる', picture.url, target: '_blank', class: 'btn btn-secondary btn-lg my-2 mx-1' %>
+    
     <div class="show_text_area">
 
       <%= render 'likes/like', picture: picture %>
 
       <div class="picture_show_stylist_profile_area">
         <% if picture.user.admin? && picture.picture_option.present? %>
+          <p><%= simple_format(picture.text) %></p>
           <p class="stylist_name">スタイリスト:<%= picture.picture_option.name %></p>
-          <spam class="profile"><%= simple_format(truncate(picture.picture_option.profile, length: 100)) %></span>
+          <span class="profile"><%= simple_format(truncate(picture.picture_option.profile, length: 100)) %></span>
           <div class="shop_area">
             <p class="shop_name">店名:<%= picture.picture_option.shop_name %></p>
             <p>住所:<%= picture.picture_option.shop_address %></p>
             <p>電話番号:<%= picture.picture_option.shop_phone_number %></p>
           </div>
         <% elsif picture.user.stylist.present? %>
+          <p><%= simple_format(picture.text) %></p>
           <p class="stylist_name">スタイリスト:<%= picture.user.name %></p>
-            <spam class="profile"><%= simple_format(truncate(picture.user.profile, length: 100)) %></span>
+            <span class="profile"><%= simple_format(truncate(picture.user.profile, length: 100)) %></span>
             <div class="shop_area">
               <p class="shop_name">店名:<%= picture.user.stylist.shop_name %></p>
               <p>住所:<%= picture.user.stylist.shop_address %></p>

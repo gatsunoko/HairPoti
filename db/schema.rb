@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180222131648) do
+ActiveRecord::Schema.define(version: 20180315032300) do
 
   create_table "admin_picture_options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "picture_id"
@@ -31,19 +31,19 @@ ActiveRecord::Schema.define(version: 20180222131648) do
   end
 
   create_table "pictures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "url"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.integer  "rating",          default: 1500, null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.integer  "rating",                        default: 1500, null: false
     t.integer  "user_id"
-    t.integer  "win",             default: 0,    null: false
-    t.integer  "lose",            default: 0,    null: false
-    t.boolean  "picture_present", default: true, null: false
+    t.integer  "win",                           default: 0,    null: false
+    t.integer  "lose",                          default: 0,    null: false
+    t.boolean  "picture_present",               default: true, null: false
     t.string   "length"
     t.string   "color"
     t.string   "picture_front"
     t.string   "picture_side"
     t.string   "picture_back"
+    t.text     "text",            limit: 65535
     t.index ["user_id"], name: "index_pictures_on_user_id", using: :btree
   end
 
