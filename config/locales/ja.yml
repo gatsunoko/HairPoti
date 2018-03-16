@@ -35,13 +35,31 @@ ja:
         display_entries: '1-%{count}件を表示中 / 合計%{count}件'
       more_pages:
         display_entries: '%{first}-%{last}件を表示中 / 合計%{total}件'
+    submit:
+      picture:
+        create: '登録'
+        update: '更新'
+      user:
+        create: 'ユーザー登録'
+        update: '更新'
   activerecord:
     models:
       user: 'ユーザー'
+      picture: 'ヘアカタログ'
     attributes:
       user:
         email: 'メールアドレス'
-        username: 'ユーザー名'
+        name: 'ユーザーネーム'
+        profile: 'プロフィール'
+        picture: 'プロフィール写真'
         password: 'パスワード'
         password_confirmation: '確認用パスワード'
         current_password: '現在のパスワード'
+      picture:
+        color: 'カラー'
+        length: '長さ'
+        text: 'アレンジポイント'
+      stylist:
+        shop_name: '店名'
+        shop_address: '住所'
+        shop_phone_number: '電話番号'
