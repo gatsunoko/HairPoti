@@ -27,18 +27,18 @@ module ImageUpload
           original = Magick::Image.from_blob(File.read(file.tempfile)).shift
 
           picture_s = original.resize_to_fit(150, 150)
-          file_full_path="#{params[:dir]}/s#{now}_#{current_user.id}_#{args[:picture_id]}_#{args[:name]}"+File.extname(name).downcase
+          file_full_path="#{args[:dir]}/s#{now}_#{current_user.id}_#{args[:picture_id]}_#{args[:name]}"+File.extname(name).downcase
           object = bucket.objects[file_full_path]
           object.write(picture_s.to_blob ,:acl => :public_read)
 
           picture_m = original.resize_to_fit(300, 300)
-          file_full_path="#{params[:dir]}/m#{now}_#{current_user.id}_#{args[:picture_id]}_#{args[:name]}"+File.extname(name).downcase
+          file_full_path="#{args[:dir]}/m#{now}_#{current_user.id}_#{args[:picture_id]}_#{args[:name]}"+File.extname(name).downcase
           object = bucket.objects[file_full_path]
           object.write(picture_m.to_blob ,:acl => :public_read)
 
           if args[:name] != 'profile'
             picture_l = original.resize_to_fit(800, 800)
-            file_full_path="#{params[:dir]}/l#{now}_#{current_user.id}_#{args[:picture_id]}_#{args[:name]}"+File.extname(name).downcase
+            file_full_path="#{args[:dir]}/l#{now}_#{current_user.id}_#{args[:picture_id]}_#{args[:name]}"+File.extname(name).downcase
             object = bucket.objects[file_full_path]
             object.write(picture_l.to_blob ,:acl => :public_read)
           end

@@ -124,16 +124,10 @@ class PicturesController < ApplicationController
   # DELETE /pictures/1
   # DELETE /pictures/1.json
   def destroy
-    @picture.destroy
-    if ENV['AWS_S3'].present?
-      size = ["s", "m", "l"]
-      s3d = AWS::S3.new
-      size.each do |s|
-        s3d.buckets[ENV["AWS_S3_BUCKET"]].objects[ENV['HAIR_PICTURE_DIR']+'/'+s+@picture.picture_front].delete if @picture.picture_side.present?
-        s3d.buckets[ENV["AWS_S3_BUCKET"]].objects[ENV['HAIR_PICTURE_DIR']+'/'+s+@picture.picture_side].delete if @picture.picture_side.present?
-        s3d.buckets[ENV["AWS_S3_BUCKET"]].objects[ENV['HAIR_PICTURE_DIR']+'/'+s+@picture.picture_back].delete if @picture.picture_side.present?
-      end
+    @picture.picture_details.each do |detail|
+      picture_destroy(dir: ENV['HAIR_PICTURE_DIR'], picture: detail.name)
     end
+    @picture.destroy
     redirect_to root_path
     # respond_to do |format|
     #   format.html { redirect_back(fallback_location: root_path) } and return
