@@ -1,6 +1,6 @@
 class HomesController < ApplicationController
   def index
-    @ranking = Picture.all.where(picture_present: true).order(id: :desc).limit(9).offset(0)
+    @ranking = Picture.all.where(picture_present: true).includes(:picture_details).order(id: :desc).limit(9).offset(0)
     @pictures = Picture.all.where(picture_present: true).where.not('id IN (?)', @ranking.pluck(:id)).order(id: :desc).page(params[:page]).per(12)
 
     #投票フォームのデフォルト値セット

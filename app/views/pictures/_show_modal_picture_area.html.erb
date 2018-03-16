@@ -27,7 +27,7 @@
       </div>
     <% end -%>
     
-    <div class="show_text_area">
+    <div class="show_text_area px-2">
 
       <%= render 'likes/like', picture: picture %>
 
@@ -45,7 +45,7 @@
           <p><%= simple_format(picture.text) %></p>
           <p class="stylist_name">スタイリスト:<%= picture.user.name %></p>
           <div class="col-12 text-center">
-            <%= image_tag(display_picture(size: "s", name: picture.user.picture, backet: 'PROFILE_PICTURE_DIR'), alt: '画像読み込みエラー') %>
+            <%= image_tag(display_picture(size: "s", name: picture.user.picture, dir: 'PROFILE_PICTURE_DIR'), alt: '画像読み込みエラー') %>
           </div>
           <span class="profile"><%= simple_format(truncate(picture.user.profile, length: 100)) %></span>
           <div class="shop_area">
@@ -61,17 +61,9 @@
   </div>
   <div class="show_picture_area col-sm-9 order-1 order-sm-2">
     <div class="current_picture_area">
-      <% if picture.picture_front.present? %>
-        <p>フロント</p>
-        <%= image_tag(display_picture(size: "l", name: picture.picture_front, backet: 'HAIR_PICTURE_DIR'), id: "show_picture_#{picture.id}", class: 'show_picture', alt: '画像読み込みエラー') %>
-      <% end -%>
-      <% if picture.picture_side.present? %>
-        <p>サイド</p>
-        <%= image_tag(display_picture(size: "l", name: picture.picture_side, backet: 'HAIR_PICTURE_DIR'), id: "show_picture_#{picture.id}", class: 'show_picture', alt: '画像読み込みエラー') %>
-      <% end -%>
-      <% if picture.picture_back.present? %>
-        <p>バック</p>
-        <%= image_tag(display_picture(size: "l", name: picture.picture_back, backet: 'HAIR_PICTURE_DIR'), id: "show_picture_#{picture.id}", class: 'show_picture', alt: '画像読み込みエラー') %>
+      <% picture.picture_details.each do |detail| %>
+        <p><%= picture_genre(detail.genre) %></p>
+        <%= image_tag(display_picture(size: "l", name: detail.name, dir: 'HAIR_PICTURE_DIR'), id: "show_picture_#{picture.id}", class: 'show_picture', alt: '画像読み込みエラー') %>
       <% end -%>
     </div>
   </div>

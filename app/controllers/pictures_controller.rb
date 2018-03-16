@@ -64,16 +64,19 @@ class PicturesController < ApplicationController
 
     respond_to do |format|
       if @picture.save
-        if ENV['AWS_S3'].present?
-          @picture.picture_front = picture_up_s3("picture_front", @picture.id, "front", ENV['HAIR_PICTURE_DIR'])
-          @picture.picture_side = picture_up_s3("picture_side", @picture.id, "side", ENV['HAIR_PICTURE_DIR'])
-          @picture.picture_back = picture_up_s3("picture_back", @picture.id, "back", ENV['HAIR_PICTURE_DIR'])
-        else
-          @picture.picture_front = picture_up_dir("picture_front", @picture.id, "front")
-          @picture.picture_side = picture_up_dir("picture_side", @picture.id, "side")
-          @picture.picture_back = picture_up_dir("picture_back", @picture.id, "back")
+        if params[:picture_front].present?
+          picture_front = picture_up(file: "picture_front", picture_id: @picture.id, name: "front", dir: ENV['HAIR_PICTURE_DIR'])
+          Pictures::PictureDetail.create(name: picture_front, user_id: current_user.id, picture_id: @picture.id, genre: 'picture_front')
         end
-        @picture.save
+        if params[:picture_side].present?
+          picture_side = picture_up(file: "picture_side", picture_id: @picture.id, name: "side", dir: ENV['HAIR_PICTURE_DIR'])
+          Pictures::PictureDetail.create(name: picture_side, user_id: current_user.id, picture_id: @picture.id, genre: 'picture_side')
+        end
+        if params[:picture_back].present?
+          picture_back = picture_up(file: "picture_back", picture_id: @picture.id, name: "back", dir: ENV['HAIR_PICTURE_DIR'])
+          Pictures::PictureDetail.create(name: picture_back, user_id: current_user.id, picture_id: @picture.id, genre: 'picture_back')
+        end
+
         redirect_to root_path and return
       else
         render 'new' and return

@@ -11,16 +11,17 @@
           <span class="_current"><%= like.picture.id %></span>
           <span class="_next"><%= next_id %></span>
         </div>
-        <%= link_to(image_tag(display_picture(size: "m", name: like.picture.picture_front, backet: 'HAIR_PICTURE_DIR'),
-              onError: "img_blank(#{like.picture.id})",
-              alt: '画像読み込みエラー'),
-              '',
-              id: "picture_link_#{like.picture.id}",
-              data: { href: show_modal_picture_path(like.picture,
-                  prev_id: prev_id,
-                  next_id: next_id),
-                toggle: 'modal',
-                target: "#modal_area"}) %>
+        <% if like.picture.picture_details[0].present? %>
+          <%= link_to(image_tag(display_picture(size: "m", name: like.picture.picture_details[0].name, dir: 'HAIR_PICTURE_DIR'),
+                alt: '画像読み込みエラー'),
+                '',
+                id: "picture_link_#{like.picture.id}",
+                data: { href: show_modal_picture_path(like.picture,
+                    prev_id: prev_id,
+                    next_id: next_id),
+                  toggle: 'modal',
+                  target: "#modal_area"}) %>
+        <% end -%>
       </div>
     </div>
   <% end -%>

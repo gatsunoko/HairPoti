@@ -19,19 +19,19 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-function img_blank(picture_id) {
-  $.ajax({
-      url: '/conflict/img_blank',
-      type: 'GET',
-      data: {
-        picture_id: picture_id
-      },
-    })
-    .done(function(response){
-    })
-    .fail(function(xhr){
-    });
-}
+// function img_blank(picture_id) {
+//   $.ajax({
+//       url: '/conflict/img_blank',
+//       type: 'GET',
+//       data: {
+//         picture_id: picture_id
+//       },
+//     })
+//     .done(function(response){
+//     })
+//     .fail(function(xhr){
+//     });
+// }
 
 function picture_big(link){
   $('.text_area').css('display', 'block');

@@ -11,5 +11,6 @@ function previewFile(name, id) {
     reader.readAsDataURL(file);//ここでreaderのメソッドに引数としてfileを入れます。ここで、readerのaddEventListenerが発火します。
   } else {
     $('img[name="' + name + '"]')[0].src = ""//何も選択されなかったらプレビュー空白にする
+    $('img[name="' + name + '"]')[0].alt = ""//何も選択されなかったらプレビュー空白にする
   }
 }

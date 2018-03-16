@@ -18,7 +18,9 @@
   <div class="form-group col-sm-8 col-md-6">
     <%= f.label :picture %>
     <%= f.file_field :picture, name: 'picture', id: 'picture', class: 'form-control', onchange: 'previewFile("picture", "#picture")' %>
-    <%= image_tag '', name: 'picture' %>
+    <div class="col-12 text-center">
+      <%= image_tag(display_picture(size: "m", name: @user.picture, dir: 'PROFILE_PICTURE_DIR'), alt: '', style: 'max-width: 300px;', name: 'picture') %>
+    </div>
   </div>
 
   <%= f.fields_for :stylist do |s| %>
