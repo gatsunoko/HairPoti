@@ -3,10 +3,12 @@
     <div class="col-4 text-center">
         <%#= link_to '前へ', prev_picture_path(1), class: 'prev_link', remote: true %>
     </div>
-    <div class="col-4 py-2 px-0">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="display: block; width: 100%; margin: 0 auto;">
-        <span aria-hidden="true">&times;</span>
-      </button>
+    <div class="text-center col-4 py-2 px-0">
+      <div style="display: inline-block; width: 30px;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
     </div>
     <div class="col-4 text-center">
       <%#= link_to '次へ', next_picture_path(1), class: 'next_link', remote: true %>
@@ -17,7 +19,7 @@
   <div class="col-sm-3 order-2 order-md-1">
     <% if user_signed_in? && (picture.user_id == current_user.id || current_user.admin) %>
       <div>
-        <%= link_to '編集', edit_picture_path(picture), class: 'btn btn-primary btn-lg mx-1', target: '_blank' %>
+        <%= link_to '編集', edit_picture_path(picture), class: 'btn btn-primary btn-lg mx-1' %>
         <%= link_to '削除', picture, method: :delete, data: { confirm: '削除してよろしいですか?' }, class: 'btn btn-danger btn-lg mx-1' %>
         <% if current_user.admin %>
           <div class="image_present">
@@ -43,11 +45,13 @@
           </div>
         <% elsif picture.user.stylist.present? %>
           <p><%= simple_format(picture.text) %></p>
-          <p class="stylist_name">スタイリスト:<%= picture.user.name %></p>
-          <% if picture.user.picture.present? %>
-            <div class="col-12 text-center">
-              <%= image_tag(display_picture(size: "s", name: picture.user.picture, dir: 'PROFILE_PICTURE_DIR'), alt: '画像読み込みエラー') %>
-            </div>
+          <%= link_to stylist_path(picture.user) do %>
+            <p class="stylist_name">スタイリスト:<%= picture.user.name %></p>
+            <% if picture.user.picture.present? %>
+              <div class="col-12 text-center">
+                <%= image_tag(display_picture(size: "s", name: picture.user.picture, dir: 'PROFILE_PICTURE_DIR'), alt: '画像読み込みエラー') %>
+              </div>
+            <% end -%>
           <% end -%>
           <span class="profile"><%= simple_format(truncate(picture.user.profile, length: 100)) %></span>
           <div class="shop_area">
