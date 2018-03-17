@@ -100,13 +100,6 @@
     next = $("#news_"+next_page+" .1 ._current").text();
   }
 
-  <%# 最初にモーダルを開く時 prev current next の順で3個表示するが、$("#prev_id")を書き換えるのは最初のprevだけにしたいので、currentとnextでは書き換えないようにする %>
-  <% if (defined? number) != nil %>
-    <% if number == 0 %>
-      $("#prev_id").text(prev);
-    <% end -%>
-  <% else %>
-    $("#prev_id").text(prev);
-  <% end -%>
+  $("#prev_id").text(prev);
   $("#next_id").text(next);
 </script>

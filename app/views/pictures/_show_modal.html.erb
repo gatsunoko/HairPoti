@@ -2,19 +2,15 @@
   <ul class="swiper-wrapper">
 
     <% if @prev_picture.present? %>
-      <li id="prev_picture" class="swiper-slide">
-        <%= render 'show_modal_picture_area', picture: @prev_picture, number: 0 %>
-      </li>
+      <li id="prev_picture" class="swiper-slide"></li>
     <% end -%>
 
     <li id="current_picture" class="swiper-slide">
-      <%= render 'show_modal_picture_area', picture: @picture, number: 1 %>
+      <%= render 'show_modal_picture_area', picture: @picture %>
     </li>
 
     <% if @next_picture.present? %>
-      <li id="next_picture" class="swiper-slide">
-        <%= render 'show_modal_picture_area', picture: @next_picture, number: 2 %>
-      </li>
+      <li id="next_picture" class="swiper-slide"></li>
     <% end -%>
 
   </ul>
@@ -30,11 +26,7 @@
 
 <script>
   var swiper = new Swiper('.swiper-container', {
-    <% if @prev_picture.blank? %>
-      initialSlide: 0,
-    <% else %>
-      initialSlide: 1,
-    <% end -%>
+    initialSlide: 0,
     observer: true,
     observeParents: true,
     autoHeight: true,
@@ -49,10 +41,24 @@
     },
   });
 
+  //モーダル移動したら一番上にスクロールする
   swiper.on('slideChangeTransitionStart', function() {
     $("#modal_area").stop();
     $('#modal_area').animate({scrollTop: 0}, 300, 'swing');
   });
+
+  $('#current_picture .current_picture_area img').ready(function() {
+    <% if @prev_picture.present? %>
+      $("#prev_picture").html("<%= escape_javascript(render 'show_modal_picture_area', picture: @prev_picture) %>");
+      swiper.slideNext(0, false);
+      swiper.update();
+    <% end -%>
+    <% if @next_picture.present? %>
+      $("#next_picture").html("<%= escape_javascript(render 'show_modal_picture_area', picture: @next_picture) %>");
+      swiper.update();
+    <% end -%>
+  });
+
 
   <%# swiperが移動終了した時のイベント %>
   swiper.on('slideChangeTransitionEnd', function() {

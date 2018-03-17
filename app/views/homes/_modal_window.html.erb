@@ -23,7 +23,6 @@ $(document).on('turbolinks:load', function() {
   //ブラウザの戻るで戻った場合コンテンツが削除されているので、リロードする
   if($('#top_contents').length == false && $('#modal_area').length) {
     location.reload();
-    console.log("reload");
   }
 });
 </script>
