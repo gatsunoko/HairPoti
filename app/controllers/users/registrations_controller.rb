@@ -18,9 +18,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    old_role = resource.role
+    super
+    #ユーザータイプをユーザーからスタイリストに変更したら、スタイリスト用の子テーブルを追加
+    Stylist.create(user_id: resource.id) if old_role == 'user' && resource.role == 'stylist'
+  end
 
   # DELETE /resource
   # def destroy
