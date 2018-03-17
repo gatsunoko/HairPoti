@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     delete 'administrator/bulk_destroy'
   end
 
-  resources :stylists, only: [:edit, :update]
+  resources :stylists, only: [:show, :edit, :update]
   root 'homes#index'
   get 'homes/index'
   get 'homes/after_signup'

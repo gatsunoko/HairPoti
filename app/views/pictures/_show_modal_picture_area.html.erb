@@ -44,9 +44,11 @@
         <% elsif picture.user.stylist.present? %>
           <p><%= simple_format(picture.text) %></p>
           <p class="stylist_name">スタイリスト:<%= picture.user.name %></p>
-          <div class="col-12 text-center">
-            <%= image_tag(display_picture(size: "s", name: picture.user.picture, dir: 'PROFILE_PICTURE_DIR'), alt: '画像読み込みエラー') %>
-          </div>
+          <% if picture.user.picture.present? %>
+            <div class="col-12 text-center">
+              <%= image_tag(display_picture(size: "s", name: picture.user.picture, dir: 'PROFILE_PICTURE_DIR'), alt: '画像読み込みエラー') %>
+            </div>
+          <% end -%>
           <span class="profile"><%= simple_format(truncate(picture.user.profile, length: 100)) %></span>
           <div class="shop_area">
             <p class="shop_name">店名:<%= picture.user.stylist.shop_name %></p>

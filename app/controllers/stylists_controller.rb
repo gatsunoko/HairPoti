@@ -2,6 +2,11 @@ class StylistsController < ApplicationController
 
   include ImageUpload
 
+  def show
+    @user = User.find params[:id]
+    @pictures = Picture.where(user_id: current_user.id).includes(:picture_details).order(id: :desc).page(params[:page]).per(12)
+  end
+
   def edit
     @user = User.find current_user.id
   end
