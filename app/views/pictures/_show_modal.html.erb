@@ -49,6 +49,10 @@
     },
   });
 
+  swiper.on('slideChangeTransitionStart', function() {
+    $('#modal_area').animate({scrollTop: 0}, 300, 'swing');
+  });
+
   <%# swiperが移動終了した時のイベント %>
   swiper.on('slideChangeTransitionEnd', function() {
     <%# swiperが移動した後、画像の大きさにwindowを合わせる為にupdateする %>
