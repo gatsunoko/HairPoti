@@ -50,6 +50,7 @@
   });
 
   swiper.on('slideChangeTransitionStart', function() {
+    $("#modal_area").stop();
     $('#modal_area').animate({scrollTop: 0}, 300, 'swing');
   });
 
