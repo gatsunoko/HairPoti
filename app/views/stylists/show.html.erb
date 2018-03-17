@@ -1,4 +1,4 @@
-<div class="stylist_show container" style="max-width: 980px;">
+<div class="stylist_show container">
   <% if user_signed_in? && @user.id == current_user.id %>
     <div class="text-center">
       <%= link_to '編集', edit_stylist_path(current_user.id), class: 'btn btn-primary' %>

@@ -59,6 +59,7 @@ ja:
         color: 'カラー'
         length: '長さ'
         text: 'アレンジポイント'
+        detail_count: '写真の枚数'
       stylist:
         shop_name: '店名'
         shop_address: '住所'

@@ -1,17 +1,17 @@
 <%= form_for(picture) do |f| %>
   <% if picture.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(picture.errors.count, "error") %> prohibited this picture from being saved:</h2>
+      <h2 style="color: red;"><%= pluralize(picture.errors.count, "つのエラーにより") %>投稿に失敗しました。</h2>
 
       <ul>
       <% picture.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <li style="color: red;"><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-  <% if controller.action_name == "new" %>
+  <% if controller.action_name == "new" || controller.action_name == "create" %>
     <div class="picture_upload_area form-group col-sm-6 col-md-4">
       <%= f.label 'フロント' %>
       <%= f.file_field :picture_front, name: 'picture_front', id: 'picture_front', class: 'form-control', onchange: 'previewFile("picture_front", "#picture_front")' %>

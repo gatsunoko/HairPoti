@@ -59,8 +59,15 @@ class PicturesController < ApplicationController
   # POST /pictures
   # POST /pictures.json
   def create
+    # raise.params.inspect
     @picture = Picture.new(picture_params)
     @picture.user_id = current_user.id
+    #写真が一枚でもあるか確認、detail_countが1以上じゃないとvalidationに失敗する。
+    @picture.detail_count = 0
+    @picture.detail_count += 1 if params[:picture_front].present?
+    @picture.detail_count += 1 if params[:picture_side].present?
+    @picture.detail_count += 1 if params[:picture_back].present?
+
 
     respond_to do |format|
       if @picture.save
