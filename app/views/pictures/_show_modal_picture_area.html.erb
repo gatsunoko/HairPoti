@@ -45,13 +45,12 @@
           </div>
         <% elsif picture.user.stylist.present? %>
           <p><%= simple_format(picture.text) %></p>
-          <%= link_to stylist_path(picture.user) do %>
-            <p class="stylist_name">スタイリスト:<%= picture.user.name %></p>
-            <% if picture.user.picture.present? %>
-              <div class="col-12 text-center">
-                <%= image_tag(display_picture(size: "s", name: picture.user.picture, dir: 'PROFILE_PICTURE_DIR'), alt: '画像読み込みエラー') %>
-              </div>
-            <% end -%>
+          <p class="stylist_name">スタイリスト:<%= picture.user.name %></p>
+          <% if picture.user.picture.present? %>
+            <div class="col-12 text-center">
+              <%= link_to 'プロフィール', stylist_path(picture.user), class: 'btn btn-primary btn-lg my-2' %>              
+              <%= image_tag(display_picture(size: "s", name: picture.user.picture, dir: 'PROFILE_PICTURE_DIR'), alt: '画像読み込みエラー') %>
+            </div>
           <% end -%>
           <span class="profile"><%= simple_format(truncate(picture.user.profile, length: 100)) %></span>
           <div class="shop_area">

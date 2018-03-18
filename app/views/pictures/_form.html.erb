@@ -14,19 +14,19 @@
   <% if controller.action_name == "new" || controller.action_name == "create" %>
     <div class="picture_upload_area form-group col-sm-6 col-md-4">
       <%= f.label 'フロント' %>
-      <%= f.file_field :picture_front, name: 'picture_front', id: 'picture_front', class: 'form-control', onchange: 'previewFile("picture_front", "#picture_front")' %>
+      <%= f.file_field :picture_front, name: 'picture_front', id: 'picture_front', class: 'form-control', onchange: 'previewFile("picture_front", "#picture_front")', accept: 'image/*' %>
       <%= image_tag '', name: 'picture_front' %>
     </div>
 
     <div class="picture_upload_area form-group col-sm-6 col-md-4">
       <%= f.label 'サイド' %>
-      <%= f.file_field :picture_side, name: 'picture_side', id: 'picture_side', class: 'form-control', onchange: 'previewFile("picture_side", "#picture_side")' %>
+      <%= f.file_field :picture_side, name: 'picture_side', id: 'picture_side', class: 'form-control', onchange: 'previewFile("picture_side", "#picture_side")', accept: 'image/*' %>
       <%= image_tag '', name: 'picture_side' %>
     </div>
 
     <div class="picture_upload_area form-group col-sm-6 col-md-4">
       <%= f.label 'バック' %>
-      <%= f.file_field :picture_back, name: 'picture_back', id: 'picture_back', class: 'form-control', onchange: 'previewFile("picture_back", "#picture_back")' %>
+      <%= f.file_field :picture_back, name: 'picture_back', id: 'picture_back', class: 'form-control', onchange: 'previewFile("picture_back", "#picture_back")', accept: 'image/*' %>
       <%= image_tag '', name: 'picture_back' %>
     </div>
   <% else %>
