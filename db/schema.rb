@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180319025544) do
+ActiveRecord::Schema.define(version: 20180319104045) do
 
   create_table "admin_picture_options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "picture_id"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20180319025544) do
     t.text     "text",            limit: 65535
     t.integer  "detail_count"
     t.integer  "likes_count",                   default: 0,    null: false
+    t.integer  "gender",                                       null: false
     t.index ["user_id"], name: "index_pictures_on_user_id", using: :btree
   end
 

@@ -56,6 +56,7 @@ ja:
         password_confirmation: '確認用パスワード'
         current_password: '現在のパスワード'
       picture:
+        gender: '性別'
         color: 'カラー'
         length: '長さ'
         text: 'アレンジポイント'

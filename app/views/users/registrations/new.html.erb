@@ -5,8 +5,14 @@
 
   <div class="form-group col-sm-8 col-md-6">
     <h4>ユーザータイプ</h4>
-    <%= f.radio_button :role, :user, id: :genre1 %><label for="genre1">お客さん</label>
-    <%= f.radio_button :role, :stylist, id: :genre2 %><label for="genre2">スタイリスト</label>
+    <div class="custom-control custom-radio">
+      <%= f.radio_button :role, :user, id: :genre1, class: 'custom-control-input', checked: true %>
+      <label for="genre1" class="custom-control-label">お客さん</label>
+    </div>
+    <div class="custom-control custom-radio">
+      <%= f.radio_button :role, :stylist, id: :genre2, class: 'custom-control-input' %>
+      <label for="genre2" class="custom-control-label">スタイリスト</label>
+    </div>
   </div>
 
   <div class="form-group col-sm-6 col-md-4">

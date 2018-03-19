@@ -11,6 +11,17 @@
     </div>
   <% end %>
 
+  <div class="form-group col-sm-6 col-md-4">
+    <div class="custom-control custom-radio">
+      <%= f.radio_button :gender, :female, id: :gender1, class: 'custom-control-input', checked: true %>
+      <label for="gender1" class="custom-control-label">レディース</label>
+    </div>
+    <div class="custom-control custom-radio">
+      <%= f.radio_button :gender, :male, id: :gender2, class: 'custom-control-input' %>
+      <label for="gender2" class="custom-control-label">メンズ</label>
+    </div>
+  </div>
+
   <% if controller.action_name == "new" || controller.action_name == "create" %>
     <div class="picture_upload_area form-group col-sm-6 col-md-4">
       <%= f.label 'フロント' %>

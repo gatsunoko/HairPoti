@@ -17,6 +17,7 @@
 <% end -%>
 <div class="picture_area row picture_<%= picture.id %>">
   <div class="show_information_area col-sm-3 order-2 order-md-1">
+    <p class="mx-2 my-1"><%= gender_view(picture.gender) %></p>
     <p class="length mx-2">長さ:<%= picture.length %></p>
     <p class="color mx-2">カラー:<%= picture.color %></p>
     <%= simple_format(picture.text, class: 'mx-2') %>

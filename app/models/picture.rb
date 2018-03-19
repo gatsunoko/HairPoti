@@ -12,6 +12,8 @@ class Picture < ApplicationRecord
   accepts_nested_attributes_for :picture_option
   accepts_nested_attributes_for :picture_details
 
+  enum gender: { male: 1, female: 2 }
+
   scope :area_search, ->(area) {
     if area.present? && area != '全国'
       s = where('stylists.shop_address like ?', area+'%')

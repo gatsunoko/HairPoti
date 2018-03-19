@@ -23,6 +23,15 @@ module ApplicationHelper
     else
       return 'その他'
     end
-      
+  end
+
+  def gender_view(gender)
+    if gender == 'male'
+      return 'メンズ'
+    elsif gender == 'female'
+      return 'レディース'
+    else
+      return '性別未設定'
+    end
   end
 end
