@@ -12,4 +12,9 @@
       <p class="likes_count"><%= picture.likes.count %></p>
     <% end -%>
   </div>
+<% else %>
+  <div class="like text-center" id="like_area<%= picture.id.to_s %>">
+    <div class="heart_empty"></div>
+    <p class="likes_count"><%= picture.likes.count %></p>  
+  </div>
 <% end %>

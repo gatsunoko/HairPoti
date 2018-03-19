@@ -4,11 +4,8 @@
 .like {
   display: inline-block;
   width: 100%;
-  a, p, a:hover {
+  a, .likes_count, a:hover {
     display: inline;
     text-decoration: none;
   }
-}
-.likes_count {
-  /*display: inline;*/
 }
