@@ -19,7 +19,9 @@
           <div id="menu" class="collapse navbar-collapse">
             <ul class="navbar-nav row col-12 px-0">
               <li class="navbar-item col text-center px-0">
-                <%= link_to image_tag('home.png'), root_path, class: 'navbar-brand' %>
+                <%= link_to root_path, class: 'navbar-brand' do %>
+                  <div class="home"></div>
+                <% end -%>
               </li>
               <%= render 'pictures/search' %>
               <% if user_signed_in? %>
@@ -33,21 +35,35 @@
                 <% end -%>
                 <% if current_user.stylist? || current_user.admin? %>
                   <div class="col text-center px-0">
-                    <li class="navbar-item text-center px-0 py-2">
-                      <%= link_to image_tag('post.png'), new_picture_path %>
+                    <li class="navbar-item text-center text-center px-0 py-2">
+                      <%= link_to new_picture_path do %>
+                        <div class="post"></div>
+                      <% end -%>
                     </li>
                   </div>
                 <% end -%>
                   <div class="col text-center px-0">
-                    <li class="navbar-item text-center px-0 py-2"><%= link_to image_tag('heart_empty.png'), likes_likes_path %></li>
+                    <li class="navbar-item text-center px-0 py-2">
+                      <%= link_to likes_likes_path do %>
+                        <div class="heart_empty"></div>
+                      <% end -%>
+                    </li>
                   </div>
                 <% if current_user.stylist? %>
                   <div class="col text-center px-0">
-                    <li class="navbar-item text-center px-0 py-2"><%= link_to image_tag('mypage.png'), stylist_path(current_user.id) %></li>
+                    <li class="navbar-item text-center px-0 py-2">
+                      <%= link_to stylist_path(current_user.id) do %>
+                        <div class="mypage"></div>
+                      <% end -%>
+                    </li>
                   </div>
                 <% else %>
                   <div class="col text-center px-0">
-                    <li class="navbar-item text-center px-0 py-2"><%= link_to image_tag('mypage.png'), edit_user_registration_path %></li>
+                    <li class="navbar-item text-center px-0 py-2">
+                      <%= link_to edit_user_registration_path do %>
+                        <div class="mypage"></div>
+                      <% end -%>
+                    </li>
                   </div>
                   <%#= link_to 'ユーザーエディット', edit_user_registration_path %>
                 <% end -%>

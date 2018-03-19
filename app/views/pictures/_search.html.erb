@@ -1,6 +1,8 @@
 <div class="col text-center px-0">
   <li class="navbar-item btn-group">
-    <%= link_to(image_tag('search.png'), '', class: 'py-2', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }) %>
+    <%= link_to('', class: 'py-2', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }) do %>
+      <div class="search"></div>
+    <% end -%>
     <div class="dropdown-menu">
       <%= form_tag({controller: '/pictures', action: :search }, method: :get) do %>
         <div class="form-group">
