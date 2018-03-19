@@ -69,4 +69,12 @@
     font-weight: bold;
     margin: 5px 0;
   }
+  @media screen and (min-width: 768px) {
+    .show_information_area {
+      padding-right: 0;
+    }
+    .show_picture_area {
+      padding-left: 0;
+    }
+  }
 }

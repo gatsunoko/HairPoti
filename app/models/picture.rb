@@ -2,6 +2,7 @@ class Picture < ApplicationRecord
   # validates :url, presence: true
   # validates :url, :uniqueness => {:scope => :user_id}
   validates :detail_count, numericality: { only_integer: true, greater_than_or_equal_to: 1, message: 'は一枚以上必要です。' }
+  validates :text, length: { maximum: 400 }
 
   belongs_to :user
   has_many :user_pictures, dependent: :destroy

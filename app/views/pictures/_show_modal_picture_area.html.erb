@@ -15,11 +15,11 @@
     </div>
   </div>
 <% end -%>
-<div class="picture_area row px-2 picture_<%= picture.id %>">
-  <div class="col-sm-3 order-2 order-md-1">
-    <p class="length">長さ:<%= picture.length %></p>
-    <p class="color">カラー:<%= picture.color %></p>
-    <p><%= simple_format(picture.text) %></p>
+<div class="picture_area row picture_<%= picture.id %>">
+  <div class="show_information_area col-sm-3 order-2 order-md-1">
+    <p class="length mx-2">長さ:<%= picture.length %></p>
+    <p class="color mx-2">カラー:<%= picture.color %></p>
+    <%= simple_format(picture.text, class: 'mx-2') %>
     <% if user_signed_in? && (picture.user_id == current_user.id || current_user.admin) %>
       <div>
         <%= link_to '編集', edit_picture_path(picture), class: 'btn btn-primary btn-lg mx-1' %>
