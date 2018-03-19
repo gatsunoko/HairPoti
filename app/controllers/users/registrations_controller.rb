@@ -23,10 +23,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     old_role = resource.role
     ActiveRecord::Base.transaction do
       super
-      @user = User.find resource.id
-      picture_destroy(dir: ENV['PROFILE_PICTURE_DIR'], picture: @user.picture)
-      @user.picture = picture_up(file: "picture", picture_id: @user.id, name: "profile", dir: ENV['PROFILE_PICTURE_DIR'])
-      @user.save
+      if params[:picture].present?
+        @user = User.find resource.id
+        picture_destroy(dir: ENV['PROFILE_PICTURE_DIR'], picture: @user.picture)
+        @user.picture = picture_up(file: "picture", picture_id: @user.id, name: "profile", dir: ENV['PROFILE_PICTURE_DIR'])
+        @user.save
+      end
       #ユーザータイプをユーザーからスタイリストに変更したら、スタイリスト用の子テーブルを追加
       Stylist.create(user_id: resource.id) if old_role == 'user' && resource.role == 'stylist'
     end
