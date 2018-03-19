@@ -15,8 +15,11 @@
     </div>
   </div>
 <% end -%>
-<div class="row picture_<%= picture.id %>">
+<div class="picture_area row picture_<%= picture.id %>">
   <div class="col-sm-3 order-2 order-md-1">
+    <p class="length">長さ:<%= picture.length %></p>
+    <p class="color">カラー:<%= picture.color %></p>
+    <p><%= simple_format(picture.text) %></p>
     <% if user_signed_in? && (picture.user_id == current_user.id || current_user.admin) %>
       <div>
         <%= link_to '編集', edit_picture_path(picture), class: 'btn btn-primary btn-lg mx-1' %>
@@ -35,7 +38,6 @@
 
       <div class="picture_show_stylist_profile_area">
         <% if picture.user.admin? && picture.picture_option.present? %>
-          <p><%= simple_format(picture.text) %></p>
           <p class="stylist_name">スタイリスト:<%= picture.picture_option.name %></p>
           <span class="profile"><%= simple_format(truncate(picture.picture_option.profile, length: 100)) %></span>
           <div class="shop_area">
@@ -44,7 +46,6 @@
             <p>電話番号:<%= picture.picture_option.shop_phone_number %></p>
           </div>
         <% elsif picture.user.stylist.present? %>
-          <p><%= simple_format(picture.text) %></p>
           <p class="stylist_name">スタイリスト:<%= picture.user.name %></p>
           <% if picture.user.picture.present? %>
             <div class="col-12 text-center">
@@ -60,8 +61,6 @@
           </div>
         <% end -%>
       </div>
-      <p>長さ:<%= picture.length %></p>
-      <p>カラー:<%= picture.color %></p>
     </div>
   </div>
   <div class="show_picture_area col-sm-9 order-1 order-sm-2">
