@@ -49,12 +49,12 @@
 
   <div class="form-group col-sm-6 col-md-4">
     <%= f.label :length %>
-    <%= f.select :length, ['ベリーショート', 'ショート', 'ミディアム', 'セミロング', 'ロング'], {}, class: 'form-control' %>
+    <%= f.select :length, [['ベリーショート', 'veryshort'], ['ショート', 'short'], ['ミディアム', 'midium'], ['セミロング', 'semilong'], ['ロング', 'long']], {}, class: 'form-control' %>
   </div>
 
   <div class="form-group col-sm-6 col-md-4">
     <%= f.label :color %>
-    <%= f.select :color, ['ブラウン・ベージュ系', 'イエロー・オレンジ系', 'レッド・ピンク系', 'アッシュ・ブラック系', 'その他'], {}, class: 'form-control' %>
+    <%= f.select :color, [['ブラウン・ベージュ系', 'brown'], ['イエロー・オレンジ系', 'yellow'], ['レッド・ピンク系', 'red'], ['アッシュ・ブラック系', 'black'], ['その他', 'other']], {}, class: 'form-control' %>
   </div>
 
   <div class="form-group col-sm-8 col-md-6">

@@ -18,8 +18,8 @@
 <div class="picture_area row picture_<%= picture.id %>">
   <div class="show_information_area col-sm-3 order-2 order-md-1">
     <p class="mx-2 my-1"><%= gender_view(picture.gender) %></p>
-    <p class="length mx-2">長さ:<%= picture.length %></p>
-    <p class="color mx-2">カラー:<%= picture.color %></p>
+    <p class="length mx-2">長さ:<%= length_view(picture.length) %></p>
+    <p class="color mx-2">カラー:<%= color_view(picture.color) %></p>
     <%= simple_format(picture.text, class: 'mx-2') %>
     <% if user_signed_in? && (picture.user_id == current_user.id || current_user.admin) %>
       <div>

@@ -13,6 +13,8 @@ class Picture < ApplicationRecord
   accepts_nested_attributes_for :picture_details
 
   enum gender: { male: 1, female: 2 }
+  enum length: { veryshort: 1, short: 2, medium: 3, semilong: 4, long: 5}
+  enum color: {brown: 1, yellow: 2, red: 3, black: 4, other: 5}
 
   scope :area_search, ->(municipalities) {
     if municipalities.present?

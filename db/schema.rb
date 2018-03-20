@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180320171322) do
+ActiveRecord::Schema.define(version: 20180320231523) do
 
   create_table "admin_picture_options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "picture_id"
@@ -46,12 +46,13 @@ ActiveRecord::Schema.define(version: 20180320171322) do
     t.integer  "win",                           default: 0,    null: false
     t.integer  "lose",                          default: 0,    null: false
     t.boolean  "picture_present",               default: true, null: false
-    t.string   "length"
-    t.string   "color"
+    t.integer  "length"
+    t.integer  "color"
     t.text     "text",            limit: 65535
     t.integer  "detail_count"
     t.integer  "likes_count",                   default: 0,    null: false
     t.integer  "gender",                                       null: false
+    t.index ["length"], name: "index_pictures_on_length", using: :btree
     t.index ["user_id"], name: "index_pictures_on_user_id", using: :btree
   end
 
@@ -78,6 +79,7 @@ ActiveRecord::Schema.define(version: 20180320171322) do
     t.string   "shop_phone_number"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.index ["shop_address"], name: "index_stylists_on_shop_address", using: :btree
   end
 
   create_table "user_pictures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -34,4 +34,36 @@ module ApplicationHelper
       return '性別未設定'
     end
   end
+
+  def length_view(length)
+    if length == 'veryshort'
+      return 'ベリーショート'
+    elsif length == 'short'
+      return 'ショート'
+    elsif length == 'medium'
+      return 'ミディアム'
+    elsif length == 'semilong'
+      return 'セミロング'
+    elsif length == 'long'
+      return 'ロング'
+    else
+      return '未設定'
+    end
+  end
+
+  def color_view(color)
+    if color == 'brown'
+      return 'ブラウン・ベージュ系'
+    elsif color == 'yellow'
+      return 'イエロー・オレンジ系'
+    elsif color == 'red'
+      return 'レッド・ピンク系'
+    elsif color == 'black'
+      return 'アッシュ・ブラック系'
+    elsif color == 'other'
+      return 'その他'
+    else
+      return '未設定'
+    end
+  end
 end
