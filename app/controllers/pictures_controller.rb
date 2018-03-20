@@ -17,7 +17,7 @@ class PicturesController < ApplicationController
   end
 
   def search
-    @pictures = Picture.where(picture_present: true).area_search(params[:area]).length_search(params[:length]).page(params[:page]).per(12)
+    @pictures = Picture.where(picture_present: true).area_search(params[:municipalities]).length_search(params[:length]).page(params[:page]).per(12)
     # if browser.device.mobile?
     #   render 'homes/mobile_index' and return
     # else

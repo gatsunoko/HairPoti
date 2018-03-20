@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180319104045) do
+ActiveRecord::Schema.define(version: 20180320171322) do
 
   create_table "admin_picture_options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "picture_id"
@@ -28,6 +28,14 @@ ActiveRecord::Schema.define(version: 20180319104045) do
     t.integer  "picture_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "municipalities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.integer  "order_num"
+    t.integer  "prefecture_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "pictures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -52,6 +60,13 @@ ActiveRecord::Schema.define(version: 20180319104045) do
     t.integer  "genre"
     t.integer  "user_id"
     t.integer  "picture_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "prefectures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.integer  "order_num"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

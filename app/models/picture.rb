@@ -14,16 +14,34 @@ class Picture < ApplicationRecord
 
   enum gender: { male: 1, female: 2 }
 
-  scope :area_search, ->(area) {
-    if area.present? && area != '全国'
-      s = where('stylists.shop_address like ?', area+'%')
-          .joins(:user => :stylist).references(:user => :stylist).pluck(:id)
+  scope :area_search, ->(municipalities) {
+    if municipalities.present?
+      areas = Municipality.where(id: municipalities)
+      prefecture = Prefecture.find(areas[0].prefecture_id).name
+      #prefecture = prefecture_ending(Prefecture.find(areas[0].prefecture_id).name)
+      if prefecture == '東京'
+        prefecture = prefecture+'都'
+      elsif prefecture == '大阪' || prefecture == '京都'
+        prefecture = prefecture+'府'
+      elsif prefecture == '北海道'
+        prefecture = prefecture
+      else
+        prefecture = prefecture+'県'
+      end
 
-      a = where('admin_picture_options.shop_address like ?', area+'%')
-          .joins(:picture_option).references(:picture_option).pluck(:id)
+      area_params = Array.new
+      areas.each do |area|
+        s = where('stylists.shop_address like ?', prefecture+area.name+'%')
+            .joins(:user => :stylist).references(:user => :stylist).pluck(:id)
 
-      s.concat(a)
-      where(id: s)
+        area_params.concat(s)
+      end
+
+      # a = where('admin_picture_options.shop_address like ?', area+'%')
+      #     .joins(:picture_option).references(:picture_option).pluck(:id)
+
+      # s.concat(a)
+      where(id: area_params)
     end
   }
 

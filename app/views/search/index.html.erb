@@ -1,0 +1,55 @@
+<div class="col text-center px-0">
+  <%= form_tag({controller: '/pictures', action: :search }, method: :get) do %>
+    <div class="form-group">
+      <label>地域</label>
+      <%= select_tag :area, options_for_select(Prefecture.all.map{|o| [o.name, o.id]}), prompt: '全国', id: 'prefecture', class: 'form-control selectbox' %>
+    </div>
+
+    <div id="municipalities" class="form-group checkbox row">
+      <%= render 'search/municipalities' %>
+    </div>
+
+    <div class="form-group checkbox">
+      <label>
+        <%= check_box_tag 'length[]', 'ベリーショート' %>
+        <span>ベリーショート</span>
+      </label>
+      <label>
+        <%= check_box_tag 'length[]', 'ショート' %>
+        <span>ショート</span>
+      </label>
+      <label>
+        <%= check_box_tag 'length[]', 'ミディアム' %>
+        <span>ミディアム</span>
+      </label>
+      <br>
+      <label>
+        <%= check_box_tag 'length[]', 'セミロング' %>
+        <span>セミロング</span>
+      </label>
+      <label>
+        <%= check_box_tag 'length[]', 'ロング' %>
+        <span>ロング</span>
+      </label>
+    </div>
+
+    <button type="submit" class="btn">
+      <div class="search"></div>
+    </button>
+  <% end -%>
+</div>
+
+<script>
+  $('#prefecture').change(function() {
+    $.ajax({
+      url: "/search/prefecture_change",
+      type: "get",
+      data: {prefecture: $(this).val()},
+      dataType: "script",
+      success: function(data) {
+      },
+      error: function(data) {
+      }
+    });
+  });
+</script>

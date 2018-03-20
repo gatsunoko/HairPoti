@@ -23,7 +23,14 @@
                   <div class="home"></div>
                 <% end -%>
               </li>
-              <%= render 'pictures/search' %>
+              <%#= render 'pictures/search' %>
+              <div class="col text-center px-0">
+                <li class="navbar-item text-center text-center px-0 py-2">
+                  <%= link_to search_index_path do %>
+                    <div class="search"></div>
+                  <% end -%>
+                </li>
+              </div>
               <% if user_signed_in? %>
                 <%#= link_to 'プロフィール変更', edit_user_registration_path %>
                 <% if current_user.admin %>

@@ -37,4 +37,7 @@ Rails.application.routes.draw do
   get 'conflict/result'
   get 'likes/like'
   get 'likes/likes'
+
+  get 'search/index'
+  get 'search/prefecture_change'
 end
