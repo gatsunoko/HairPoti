@@ -67,8 +67,7 @@ class PicturesController < ApplicationController
     @picture.detail_count += 1 if params[:picture_front].present?
     @picture.detail_count += 1 if params[:picture_side].present?
     @picture.detail_count += 1 if params[:picture_back].present?
-
-
+    
     respond_to do |format|
       if @picture.save
         if params[:picture_front].present?

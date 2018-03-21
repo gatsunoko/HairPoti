@@ -1,8 +1,38 @@
 <div class="col text-center px-0">
   <%= form_tag({controller: '/pictures', action: :search }, method: :get) do %>
-    <div class="form-group">
-      <label>地域</label>
-      <%= select_tag :area, options_for_select(Prefecture.all.map{|o| [o.name, o.id]}), prompt: '全国', id: 'prefecture', class: 'form-control selectbox' %>
+    <div class="form-group text-center">
+        <label style="display: block;">地域</label>
+        <select name="area" id="prefecture" class="form-control selectbox" style="max-width: 350px; display: inline-block;">
+          <option value="">全国</option>
+          <% Prefecture.all.each.with_index(1) do |prefecture, i| %>
+            <% if i == 1 %>
+              <optgroup label="北海道・東北">
+            <% elsif i == 8 %>
+              </optgroup>
+              <optgroup label="関東">
+            <% elsif i == 15 %>
+              </optgroup>
+              <optgroup label="甲信越・北陸">
+            <% elsif i == 21 %>
+              </optgroup>
+              <optgroup label="東海">
+            <% elsif i == 25 %>
+              </optgroup>
+              <optgroup label="関西">
+            <% elsif i == 31 %>
+              </optgroup>
+              <optgroup label="中国">
+            <% elsif i == 36 %>
+              </optgroup>
+              <optgroup label="四国">
+            <% elsif i == 40 %>
+              </optgroup>
+              <optgroup label="九州・沖縄">
+            <% end -%>
+            <option value="<%= prefecture.id %>"><%= prefecture.name %></option>
+          <% end -%>
+          </optgroup>
+        </select>
     </div>
 
     <div id="municipalities" class="form-group checkbox row">

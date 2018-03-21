@@ -1,6 +1,6 @@
 <% if @municipalities.present? %>
   <% @municipalities.each do |municipality| %>
-    <div class="col-12 col-sm-3 text-left">
+    <div class="municipalities_check col-12 col-sm-3 text-left">
       <label>
         <%= check_box_tag 'municipalities[]', municipality.id %>
         <span><%= municipality.name %></span>
