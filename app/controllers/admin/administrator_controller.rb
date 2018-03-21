@@ -6,11 +6,11 @@ class Admin::AdministratorController < ApplicationController
   end
 
   def blank_pictures
-    @pictures = Picture.where(picture_present: false).order(updated_at: :desc).page(params[:page]).per(12)
+    @pictures = Picture.where(picture_present: false).order(updated_at: :desc).page(params[:page]).per(24)
   end
 
   def multiple_urls
-    @pictures = Picture.group(:url).having('count(*) >= 2').order(id: :desc).page(params[:page]).per(12)
+    @pictures = Picture.group(:url).having('count(*) >= 2').order(id: :desc).page(params[:page]).per(24)
   end
 
   def multiple_url

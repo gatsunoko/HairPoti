@@ -43,7 +43,7 @@
   <% else %>
     <% @picture.picture_details.each do |detail| %>
       <p><%= picture_genre(detail.genre) %></p>
-      <%= image_tag(display_picture(size: "m", name: detail.name, dir: 'HAIR_PICTURE_DIR'), id: "show_picture_#{picture.id}", class: 'show_picture', alt: '画像読み込みエラー') %>
+      <%= image_tag(display_picture(size: "m", name: detail.name, dir: 'HAIR_PICTURE_DIR'), id: "show_picture_#{picture.id}", class: 'show_picture', alt: '画像') %>
     <% end -%>
   <% end -%>
 

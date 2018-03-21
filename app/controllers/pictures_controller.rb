@@ -10,14 +10,14 @@ class PicturesController < ApplicationController
   # GET /pictures.json
   def index
     if current_user.admin
-      @pictures = Picture.all.order(id: :desc).page(params[:page]).per(12)
+      @pictures = Picture.all.order(id: :desc).page(params[:page]).per(24)
     else
-      @pictures = Picture.where(user_id: current_user.id).order(id: :desc).page(params[:page]).per(12)
+      @pictures = Picture.where(user_id: current_user.id).order(id: :desc).page(params[:page]).per(24)
     end
   end
 
   def search
-    @pictures = Picture.where(picture_present: true).area_search(params[:municipalities]).length_search(params[:length]).page(params[:page]).per(12)
+    @pictures = Picture.where(picture_present: true).area_search(params[:municipalities]).length_search(params[:length]).order(id: :desc).includes(:picture_details).page(params[:page]).per(24)
     # if browser.device.mobile?
     #   render 'homes/mobile_index' and return
     # else

@@ -85,7 +85,7 @@ class ConflictController < ApplicationController
   end
 
   def result
-    @pictures = Picture.where(id: session[:voting_id]).order(['field(id, ?)', session[:voting_id].reverse]).page(params[:page]).per(12)
+    @pictures = Picture.where(id: session[:voting_id]).order(['field(id, ?)', session[:voting_id].reverse]).page(params[:page]).per(24)
   end
 
   def img_blank

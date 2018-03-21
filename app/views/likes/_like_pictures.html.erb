@@ -13,7 +13,7 @@
         </div>
         <% if like.picture.picture_details[0].present? %>
           <%= link_to(image_tag(display_picture(size: "m", name: like.picture.picture_details[0].name, dir: 'HAIR_PICTURE_DIR'),
-                alt: '画像読み込みエラー'),
+                alt: '画像'),
                 '',
                 id: "picture_link_#{like.picture.id}",
                 data: { href: show_modal_picture_path(like.picture,

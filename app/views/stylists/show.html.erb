@@ -8,7 +8,7 @@
   <p class="stylist_name">ユーザーネーム:<%= @user.name %></p>
   <% if @user.picture.present? %>
     <div class="col-12 text-center">
-      <%= image_tag(display_picture(size: "m", name: @user.picture, dir: 'PROFILE_PICTURE_DIR'), alt: '画像読み込みエラー') %>
+      <%= image_tag(display_picture(size: "m", name: @user.picture, dir: 'PROFILE_PICTURE_DIR'), alt: '画像') %>
     </div>
   <% end -%>
   <span class="profile"><%= simple_format(@user.profile, length: 100) %></span>

@@ -51,7 +51,7 @@
           <% if picture.user.picture.present? %>
             <div class="col-12 text-center">
               <%= link_to 'プロフィール', stylist_path(picture.user), class: 'btn btn-primary btn-lg my-2' %>              
-              <%= image_tag(display_picture(size: "s", name: picture.user.picture, dir: 'PROFILE_PICTURE_DIR'), alt: '画像読み込みエラー') %>
+              <%= image_tag(display_picture(size: "s", name: picture.user.picture, dir: 'PROFILE_PICTURE_DIR'), alt: '画像') %>
             </div>
           <% end -%>
           <span class="profile"><%= simple_format(truncate(picture.user.profile, length: 100)) %></span>
@@ -68,7 +68,7 @@
     <div class="current_picture_area">
       <% picture.picture_details.each do |detail| %>
         <p><%= picture_genre(detail.genre) %></p>
-        <%= image_tag(display_picture(size: "l", name: detail.name, dir: 'HAIR_PICTURE_DIR'), id: "show_picture_#{picture.id}", class: 'show_picture', alt: '画像読み込みエラー') %>
+        <%= image_tag(display_picture(size: "l", name: detail.name, dir: 'HAIR_PICTURE_DIR'), id: "show_picture_#{picture.id}", class: 'show_picture', alt: '画像') %>
       <% end -%>
     </div>
   </div>
