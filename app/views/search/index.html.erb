@@ -1,4 +1,4 @@
-<div class="col text-center px-0">
+<div class="search_index text-center px-0">
   <%= form_tag({controller: '/pictures', action: :search }, method: :get) do %>
     <div class="form-group text-center">
         <label style="display: block;">地域</label>
@@ -66,6 +66,12 @@
     <button type="submit" class="btn">
       <div class="search"></div>
     </button>
+
+    <div class="search_footer">
+      <button type="submit" class="btn">
+        <div class="search"></div>
+      </button>
+    </div>
   <% end -%>
 </div>
 
