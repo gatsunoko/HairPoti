@@ -8,7 +8,7 @@ RSpec.describe LikesController, type: :controller do
         @user = create(:user)
         login_user @user
         10.times {
-          @picture = create(:picture, length: 'ショート', user_id: @user.id)
+          @picture = create(:picture, length: 'short', user_id: @user.id)
           create(:like, user_id: @user.id, picture_id: @picture.id)
         }
       end

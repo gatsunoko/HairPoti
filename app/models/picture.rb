@@ -20,16 +20,7 @@ class Picture < ApplicationRecord
     if municipalities.present?
       areas = Municipality.where(id: municipalities)
       prefecture = Prefecture.find(areas[0].prefecture_id).name
-      #prefecture = prefecture_ending(Prefecture.find(areas[0].prefecture_id).name)
-      if prefecture == '東京'
-        prefecture = prefecture+'都'
-      elsif prefecture == '大阪' || prefecture == '京都'
-        prefecture = prefecture+'府'
-      elsif prefecture == '北海道'
-        prefecture = prefecture
-      else
-        prefecture = prefecture+'県'
-      end
+      prefecture = self.prefecture_ending(prefecture)
 
       area_params = Array.new
       areas.each do |area|
@@ -55,5 +46,17 @@ class Picture < ApplicationRecord
 
   def like_user(user_id)
     likes.find_by(user_id: user_id)
+  end
+
+  def self.prefecture_ending(prefecture)
+    if prefecture == '東京'
+      return prefecture+'都'
+    elsif prefecture == '大阪' || prefecture == '京都'
+      return prefecture+'府'
+    elsif prefecture == '北海道'
+      return prefecture
+    else
+      return prefecture+'県'
+    end
   end
 end

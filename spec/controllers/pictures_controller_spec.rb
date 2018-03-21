@@ -38,21 +38,31 @@ RSpec.describe PicturesController, type: :controller do
 
     context 'search' do
       render_views
-      before(:each) do
-        @user = create(:user)
-        10.times {
-          @picture = create(:picture, length: 'ショート', user_id: @user.id)
-          create(:admin_picture_option, picture_id: @picture.id, shop_address: '愛知')
-
-          @picture = create(:picture, length: 'ロング', user_id: @user.id)  
-          create(:admin_picture_option, picture_id: @picture.id, shop_address: '愛知')
-        }
+      subject do
+        @user = create(:user, id: 1)
+        create(:stylist, user_id: @user.id, shop_address: '愛知')
+        create_list(:picture, record_count, length: length1)
+        create_list(:picture, record_count, length: length2)
       end
 
-      it 'エリアパラメーターが愛知で検索結果が12件以上ある場合は12件(kaminari 1ページ分)を取得してindexが表示できる' do
-        get 'search', params: { area: '愛知', length: [ 'ショート', 'ロング'] }
-        expect(assigns(:pictures).count).to eq per
-        expect(response).to render_template 'homes/index'
+      context 'エリアが愛知で長さがショートとロングがそれぞれ10件' do
+        let(:record_count) { 10 }
+        let(:length1) { 'short' }
+        let(:length2) { 'long' }
+
+        it 'エリアパラメーターが愛知で検索結果が12件以上ある場合は12件(kaminari 1ページ分)を取得してindexが表示できる' do
+          subject
+          get 'search', params: { area: '愛知', length: [ 'short', 'long'] }
+          expect(assigns(:pictures).count).to eq per
+          expect(response).to render_template 'homes/index'
+        end
+
+        it '長さがショートの件数が10件でエリア未指定の場合、ショートで検索すると10件表示される' do
+          subject
+          get 'search', params: { area: '愛知', length: [ 'short'] }
+          expect(assigns(:pictures).count).to eq 10
+          expect(response).to render_template 'homes/index'
+        end
       end
     end
   end
@@ -68,8 +78,8 @@ RSpec.describe PicturesController, type: :controller do
       render_views
       before(:each) do
         3.times {
-          @picture = create(:picture, length: 'ショート', user_id: @user.id)
-          @picture = create(:picture, length: 'ショート', user_id: @user2.id)
+          @picture = create(:picture, length: 'short', user_id: @user.id)
+          @picture = create(:picture, length: 'short', user_id: @user2.id)
         }        
       end
       it '自分が投稿した画像だけが表示される' do
@@ -110,8 +120,8 @@ RSpec.describe PicturesController, type: :controller do
       render_views
       before(:each) do
         3.times {
-          @picture = create(:picture, length: 'ショート', user_id: @user.id)
-          @picture = create(:picture, length: 'ショート', user_id: @user2.id)
+          @picture = create(:picture, length: 'short', user_id: @user.id)
+          @picture = create(:picture, length: 'short', user_id: @user2.id)
         }        
       end
       it 'すべてのユーザーが投稿した画像が表示される' do
