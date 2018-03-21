@@ -5,6 +5,10 @@ class Picture < ApplicationRecord
   validates :text, length: { maximum: 400 }
 
   belongs_to :user
+  belongs_to :prefecture
+  counter_culture :prefecture
+  belongs_to :municipality
+  counter_culture :municipality
   has_many :user_pictures, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_one :picture_option, class_name: 'Admin::PictureOption', dependent: :destroy

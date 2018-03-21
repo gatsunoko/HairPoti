@@ -20,6 +20,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def prefecture_ending(prefecture)
+    if prefecture == '東京'
+      return prefecture+'都'
+    elsif prefecture == '大阪' || prefecture == '京都'
+      return prefecture+'府'
+    elsif prefecture == '北海道'
+      return prefecture
+    else
+      return prefecture+'県'
+    end
+  end
+
   protected
     def configure_permitted_parameters
       added_attrs = [:name, :picture, :profile, :role]

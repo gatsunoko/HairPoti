@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180320231523) do
+ActiveRecord::Schema.define(version: 20180321212948) do
 
   create_table "admin_picture_options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "picture_id"
@@ -34,8 +34,9 @@ ActiveRecord::Schema.define(version: 20180320231523) do
     t.string   "name"
     t.integer  "order_num"
     t.integer  "prefecture_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "pictures_count", default: 0
   end
 
   create_table "pictures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -52,6 +53,8 @@ ActiveRecord::Schema.define(version: 20180320231523) do
     t.integer  "detail_count"
     t.integer  "likes_count",                   default: 0,    null: false
     t.integer  "gender",                                       null: false
+    t.integer  "prefecture_id"
+    t.integer  "municipality_id"
     t.index ["length"], name: "index_pictures_on_length", using: :btree
     t.index ["user_id"], name: "index_pictures_on_user_id", using: :btree
   end
@@ -68,8 +71,9 @@ ActiveRecord::Schema.define(version: 20180320231523) do
   create_table "prefectures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.integer  "order_num"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "pictures_count", default: 0
   end
 
   create_table "stylists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

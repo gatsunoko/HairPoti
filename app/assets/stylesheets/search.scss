@@ -16,12 +16,20 @@
     height: 56px;
     background: rgba(0,0,0,0.3);
   }
+  .municipality_name_0 {
+    color: gray;
+  }
 }
 @media screen and (max-width: 768px){
   .municipalities_check {
     margin-left: 15px;
-    span {
+    .municipality_name_0,
+    .municipality_name {
       font-size: 22px;
+    }
+    .municipality_count {
+      color: gray;
+      font-size: 16px;
     }
   }
   .search_footer {
@@ -29,6 +37,14 @@
   }
 }
 @media screen and (min-width: 769px) {
+  .municipality_name_0,
+  .municipality_name {
+    font-size: 16px;
+  }
+  .municipality_count {
+    color: gray;
+    font-size: 14px;
+  }
   .search_footer {
     visibility: hidden;
   }

@@ -1,10 +1,17 @@
 <% if @municipalities.present? %>
   <% @municipalities.each do |municipality| %>
     <div class="municipalities_check col-12 col-sm-3 text-left">
-      <label>
-        <%= check_box_tag 'municipalities[]', municipality.id %>
-        <span><%= municipality.name %></span>
-      </label>
+      <% if municipality.pictures_count > 0 %>
+        <label>
+          <%= check_box_tag 'municipalities[]', municipality.id %>
+          <span class="municipality_name"><%= municipality.name %></span><span class="municipality_count"> (<%= municipality.pictures_count %>)</span>
+        </label>
+      <% else %>
+        <label>
+          <%= check_box_tag 'municipalities[]', municipality.id, false, disabled: 'disabled' %>
+          <span class="municipality_name_0"><%= municipality.name %></span><span class="municipality_count"> (<%= municipality.pictures_count %>)</span>
+        </label>
+      <% end -%>
     </div>
   <% end -%>
 <% end -%>

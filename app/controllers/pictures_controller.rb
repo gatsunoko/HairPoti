@@ -5,6 +5,7 @@ class PicturesController < ApplicationController
   before_action :is_admin, only: [:bulk_new, :bulk_create]
 
   include ImageUpload
+  include MunicipalityWhere
 
   # GET /pictures
   # GET /pictures.json
@@ -67,7 +68,11 @@ class PicturesController < ApplicationController
     @picture.detail_count += 1 if params[:picture_front].present?
     @picture.detail_count += 1 if params[:picture_side].present?
     @picture.detail_count += 1 if params[:picture_back].present?
-    
+    #住所を確認して、prefecture_idとmunicipality_idを設定する
+    @picture.prefecture_id = prefecture_where(current_user.stylist.shop_address)
+    prefecture = prefecture_ending(Prefecture.find(@picture.prefecture_id).name)
+    @picture.municipality_id = municipality_where(current_user.stylist.shop_address, prefecture)
+
     respond_to do |format|
       if @picture.save
         if params[:picture_front].present?

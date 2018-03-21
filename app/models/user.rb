@@ -9,6 +9,7 @@ class User < ApplicationRecord
   validates :profile, length: { maximum: 1000 }
 
   has_many :likes
+  has_many :pictures
   has_one :stylist
   accepts_nested_attributes_for :stylist
 
