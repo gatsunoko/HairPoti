@@ -1,0 +1,17 @@
+<div class="stylist_show container">
+  <% if user_signed_in? && @user.id == current_user.id %>
+    <div class="text-center">
+      <%= link_to '編集', edit_user_registration_path(current_user.id), class: 'btn btn-primary' %>
+      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+    </div>
+  <% end -%>
+  <p class="stylist_name">ユーザーネーム:<%= @user.name %></p>
+  <% if @user.picture.present? %>
+    <div class="col-12 text-center">
+      <%= image_tag(display_picture(size: "m", name: @user.picture, dir: 'PROFILE_PICTURE_DIR'), alt: '画像') %>
+    </div>
+  <% else %>
+    <h3>プロフィール写真未設定</h3>
+  <% end -%>
+  <span class="profile"><%= simple_format(@user.profile, length: 100) %></span>
+</div>

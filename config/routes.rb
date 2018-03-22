@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   end
 
   resources :stylists, only: [:show, :edit, :update]
+  resources :customers, only: [:show]
   root 'homes#index'
   get 'homes/index'
   get 'homes/after_signup'
