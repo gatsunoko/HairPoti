@@ -48,6 +48,7 @@ gem 'rmagick'
 gem 'counter_culture', '~> 1.8'
 gem 'omniauth'
 gem 'omniauth-twitter'
+gem 'omniauth-instagram'
 
 group :production do
   gem 'aws-sdk', '1.61'
