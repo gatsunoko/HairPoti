@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PicturesController, type: :controller do
   describe 'ログインしていない場合' do
-    per = 12
+    per = 24
     context 'index' do
       before(:each) do
         get 'index'
@@ -45,8 +45,8 @@ RSpec.describe PicturesController, type: :controller do
         create_list(:picture, record_count, length: length2)
       end
 
-      context 'エリアが愛知で長さがショートとロングがそれぞれ10件' do
-        let(:record_count) { 10 }
+      context 'エリアが愛知で長さがショートとロングがそれぞれ15件' do
+        let(:record_count) { 15 }
         let(:length1) { 'short' }
         let(:length2) { 'long' }
 
@@ -57,10 +57,10 @@ RSpec.describe PicturesController, type: :controller do
           expect(response).to render_template 'homes/index'
         end
 
-        it '長さがショートの件数が10件でエリア未指定の場合、ショートで検索すると10件表示される' do
+        it '長さがショートの件数が10件でエリア未指定の場合、ショートで検索すると15件表示される' do
           subject
           get 'search', params: { area: '愛知', length: [ 'short'] }
-          expect(assigns(:pictures).count).to eq 10
+          expect(assigns(:pictures).count).to eq 15
           expect(response).to render_template 'homes/index'
         end
       end

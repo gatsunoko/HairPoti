@@ -5,6 +5,7 @@ module MunicipalityWhere
         return municipality.id
       end
     end
+    return nil
   end
 
   def prefecture_where(address)
@@ -13,5 +14,6 @@ module MunicipalityWhere
         return prefecture.id
       end
     end
+    return nil
   end
 end

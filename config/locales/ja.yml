@@ -65,3 +65,6 @@ ja:
         shop_name: '店名'
         shop_address: '住所'
         shop_phone_number: '電話番号'
+    errors:
+      messages:
+        record_invalid: 'バリデーションエラー'

@@ -5,9 +5,9 @@ class Picture < ApplicationRecord
   validates :text, length: { maximum: 400 }
 
   belongs_to :user
-  belongs_to :prefecture
+  belongs_to :prefecture, optional: true
   counter_culture :prefecture
-  belongs_to :municipality
+  belongs_to :municipality, optional: true
   counter_culture :municipality
   has_many :user_pictures, dependent: :destroy
   has_many :likes, dependent: :destroy

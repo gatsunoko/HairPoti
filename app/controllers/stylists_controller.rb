@@ -21,8 +21,8 @@ class StylistsController < ApplicationController
         if old_address != @user.stylist.shop_address
           @user.pictures.each do |picture|
             picture.prefecture_id = prefecture_where(@user.stylist.shop_address)
-            prefecture = prefecture_ending(Prefecture.find(picture.prefecture_id).name)
-            picture.municipality_id = municipality_where(@user.stylist.shop_address, prefecture)
+            prefecture = prefecture_ending(Prefecture.find(picture.prefecture_id).name) if picture.prefecture_id.present?
+            picture.municipality_id = municipality_where(@user.stylist.shop_address, prefecture) if picture.prefecture_id.present?
             picture.save
           end
         end
