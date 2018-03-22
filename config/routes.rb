@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'users/registrations', confirmations: 'users/confirmations', sessions: "users/sessions" }
+  devise_for :users, controllers: { registrations: 'users/registrations',
+                                    confirmations: 'users/confirmations',
+                                    sessions: "users/sessions",
+                                    omniauth_callbacks: 'users/omniauth_callbacks' }
   resources :pictures do
     collection do
       get :bulk_new

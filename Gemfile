@@ -46,6 +46,8 @@ gem 'bootstrap', '~> 4.0.0.beta2.1'
 gem 'browser'
 gem 'rmagick'
 gem 'counter_culture', '~> 1.8'
+gem 'omniauth'
+gem 'omniauth-twitter'
 
 group :production do
   gem 'aws-sdk', '1.61'

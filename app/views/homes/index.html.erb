@@ -12,6 +12,7 @@
   <% unless user_signed_in? %>
     <%= link_to 'ユーザー登録', new_user_registration_path, class: 'btn btn-info btn-lg' %>
     <%= link_to 'ログイン', new_user_session_path, class: 'btn btn-primary btn-lg' %>
+    <%= link_to 'ツイッターでログイン', user_twitter_omniauth_authorize_path, class: 'btn btn-primary btn-lg' %>
   <% end -%>
 <%
 =begin

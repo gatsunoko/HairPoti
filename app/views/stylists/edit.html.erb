@@ -1,9 +1,11 @@
 <%= form_for(@user, url: stylist_path(@user), html: { method: :patch }) do |f| %>
 
-  <div class="form-group col-sm-6 col-md-4">
-    <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, class: 'form-control' %>
-  </div>
+  <% if @user.provider.blank? %>
+    <div class="form-group col-sm-6 col-md-4">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+    </div>
+  <% end -%>
 
   <div class="form-group col-sm-6 col-md-4">
     <%= f.label :name %>
