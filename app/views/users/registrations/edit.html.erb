@@ -6,11 +6,11 @@
   <div class="form-group col-sm-8 col-md-6">
     <h4>ユーザータイプ</h4>
     <div class="custom-control custom-radio">
-      <%= f.radio_button :role, :user, id: :genre1, class: 'custom-control-input', checked: true %>
+      <%= f.radio_button :role, :user, id: :genre1, class: 'user_role_button custom-control-input', checked: true %>
       <label for="genre1" class="custom-control-label">お客さん</label>
     </div>
     <div class="custom-control custom-radio">
-      <%= f.radio_button :role, :stylist, id: :genre2, class: 'custom-control-input' %>
+      <%= f.radio_button :role, :stylist, id: :genre2, class: 'user_role_button custom-control-input' %>
       <label for="genre2" class="custom-control-label">スタイリスト</label>
     </div>
   </div>
@@ -45,22 +45,33 @@
     <input type="text" id="characnt" disabled="disabled">
   </div>
 
-  <%= f.fields_for :stylist do |s| %>
+  <div id="stylist_area" style="display: none;">
     <div class="form-group col-sm-8 col-md-6">
-      <%= s.label :shop_name %>
-      <%= s.text_field :shop_name, class: 'form-control' %>
+      <%= label_tag '店名' %>
+      <%= text_field_tag :shop_name, "", class: 'form-control' %>
     </div>
 
     <div class="form-group col-sm-11 col-md-9">
-      <%= s.label :shop_address %>
-      <%= s.text_field :shop_address, class: 'form-control' %>
+      <%= label_tag '住所' %>
+      <%= text_field_tag :shop_address, "", class: 'form-control' %>
     </div>
 
     <div class="form-group col-sm-6 col-md-4">
-      <%= s.label :shop_phone_number %>
-      <%= s.text_field :shop_phone_number, class: 'form-control' %>
+      <%= label_tag '電話番号' %>
+      <%= text_field_tag :shop_phone_number, "", class: 'form-control' %>
     </div>
-  <% end -%>
+  </div>
+
+  <script>
+    $('.user_role_button').change(function() {
+      if($(this).val() == 'stylist') {
+        $('#stylist_area').css('display', 'block');
+      } else {
+        $('#stylist_area').css('display', 'none');
+      }
+    });
+  </script>
+
 <%
 =begin
 %>

@@ -30,7 +30,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
         @user.save
       end
       #ユーザータイプをユーザーからスタイリストに変更したら、スタイリスト用の子テーブルを追加
-      Stylist.create(user_id: resource.id) if old_role == 'user' && resource.role == 'stylist'
+      if old_role == 'user' && resource.role == 'stylist'
+        Stylist.create(user_id: resource.id,
+          shop_name: params[:shop_name],
+          shop_address: params[:shop_address],
+          shop_phone_number: params[:shop_phone_number])
+      end
     end
   end
 

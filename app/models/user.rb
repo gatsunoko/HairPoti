@@ -8,9 +8,9 @@ class User < ApplicationRecord
 
   validates :profile, length: { maximum: 1000 }
 
-  has_many :likes
-  has_many :pictures
-  has_one :stylist
+  has_many :likes, dependent: :destroy
+  has_many :pictures, dependent: :destroy
+  has_one :stylist, dependent: :destroy
   accepts_nested_attributes_for :stylist
 
   enum role: { user: 1, stylist: 2, admin: 3 }
