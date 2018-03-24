@@ -75,6 +75,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
   protected
+    def after_update_path_for(resource)
+      user_path(resource)
+    end
+  
     def after_inactive_sign_up_path_for(resource)
       homes_after_signup_path
     end

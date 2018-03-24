@@ -3,6 +3,8 @@ Rails.application.routes.draw do
                                     confirmations: 'users/confirmations',
                                     sessions: "users/sessions",
                                     omniauth_callbacks: 'users/omniauth_callbacks' }
+  resources :users, :only => [:index, :show]
+  
   resources :pictures do
     collection do
       get :bulk_new
@@ -30,8 +32,8 @@ Rails.application.routes.draw do
     delete 'administrator/bulk_destroy'
   end
 
-  resources :stylists, only: [:show, :edit, :update]
-  resources :customers, only: [:show]
+  resources :stylists, only: [:edit, :update]
+  
   root 'homes#index'
   get 'homes/index'
   get 'homes/after_signup'

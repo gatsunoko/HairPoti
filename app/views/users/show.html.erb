@@ -1,0 +1,40 @@
+<div class="stylist_show container">
+  <% if user_signed_in? && @user.id == current_user.id %>
+    <div class="text-center">
+      <% if @user.stylist? %>
+        <%= link_to '編集', edit_stylist_path(current_user.id), class: 'btn btn-primary' %>
+      <% else %>
+        <%= link_to '編集', edit_user_registration_path(current_user.id), class: 'btn btn-primary' %>
+      <% end -%>
+      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+    </div>
+  <% end -%>
+  <p class="stylist_name">ユーザーネーム:<%= @user.name %></p>
+  <% if @user.picture.present? %>
+    <div class="col-12 text-center">
+      <%= image_tag(display_picture(size: "m", name: @user.picture, dir: 'PROFILE_PICTURE_DIR'), alt: '画像') %>
+    </div>
+  <% end -%>
+  <span class="profile"><%= simple_format(@user.profile, length: 100) %></span>
+  <% if @user.stylist? %>
+    <div class="shop_area">
+      <p class="shop_name">店名:<%= @user.stylist.shop_name %></p>
+      <p>住所:<%= @user.stylist.shop_address %></p>
+      <p>電話番号:<%= @user.stylist.shop_phone_number %></p>
+    </div>
+  <% end -%>
+</div>
+
+<% if @user.stylist? %>
+  <div id="top_contents">
+    <%= render 'homes/news', pictures: @pictures %>
+  </div>
+
+  <%= render 'homes/modal_window' %>
+
+  <div class="navigation" style="visibility: hidden;">
+    <%= paginate @pictures %>
+  </div>
+  <%# 無限スクロールのJS path の中の append の部分を追加する %>
+  <%= render 'homes/infinite_scroll', pictures: @pictures %>
+<% end -%>
