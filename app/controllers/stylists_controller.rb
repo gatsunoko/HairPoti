@@ -3,11 +3,6 @@ class StylistsController < ApplicationController
   include ImageUpload
   include MunicipalityWhere
 
-  def show
-    @user = User.find params[:id]
-    @pictures = Picture.where(user_id: params[:id]).includes(:picture_details).order(id: :desc).page(params[:page]).per(24)
-  end
-
   def edit
     @user = User.find current_user.id
   end
