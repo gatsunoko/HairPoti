@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     sequence(:email, 1) {|n|"example#{n}@email.com"}
     role 2

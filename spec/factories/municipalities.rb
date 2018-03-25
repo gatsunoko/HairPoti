@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :municipality do
     name "MyString"
     order_num 1

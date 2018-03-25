@@ -30,7 +30,7 @@ ActiveRecord::Migration.maintain_test_schema!
 
 #ActiveRecord::Base.logger = Logger.new(STDOUT) #RspecのSQLログ出力
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods #FactoryGirlを省略形でかけるようにする
+  config.include FactoryBot::Syntax::Methods #FactoryBotを省略形でかけるようにする
 
   config.include Devise::Test::ControllerHelpers, type: :controller #RspecでDeviseが使えるようにする
   config.include Devise::Test::ControllerHelpers, type: :view       #RspecでDeviseが使えるようにする

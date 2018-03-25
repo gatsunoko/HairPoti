@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :pictures_picture_detail, class: 'Pictures::PictureDetail' do
     name "MyString"
     genre 1

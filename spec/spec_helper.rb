@@ -16,9 +16,9 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.before(:all) do
-      FactoryGirl.factories.clear
-      FactoryGirl.sequences.clear
-      FactoryGirl.find_definitions
+      FactoryBot.factories.clear
+      FactoryBot.sequences.clear
+      FactoryBot.find_definitions
   end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
