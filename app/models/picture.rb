@@ -48,6 +48,12 @@ class Picture < ApplicationRecord
     end
   }
 
+  scope :gender_search, ->(gender) {
+    if gender.present?
+      where(gender: gender)
+    end
+  }
+
   def like_user(user_id)
     likes.find_by(user_id: user_id)
   end
