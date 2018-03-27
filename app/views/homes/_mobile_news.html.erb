@@ -11,7 +11,9 @@
           <span class="_current"><%= picture.id %></span>
           <span class="_next"><%= next_id %></span>
         </div>
-        <span onclick="picture_big('link_<%= picture.id %>')" class="link_span" id="link_<%= picture.id %>"><%= image_tag(picture.url + 'media/?size=t') %></span>
+        <span onclick="picture_big('link_<%= picture.id %>')" class="link_span" id="link_<%= picture.id %>">
+          <%= image_tag display_picture(size: "m", name: picture.picture_details[0].name, dir: 'HAIR_PICTURE_DIR') %>
+        </span>
       </div>
     </div>
     <div class="text_area">
@@ -26,10 +28,18 @@
           </div>
         <% elsif picture.user.stylist.present? %>
           <p class="stylist_name">スタイリスト:<%= picture.user.name %></p>
-            <spam class="profile"><%= simple_format(picture.user.profile) %></span>
-            <div class="shop_area">
-              <p class="shop_name">店名:<%= picture.user.stylist.shop_name %></p>
+          <% if picture.user.picture.present? %>
+            <div class="col-12 text-center">
+              <%= link_to 'プロフィール', user_path(picture.user), class: 'btn btn-primary btn-lg my-2' %>              
+              <%= image_tag(display_picture(size: "s", name: picture.user.picture, dir: 'PROFILE_PICTURE_DIR'), alt: '画像') %>
             </div>
+          <% end -%>
+          <span class="profile"><%= simple_format(truncate(picture.user.profile, length: 100)) %></span>
+          <div class="shop_area">
+            <p class="shop_name">店名:<%= picture.user.stylist.shop_name %></p>
+            <p>住所:<%= picture.user.stylist.shop_address %></p>
+            <p>電話番号:<%= picture.user.stylist.shop_phone_number %></p>
+          </div>
         <% end -%>
       </div>
       <p>長さ:<%= length_view(picture.length) %></p>

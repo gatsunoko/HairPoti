@@ -24,6 +24,7 @@ class PicturesController < ApplicationController
                         .gender_search(params[:gender])
                         .order(id: :desc)
                         .includes(:picture_details)
+                        .includes(:likes)
                         .page(params[:page]).per(24)
     # if browser.device.mobile?
     #   render 'homes/mobile_index' and return

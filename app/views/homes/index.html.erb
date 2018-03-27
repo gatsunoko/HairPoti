@@ -129,6 +129,14 @@
   <%# infinite_scrollでの無限スクロールではリンクパラメータの最後がページ番号でないといけない為、ページ番号の後のパラメータを削除するjs %>
   <script>
     $(".navigation a[rel=next]")[0]['href'] = $(".navigation a[rel=next]")[0]['href'].replace(/&utf.*/,"");
+
+    <%# おすすめの最後を新着の最初のprevに %>
+    prev = $("#news_0 .9 ._current").text();
+    current = $("#news_1 .1 ._current").text()
+    $("#news_1 .1 ._prev").text(prev);
+    $("#news_0 .9 ._next").text(current);
+    $("#picture_link_"+current).attr('data-href', $("#picture_link_"+current).attr('data-href')+"&prev_id="+prev)
+    $("#picture_link_"+prev).attr('data-href', $("#picture_link_"+prev).attr('data-href')+"&next_id="+current)
   </script>
 </div>
 
