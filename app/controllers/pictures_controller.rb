@@ -148,7 +148,7 @@ class PicturesController < ApplicationController
       picture_destroy(dir: ENV['HAIR_PICTURE_DIR'], picture: detail.name)
     end
     @picture.destroy
-    redirect_to root_path
+    redirect_to user_path(current_user.id) and return
     # respond_to do |format|
     #   format.html { redirect_back(fallback_location: root_path) } and return
     #   format.json { head :no_content }
