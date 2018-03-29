@@ -49,7 +49,7 @@ ja:
     attributes:
       user:
         email: 'メールアドレス'
-        name: 'ユーザーネーム'
+        name: '名前'
         profile: 'プロフィール'
         picture: 'プロフィール写真'
         password: 'パスワード'

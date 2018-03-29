@@ -1,0 +1,13 @@
+<div class="like_persons_area row">
+  <div class="close_button col-12 py-2">
+    <input type="button" class="btn btn-primary" value="閉じる" onclick="close_like_persons(<%= picture_id %>)">
+  </div>
+  <% likes.each do |like| %>
+    <div class="user col-12 text-left">
+      <%= link_to user_path(like.user) do %>
+        <%= image_tag(user_image_display(path: like.user.picture, size: "s", dir: 'PROFILE_PICTURE_DIR')) %>
+        <p class="name"><%= like.user.name %></p>
+      <% end -%>
+    </div>
+  <% end -%>
+</div>

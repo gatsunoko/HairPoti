@@ -9,12 +9,11 @@
       <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
     </div>
   <% end -%>
-  <p class="stylist_name">ユーザーネーム:<%= @user.name %></p>
-  <% if @user.picture.present? %>
-    <div class="col-12 text-center">
-      <%= image_tag(display_picture(size: "m", name: @user.picture, dir: 'PROFILE_PICTURE_DIR'), alt: '画像') %>
-    </div>
-  <% end -%>
+  <p class="stylist_name">名前:<%= @user.name %></p>
+  <div class="col-12 text-center px-0">
+    <%= image_tag(user_image_display(path: @user.picture, size: "m", dir: 'PROFILE_PICTURE_DIR')) %>
+  </div>
+
   <span class="profile"><%= simple_format(@user.profile, length: 100) %></span>
   <% if @user.stylist? %>
     <div class="shop_area">

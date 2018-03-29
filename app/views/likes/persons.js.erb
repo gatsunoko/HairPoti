@@ -1,0 +1,3 @@
+$('#like_users_display<%= @id %> a').css('pointer-events', 'none');
+$('#like_area<%= @id %>').append("<%= escape_javascript(render 'persons', likes: @likes, picture_id: @id) %>");
+swiper.update();

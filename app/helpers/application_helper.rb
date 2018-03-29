@@ -11,6 +11,14 @@ module ApplicationHelper
     end
   end
 
+  def user_image_display(args)
+    if args[:path].present?
+      return display_picture(size: args[:size], name: args[:path], dir: args[:dir])
+    else
+      return 'user_no_img.jpg'
+    end
+  end
+
   def picture_genre(genre)
     if genre == 'picture_front'
       return 'フロント'

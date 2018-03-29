@@ -16,4 +16,9 @@ class LikesController < ApplicationController
     end
     @picture = Picture.find params[:id]
   end
+
+  def persons
+    @id = params[:id]
+    @likes = Like.where(picture_id: params[:id]).order(created_at: :desc).includes(:user)
+  end
 end
