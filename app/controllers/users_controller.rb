@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :is_admin, only: [:index]
   before_action :set_user, only: [:show, :password_edit, :password_update]
+  before_action :not_omniauthable, only: [:password_edit, :password_update]
   def index
     @users = User.all.page(params[:page]).per(20)
   end
@@ -30,5 +31,11 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:password, :password_confirmation)
+    end
+
+    def not_omniauthable
+      if @user.provider.present?
+        redirect_to root_path and return
+      end
     end
 end
