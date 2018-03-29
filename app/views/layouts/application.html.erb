@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>HairPoti</title>
+    <title>へあぽち</title>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="description" content="ヘアカット画像、ヘアスタイル画像のアップロードサービス、ヘアスタイルの検索等ができます。" />
+    <meta name="keywords" content="美容師,美容院,スタイリスト,ヘアカタログ,ヘアスタイル,ヘアカット" />
+
+    <% if /hair-poti.net/ =~ request.url  %>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116557740-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-116557740-1');
+      </script>
+    <% end %>
   </head>
 
   <body>
