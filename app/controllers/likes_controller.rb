@@ -1,6 +1,6 @@
 class LikesController < ApplicationController
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:like, :likes]
 
   def likes
     @likes = Like.where('user_id = ?', current_user.id).order(created_at: :desc).includes(:picture).page(params[:page]).per(24)
