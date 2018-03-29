@@ -3,7 +3,12 @@ Rails.application.routes.draw do
                                     confirmations: 'users/confirmations',
                                     sessions: "users/sessions",
                                     omniauth_callbacks: 'users/omniauth_callbacks' }
-  resources :users, :only => [:index, :show]
+  resources :users, :only => [:index, :show] do
+    member do
+      get :password_edit
+      patch :password_update
+    end
+  end
   
   resources :pictures do
     collection do

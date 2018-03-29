@@ -1,3 +1,8 @@
+<h2>ユーザー情報変更</h2>
+
+<div class="col-12 py-3">
+  <%= link_to 'パスワード変更', password_edit_user_path(@user) %>
+</div>
 <%= form_for(@user, url: stylist_path(@user), html: { method: :patch }) do |f| %>
 
   <% if @user.provider.blank? %>
