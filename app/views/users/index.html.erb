@@ -1,10 +1,15 @@
 <% @users.each do |user| %>
   <div class="admin_users">
-    <P>ID        :<%= user.id %></P>
-    <P>名前      :<%= user.name %></P>
-    <P>ユーザータイプ:<%= user.role %></P>
-    <P>プロバイダー :<%= user.provider %></P>
-    <P>メールアドレス:<%= user.email %></P>
+    <div style="display: inline-block;">
+      <%= image_tag(user_image_display(path: user.picture, size: "m", dir: 'PROFILE_PICTURE_DIR')) %>
+    </div>
+    <div style="display: inline-block;">
+      <P>ID        :<%= user.id %></P>
+      <P>名前      :<%= user.name %></P>
+      <P>ユーザータイプ:<%= user.role %></P>
+      <P>プロバイダー :<%= user.provider %></P>
+      <P>メールアドレス:<%= user.email %></P>
+    </div>
 
     <%= link_to '詳細', user_path(user) %>
   </div>
