@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   resources :follows, only: [:index] do
     member do
       get :follow
+      get :followers
+      get :follows
     end
   end
 

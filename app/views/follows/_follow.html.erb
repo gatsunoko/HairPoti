@@ -1,44 +1,64 @@
 <% if user_signed_in? %>
   <% unless user.id == current_user.id %>
-    <div class="like text-center" id="like_area">
+    <div class="follow_area text-center" id="like_area">
       <% if user.follow_user(current_user.id) %>
         <%= link_to follow_follow_path(id: user.id), remote: true do %>
-          <P>フォローをやめる</P>
+          <P class="follow_button">フォローをやめる</P>
         <% end -%>
-        <span id="like_users_display">
+        <span id="follow_users_display">
           <% if user.follower.count > 0 %>
-            <p class="likes_count"><%= user.follower_count %>人のフォロワー</p>
+            <%= link_to followers_follow_path(user.id) do %>
+              <p class="follow_count"><%= user.follower_count %>人のフォロワー</p>
+            <% end -%>
           <% end -%>
-          <p class="likes_count"><%= user.follows_count %>人をフォローしています</p>
+          <% if user.follows.count > 0 %>
+            <%= link_to follows_follow_path(user.id) do %>
+              <p class="follow_count"><%= user.follows_count %>人をフォローしています</p>
+            <% end -%>
+          <% end -%>
         </span>
       <% else %>
         <%= link_to follow_follow_path(id: user.id), remote: true do %>
-          <p>フォローする</p>
+          <p class="follow_button">フォローする</p>
         <% end -%>
-        <span id="like_users_display">
+        <span id="follow_users_display">
           <% if user.follower.count > 0 %>
-            <p class="likes_count"><%= user.follower_count %>人のフォロワー</p>
+            <%= link_to followers_follow_path(user.id) do %>
+              <p class="follow_count"><%= user.follower_count %>人のフォロワー</p>
+            <% end -%>
           <% end -%>
-          <p class="likes_count"><%= user.follows_count %>人をフォローしています</p>
+          <% if user.follows.count > 0 %>
+            <%= link_to follows_follow_path(user.id) do %>
+              <p class="follow_count"><%= user.follows_count %>人をフォローしています</p>
+            <% end -%>
+          <% end -%>
         </span>
       <% end -%>
     </div>
   <% else %>
-    <div class="like text-center" id="like_area">
-      <span id="like_users_display">
+    <div class="follow_area text-center" id="like_area">
+      <span id="follow_users_display">
         <% if user.follower.count > 0 %>
-          <p class="likes_count"><%= user.follower_count %>人のフォロワー</p>
+          <%= link_to followers_follow_path(user.id) do %>
+            <p class="follow_count"><%= user.follower_count %>人のフォロワー</p>
+          <% end -%>
         <% end -%>
-        <p class="likes_count"><%= user.follows_count %>人をフォローしています</p>
+        <% if user.follows.count > 0 %>
+          <%= link_to follows_follow_path(user.id) do %>
+            <p class="follow_count"><%= user.follows_count %>人をフォローしています</p>
+          <% end -%>
+        <% end -%>
       </span> 
     </div>
   <% end -%>
 <% else %>
-  <div class="like text-center" id="like_area">
+  <div class="follow_area text-center" id="like_area">
     <p>ログインするとフォローできます</p>
-    <span id="like_users_display">
+    <span id="follow_users_display">
       <% if user.follower.count > 0 %>
-        <p class="likes_count"><%= user.follower_count %>人のフォロワー</p>
+        <%= link_to followers_follow_path(user.id) do %>
+          <p class="follow_count"><%= user.follower_count %>人のフォロワー</p>
+        <% end -%>
       <% end -%>
     </span> 
   </div>
