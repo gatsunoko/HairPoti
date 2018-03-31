@@ -8,11 +8,11 @@ module ImageUpload
     if ENV['AWS_S3'].present?
       name = 'string'
 
-      unless file = params[args[:file]].nil?
+      unless file = args[:file].nil?
         now = Time.now.strftime('%Y%m%d%H%M%S').to_s
         s3 = AWS::S3.new
         bucket = s3.buckets[ENV["AWS_S3_BUCKET"]]
-        file = params[args[:file]]
+        file = args[:file]
         name = file.original_filename 
         ext = name[name.rindex('.') + 1, 4].downcase
 
@@ -48,9 +48,9 @@ module ImageUpload
       end
     else
       name = 'string'
-      unless params[args[:file]].nil?
+      unless args[:file].nil?
         now = Time.now.strftime('%Y%m%d%H%M%S').to_s
-        file = params[args[:file]]
+        file = args[:file]
         name = file.original_filename 
         ext = name[name.rindex('.') + 1, 4].downcase
         perms = ['.jpg', '.jpeg', '.gif', '.png']

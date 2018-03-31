@@ -62,6 +62,27 @@
   height: auto;
 }
 
+#file_field_area {
+  .add_button {
+    color: white;
+    padding-top: 5px;
+  }
+  .file1,
+  .button_2 {
+    display: block;
+  }
+  .button_1,
+  .file_2,
+  .file_3,
+  .file_4,
+  .file_5,
+  .button_3,
+  .button_4,
+  .button_5 {
+    display: none;
+  }
+}
+
 .picture_area {
   .length,
   .color {

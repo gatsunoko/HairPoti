@@ -70,9 +70,9 @@ class PicturesController < ApplicationController
     @picture.user_id = current_user.id
     #写真が一枚でもあるか確認、detail_countが1以上じゃないとvalidationに失敗する。
     @picture.detail_count = 0
-    @picture.detail_count += 1 if params[:picture_front].present?
-    @picture.detail_count += 1 if params[:picture_side].present?
-    @picture.detail_count += 1 if params[:picture_back].present?
+    params[:picture_detail].each do |key, value|
+      @picture.detail_count += 1 if value[:file].present?
+    end
     #住所を確認して、prefecture_idとmunicipality_idを設定する
     if current_user.stylist.shop_address.present?
       @picture.prefecture_id = prefecture_where(current_user.stylist.shop_address)
@@ -82,17 +82,11 @@ class PicturesController < ApplicationController
 
     respond_to do |format|
       if @picture.save
-        if params[:picture_front].present?
-          picture_front = picture_up(file: "picture_front", picture_id: @picture.id, name: "front", dir: ENV['HAIR_PICTURE_DIR'])
-          Pictures::PictureDetail.create(name: picture_front, user_id: current_user.id, picture_id: @picture.id, genre: 'picture_front')
-        end
-        if params[:picture_side].present?
-          picture_side = picture_up(file: "picture_side", picture_id: @picture.id, name: "side", dir: ENV['HAIR_PICTURE_DIR'])
-          Pictures::PictureDetail.create(name: picture_side, user_id: current_user.id, picture_id: @picture.id, genre: 'picture_side')
-        end
-        if params[:picture_back].present?
-          picture_back = picture_up(file: "picture_back", picture_id: @picture.id, name: "back", dir: ENV['HAIR_PICTURE_DIR'])
-          Pictures::PictureDetail.create(name: picture_back, user_id: current_user.id, picture_id: @picture.id, genre: 'picture_back')
+        params[:picture_detail].each do |key, value|
+          if value[:file].present?
+            picture_front = picture_up(file: params[:picture_detail][key][:file], picture_id: @picture.id, name: value[:genre], dir: ENV['HAIR_PICTURE_DIR'])
+            Pictures::PictureDetail.create(name: picture_front, user_id: current_user.id, picture_id: @picture.id, genre: value[:genre])
+          end
         end
 
         redirect_to root_path and return

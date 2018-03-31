@@ -24,7 +24,7 @@ class StylistsController < ApplicationController
 
         if params[:picture].present?
           picture_destroy(dir: ENV['PROFILE_PICTURE_DIR'], picture: @user.picture)
-          @user.picture = picture_up(file: "picture", picture_id: @user.id, name: "profile", dir: ENV['PROFILE_PICTURE_DIR'])
+          @user.picture = picture_up(file: params[:picture], picture_id: @user.id, name: "profile", dir: ENV['PROFILE_PICTURE_DIR'])
 
           @user.save
         end

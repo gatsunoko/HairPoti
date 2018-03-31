@@ -26,7 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if params[:picture].present?
         @user = User.find resource.id
         picture_destroy(dir: ENV['PROFILE_PICTURE_DIR'], picture: @user.picture)
-        @user.picture = picture_up(file: "picture", picture_id: @user.id, name: "profile", dir: ENV['PROFILE_PICTURE_DIR'])
+        @user.picture = picture_up(file: params[:picture], picture_id: @user.id, name: "profile", dir: ENV['PROFILE_PICTURE_DIR'])
         @user.save
       end
       #ユーザータイプをユーザーからスタイリストに変更したら、スタイリスト用の子テーブルを追加
