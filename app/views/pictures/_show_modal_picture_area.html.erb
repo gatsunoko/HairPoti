@@ -45,6 +45,9 @@
             <%= image_tag(display_picture(size: "s", name: picture.user.picture, dir: 'PROFILE_PICTURE_DIR'), alt: '画像') %>
           </div>
         <% end -%>
+        <div class="follow_<%= picture.user.id %>">
+          <%= render 'follows/follow', user: picture.user %>
+        </div>
         <span class="profile"><%= simple_format(truncate(picture.user.profile, length: 100)) %></span>
         <div class="shop_area">
           <p class="shop_name">店名:<%= picture.user.stylist.shop_name %></p>

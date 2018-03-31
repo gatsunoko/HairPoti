@@ -1,0 +1,1 @@
+$('.follow_<%= @user.id.to_s %>').html("<%= escape_javascript(render 'follows/follow', user: @user) %>");

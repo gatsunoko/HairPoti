@@ -10,6 +10,8 @@ class User < ApplicationRecord
 
   has_many :likes, dependent: :destroy
   has_many :pictures, dependent: :destroy
+  has_many :follower, class_name: 'Follow', foreign_key: 'stylist_id', dependent: :destroy
+  has_many :follows, class_name: 'Follow', foreign_key: 'user_id', dependent: :destroy
   has_one :stylist, dependent: :destroy
   accepts_nested_attributes_for :stylist
 
@@ -33,6 +35,10 @@ class User < ApplicationRecord
     end
  
     user
+  end
+
+  def follow_user(user_id)
+    return follower.exists?(user_id: user_id)
   end
 
   private

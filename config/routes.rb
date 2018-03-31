@@ -26,6 +26,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :follows, only: [:index] do
+    member do
+      get :follow
+    end
+  end
+
   namespace 'admin' do
     get 'administrator/index'
     get 'administrator/blank_pictures'

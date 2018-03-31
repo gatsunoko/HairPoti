@@ -8,7 +8,6 @@ class LikesController < ApplicationController
 
   def like
     if Like.where('user_id = ? AND picture_id = ?', current_user.id, params[:id]).count == 0
-      like = Like.where('user_id = ? AND picture_id = ?', current_user.id, params[:id]).first
       Like.create(user_id: current_user.id, picture_id: params[:id])
     else
       like = Like.where('user_id = ? AND picture_id = ?', current_user.id, params[:id])

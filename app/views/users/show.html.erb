@@ -25,6 +25,10 @@
 </div>
 
 <% if @user.stylist? %>
+  <div class="follow_<%= @user.id %>">
+    <%= render 'follows/follow', user: @user %>
+  </div>
+
   <div id="top_contents">
     <%= render 'homes/news', pictures: @pictures %>
   </div>
