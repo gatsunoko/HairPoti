@@ -12,8 +12,6 @@ Rails.application.routes.draw do
   
   resources :pictures do
     collection do
-      get :bulk_new
-      post :bulk_create
       get :short_ranking
       get :midiamu_ranking
       get :long_ranking
@@ -31,8 +29,6 @@ Rails.application.routes.draw do
   namespace 'admin' do
     get 'administrator/index'
     get 'administrator/blank_pictures'
-    get 'administrator/multiple_urls'
-    get 'administrator/multiple_url'
     get 'administrator/image_present'
     delete 'administrator/bulk_destroy'
   end

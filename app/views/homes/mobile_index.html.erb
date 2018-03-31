@@ -44,19 +44,11 @@
           <%= render 'likes/like', picture: picture %>
 
           <div class="picture_show_stylist_profile_area">
-            <% if picture.user.admin? && picture.picture_option.present? %>
-              <p class="stylist_name">スタイリスト:<%= picture.picture_option.name %></p>
-              <spam class="profile"><%= simple_format(picture.picture_option.profile) %></span>
-              <div class="shop_area">
-                <p class="shop_name">店名:<%= picture.picture_option.shop_name %></p>
-              </div>
-            <% elsif picture.user.stylist.present? %>
-              <p class="stylist_name">スタイリスト:<%= picture.user.name %></p>
-                <spam class="profile"><%= simple_format(picture.user.profile) %></span>
-                <div class="shop_area">
-                  <p class="shop_name">店名:<%= picture.user.stylist.shop_name %></p>
-                </div>
-            <% end -%>
+            <p class="stylist_name">スタイリスト:<%= picture.user.name %></p>
+            <spam class="profile"><%= simple_format(picture.user.profile) %></span>
+            <div class="shop_area">
+              <p class="shop_name">店名:<%= picture.user.stylist.shop_name %></p>
+            </div>
           </div>
           <p>長さ:<%= length_view(picture.length) %></p>
           <p>カラー:<%= color_view(picture.color) %></p>

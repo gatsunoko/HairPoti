@@ -11,9 +11,7 @@ class Picture < ApplicationRecord
   counter_culture :municipality
   has_many :user_pictures, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_one :picture_option, class_name: 'Admin::PictureOption', dependent: :destroy
   has_many :picture_details, class_name: 'Pictures::PictureDetail', dependent: :destroy
-  accepts_nested_attributes_for :picture_option
   accepts_nested_attributes_for :picture_details
 
   enum gender: { male: 1, female: 2 }
@@ -33,11 +31,7 @@ class Picture < ApplicationRecord
 
         area_params.concat(s)
       end
-
-      # a = where('admin_picture_options.shop_address like ?', area+'%')
-      #     .joins(:picture_option).references(:picture_option).pluck(:id)
-
-      # s.concat(a)
+      
       where(id: area_params)
     end
   }

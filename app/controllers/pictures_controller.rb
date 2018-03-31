@@ -1,8 +1,8 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :show_modal, :prev, :next, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:index, :new, :create, :bulk_new, :bulk_create, :collect_new, :collect_call, :edit, :update, :destroy, :my_point_ranking, :my_histories]
+  before_action :authenticate_user!, only: [:index, :new, :create, :collect_new, :collect_call, :edit, :update, :destroy, :my_point_ranking, :my_histories]
   before_action :is_mine, only: [:edit, :update, :destroy]
-  before_action :is_admin, only: [:bulk_new, :bulk_create]
+  before_action :is_stylist, only: [:new, :create]
 
   include ImageUpload
   include MunicipalityWhere
@@ -56,12 +56,10 @@ class PicturesController < ApplicationController
   # GET /pictures/new
   def new
     @picture = Picture.new
-    @picture.build_picture_option if current_user.admin?
   end
 
   # GET /pictures/1/edit
   def edit
-    @picture.build_picture_option if current_user.admin? && @picture.picture_option.blank?
   end
 
   # POST /pictures
@@ -100,29 +98,6 @@ class PicturesController < ApplicationController
         redirect_to root_path and return
       else
         render 'new' and return
-      end
-    end
-  end
-
-  def bulk_new
-  end
-
-  def bulk_create
-    #raise.params.inspect
-    urls = params[:urls]
-    urls = urls.gsub(/\r\n|\r|\n/, ",")#改行をカンマに変更
-    urls = urls.split(",")#ひとつの文字列だったspをカンマで区切って配列にする
-    @success = 0 #登録の成功した数をカウントする変数
-    @fail = 0 #登録の失敗した数をカウントする変数
-
-    urls.each do |url|
-      url.sub!(/\?.*/, "")
-      picture = Picture.new(url: url, user_id: current_user.id, length: params[:length])
-      picture.build_picture_option(name: params[:name], profile: params[:profile], shop_name: params[:shop_name], shop_address: params[:shop_address], shop_phone_number: params[:shop_phone_number]) if current_user.admin?
-      if picture.save
-        @success += 1 
-      else
-        @fail += 1
       end
     end
   end
@@ -191,6 +166,6 @@ class PicturesController < ApplicationController
     end
 
     def picture_params
-      params.require(:picture).permit(:length, :color, :text, :gender, picture_option_attributes: [:id, :destroy, :name, :profile, :shop_name, :shop_address, :shop_phone_number])
+      params.require(:picture).permit(:length, :color, :text, :gender)
     end
 end

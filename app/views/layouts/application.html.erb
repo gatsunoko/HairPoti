@@ -52,7 +52,7 @@
                     </li>
                   </div>
                 <% end -%>
-                <% if current_user.stylist? || current_user.admin? %>
+                <% if current_user.stylist? %>
                   <div class="col text-center px-0">
                     <li class="navbar-item text-center text-center px-0 py-2">
                       <%= link_to new_picture_path do %>

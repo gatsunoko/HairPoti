@@ -26,11 +26,15 @@ RSpec.describe PicturesController, type: :controller do
         expect(assigns(:picture)).to eq @picture #アクションが正常に実行
         expect(response).to render_template :show #テンプレートが正常に表示
       end
+    end
 
-      it '管理者が投稿したshowを表示できる' do 
-        @user = create(:user, role: 'admin', admin: true)
+    context 'show_modal' do
+      render_views
+      it 'スタイリストが投稿したshowをmodalで表示できる' do 
+        @user = create(:user, role: 'stylist', admin: false)
+        create(:stylist, user_id: @user.id)
         @picture = create(:picture, user_id: @user.id)
-        get 'show', params: { id: @picture.id }
+        get 'show_modal', params: { id: @picture.id }
         expect(assigns(:picture)).to eq @picture #アクションが正常に実行
         expect(response).to render_template :show #テンプレートが正常に表示
       end
@@ -97,16 +101,6 @@ RSpec.describe PicturesController, type: :controller do
         expect(response).to render_template :new
       end
     end
-
-    context 'bulk_new' do
-      render_views
-      it 'bulk_newにアクセスできない' do
-        get 'bulk_new'
-        expect(response.status).to be >= 300
-        expect(response.status).to be < 400
-        expect(response).to_not render_template :bulk_new
-      end
-    end
   end
 
   describe '管理者としてログインしている場合' do
@@ -133,19 +127,11 @@ RSpec.describe PicturesController, type: :controller do
 
     context 'new' do
       render_views
-      it 'newにアクセスできる' do
+      it 'newにアクセスできない' do
         get 'new'
-        expect(response.status).to eq 200
-        expect(response).to render_template :new
-      end
-    end
-
-    context 'bulk_new' do
-      render_views
-      it 'bulk_newにアクセスできる' do
-        get 'bulk_new'
-        expect(response.status).to eq 200
-        expect(response).to render_template :bulk_new
+        expect(response.status).to be >= 300
+        expect(response.status).to be < 400
+        expect(response).to_not render_template :new
       end
     end
   end

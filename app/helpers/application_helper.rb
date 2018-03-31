@@ -26,8 +26,8 @@ module ApplicationHelper
       return 'サイド'
     elsif genre == 'picture_back'
       return 'バック'
-    elsif genre == 'overroll'
-      return '全体'
+    elsif genre == 'other'
+      return 'その他'
     else
       return 'その他'
     end
