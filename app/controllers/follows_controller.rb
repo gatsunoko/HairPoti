@@ -8,13 +8,16 @@ class FollowsController < ApplicationController
   end
 
   def follow
-    return if current_user.id == params[:id]
-    if Follow.where('user_id = ? AND stylist_id = ?', current_user.id, params[:id]).count == 0
-      Follow.create(user_id: current_user.id, stylist_id: params[:id])
+    if current_user.id.to_i != params[:id].to_i
+      if Follow.where('user_id = ? AND stylist_id = ?', current_user.id, params[:id]).count == 0
+        Follow.create(user_id: current_user.id, stylist_id: params[:id])
+      else
+        follow = Follow.where('user_id = ? AND stylist_id = ?', current_user.id, params[:id])
+        follow.destroy_all
+      end
+      @user = User.find params[:id]
     else
-      follow = Follow.where('user_id = ? AND stylist_id = ?', current_user.id, params[:id])
-      follow.destroy_all
+      redirect_to root_path
     end
-    @user = User.find params[:id]
   end
 end
