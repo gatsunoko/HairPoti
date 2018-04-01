@@ -28,11 +28,20 @@ RSpec.describe FollowsController, type: :controller do
         expect(Follow.all.count.to_i).to be > follow_count
       end
 
-      it '既にフォローしていた場合フォロー解除される' do
+      it '既にフォローしていた場合、何も起こらない' do
         create(:follow, user_id: @user.id, stylist_id: @user2.id)
         follow_count = Follow.all.count
         get 'follow', params: { id: @user2.id }, xhr: true
         expect(response.status).to eq 200
+        expect(Follow.all.count.to_i).to eq follow_count
+      end
+    end
+
+    context 'stop_follow' do
+      it 'フォローしていた場合、フォローが削除される' do
+        create(:follow, user_id: @user.id, stylist_id: @user2.id)
+        follow_count = Follow.all.count
+        get 'stop_follow', params: { id: @user2.id }, xhr: true
         expect(Follow.all.count.to_i).to be < follow_count
       end
     end

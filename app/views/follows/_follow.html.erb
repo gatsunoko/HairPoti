@@ -2,9 +2,7 @@
   <% unless user.id == current_user.id %>
     <div class="follow_area text-center" id="like_area">
       <% if user.follow_user(current_user.id) %>
-        <%= link_to follow_follow_path(id: user.id), remote: true do %>
-          <P class="un_follow_button">フォローをやめる</P>
-        <% end -%>
+        <P class="following">フォローしています</P>
         <span id="follow_users_display">
           <% if user.follower.count > 0 %>
             <%= link_to followers_follow_path(user.id) do %>

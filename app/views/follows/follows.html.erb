@@ -9,6 +9,11 @@
           <p class="name">名前:<%= follower.stylist.name %></p>
         </div>
       <% end -%>
+      <% if current_user.id == follower.user.id %>
+        <%= link_to stop_follow_follow_path(id: follower.stylist.id) do %>
+          <P class="un_follow_button">フォローをやめる</P>
+        <% end -%>
+      <% end -%>
     </div>
   <% end -%>
 </div>
