@@ -20,6 +20,11 @@ RSpec.describe HomesController, type: :controller do
         get 'index'
         expect(response).to render_template :index
       end
+
+      it 'followsが表示できる' do
+        get 'follows'
+        expect(response).to render_template :index
+      end
     end
   end
 end

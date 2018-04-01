@@ -1,7 +1,9 @@
 class HomesController < ApplicationController
+  before_action :authenticate_user!, only: [:follows]
+
   def index
-    @ranking = Picture.all.where(picture_present: true).includes(:picture_details).order(id: :desc).limit(9).offset(0)
-    @pictures = Picture.all.where(picture_present: true).where.not('id IN (?)', @ranking.pluck(:id)).includes(:picture_details).order(id: :desc).page(params[:page]).per(24)
+    @ranking = Picture.where(picture_present: true).includes(:picture_details).order(id: :desc).limit(9).offset(0)
+    @pictures = Picture.where(picture_present: true).where.not('id IN (?)', @ranking.pluck(:id)).includes(:picture_details).order(id: :desc).page(params[:page]).per(24)
 
     #投票フォームのデフォルト値セット
     if session[:area_default].present?
@@ -21,6 +23,18 @@ class HomesController < ApplicationController
     # else
     #   render 'index' and return
     # end
+    render 'homes/index' and return
+  end
+
+  def follows
+    follows = Follow.where(user_id: current_user.id).pluck(:stylist_id)
+    @pictures = Picture.where(picture_present: true)
+                        .where(user_id: follows)
+                        .includes(:picture_details)
+                        .order(id: :desc)
+                        .page(params[:page])
+                        .per(24)
+
     render 'homes/index' and return
   end
 

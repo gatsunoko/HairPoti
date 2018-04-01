@@ -119,6 +119,12 @@
     </div>
     <h3>新着</h3>
   <% end -%>
+
+  <div class="news_or_follows">
+    <%= link_to_unless((controller.action_name == 'index'), '新着', homes_index_path) %>
+    <%= link_to_unless((controller.action_name == 'follows'), 'フォロー中', homes_follows_path) %>
+  </div>
+
   <%= render 'homes/news', pictures: @pictures %>
 </div>
 

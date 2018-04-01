@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   
   root 'homes#index'
   get 'homes/index'
+  get 'homes/follows'
   get 'homes/after_signup'
   get 'conflict/index'
   get 'conflict/elo'
