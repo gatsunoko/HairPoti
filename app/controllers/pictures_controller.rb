@@ -113,9 +113,6 @@ class PicturesController < ApplicationController
   # DELETE /pictures/1
   # DELETE /pictures/1.json
   def destroy
-    @picture.picture_details.each do |detail|
-      picture_destroy(dir: ENV['HAIR_PICTURE_DIR'], picture: detail.name)
-    end
     @picture.destroy
     redirect_to user_path(current_user.id) and return
     # respond_to do |format|

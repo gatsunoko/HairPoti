@@ -1,4 +1,6 @@
 class Picture < ApplicationRecord
+  include ImageDestroy
+  before_destroy :detail_destroy
   # validates :url, presence: true
   # validates :url, :uniqueness => {:scope => :user_id}
   validates :detail_count, numericality: { only_integer: true, greater_than_or_equal_to: 1, message: 'は一枚以上必要です。' }
@@ -63,4 +65,11 @@ class Picture < ApplicationRecord
       return prefecture+'県'
     end
   end
+
+  private
+    def detail_destroy
+      self.picture_details.each do |detail|
+        picture_destroy(dir: ENV['HAIR_PICTURE_DIR'], picture: detail.name)
+      end
+    end
 end

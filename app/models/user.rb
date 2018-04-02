@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include ImageDestroy
+  before_destroy :profile_picture_destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   before_create :build_default_profile
@@ -65,5 +67,11 @@ class User < ApplicationRecord
 
     def self.dummy_email(auth)
       "#{auth.uid}-#{auth.provider}@omniauthable.com"
+    end
+
+    def profile_picture_destroy
+      if self.picture.present?
+        picture_destroy(dir: ENV['PROFILE_PICTURE_DIR'], picture: self.picture)
+      end
     end
 end
