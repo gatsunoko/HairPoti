@@ -82,10 +82,17 @@ class PicturesController < ApplicationController
 
     respond_to do |format|
       if @picture.save
-        params[:picture_detail].each do |key, value|
+        params[:picture_detail].each_with_index do |(key, value), i|
           if value[:file].present?
-            picture_front = picture_up(file: params[:picture_detail][key][:file], picture_id: @picture.id, name: value[:genre], dir: ENV['HAIR_PICTURE_DIR'])
-            Pictures::PictureDetail.create(name: picture_front, user_id: current_user.id, picture_id: @picture.id, genre: value[:genre])
+            picture_name = picture_up(file: params[:picture_detail][key][:file],
+                                      picture_id: @picture.id,
+                                      name: value[:genre],
+                                      dir: ENV['HAIR_PICTURE_DIR'],
+                                      num: i)
+            Pictures::PictureDetail.create(name: picture_name,
+                                            user_id: current_user.id,
+                                            picture_id: @picture.id,
+                                            genre: value[:genre])
           end
         end
 

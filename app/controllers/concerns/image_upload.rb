@@ -26,24 +26,27 @@ module ImageUpload
 
           original = Magick::Image.from_blob(File.read(file.tempfile)).shift
 
+          picture_name = "#{now}_#{current_user.id}_#{args[:picture_id]}_#{args[:name]}"
+          picture_name = picture_name+args[:num].to_s if args[:num].present?
+
           picture_s = original.resize_to_fit(150, 150)
-          file_full_path="#{args[:dir]}/s#{now}_#{current_user.id}_#{args[:picture_id]}_#{args[:name]}"+File.extname(name).downcase
+          file_full_path="#{args[:dir]}/s"+picture_name+File.extname(name).downcase
           object = bucket.objects[file_full_path]
           object.write(picture_s.to_blob ,:acl => :public_read)
 
           picture_m = original.resize_to_fit(300, 300)
-          file_full_path="#{args[:dir]}/m#{now}_#{current_user.id}_#{args[:picture_id]}_#{args[:name]}"+File.extname(name).downcase
+          file_full_path="#{args[:dir]}/m"+picture_name+File.extname(name).downcase
           object = bucket.objects[file_full_path]
           object.write(picture_m.to_blob ,:acl => :public_read)
 
           if args[:name] != 'profile'
             picture_l = original.resize_to_fit(800, 800)
-            file_full_path="#{args[:dir]}/l#{now}_#{current_user.id}_#{args[:picture_id]}_#{args[:name]}"+File.extname(name).downcase
+            file_full_path="#{args[:dir]}/l"+picture_name+File.extname(name).downcase
             object = bucket.objects[file_full_path]
             object.write(picture_l.to_blob ,:acl => :public_read)
           end
 
-          return "#{now}_#{current_user.id}_#{args[:picture_id]}_#{args[:name]}"+File.extname(name).downcase
+          return picture_name+File.extname(name).downcase
         end
       end
     else
@@ -63,18 +66,21 @@ module ImageUpload
 
           original = Magick::Image.from_blob(File.read(file.tempfile)).shift
 
+          picture_name = "#{now}_#{current_user.id}_#{args[:picture_id]}_#{args[:name]}"
+          picture_name = picture_name+args[:num].to_s if args[:num].present?
+
           picture_s = original.resize_to_fit(150, 150)
-          picture_s.write("public/docs/s#{now}_#{current_user.id}_#{args[:picture_id]}_#{args[:name]}"+File.extname(name).downcase)
+          picture_s.write("public/docs/s"+picture_name+File.extname(name).downcase)
 
           picture_m = original.resize_to_fit(300, 300)
-          picture_m.write("public/docs/m#{now}_#{current_user.id}_#{args[:picture_id]}_#{args[:name]}"+File.extname(name).downcase)
+          picture_m.write("public/docs/m"+picture_name+File.extname(name).downcase)
 
           if args[:name] != 'profile'
             picture_l = original.resize_to_fit(800, 800)
-            picture_l.write("public/docs/l#{now}_#{current_user.id}_#{args[:picture_id]}_#{args[:name]}"+File.extname(name).downcase)
+            picture_l.write("public/docs/l"+picture_name+File.extname(name).downcase)
           end
 
-          return "#{now}_#{current_user.id}_#{args[:picture_id]}_#{args[:name]}"+File.extname(name).downcase
+          return picture_name+File.extname(name).downcase
         end
       end
 
