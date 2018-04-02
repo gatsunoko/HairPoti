@@ -3,8 +3,8 @@
     $('#top_contents').infiniteScroll({
       path: '.navigation a[rel=next]',
       append: '.news',
-      history: 'push',
-      checkLastPage: true,
+      history: 'replace',
+      // checkLastPage: true,
       responseType: 'document'
     });
 
