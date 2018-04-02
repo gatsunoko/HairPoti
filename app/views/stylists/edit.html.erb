@@ -6,6 +6,17 @@
   </div>
 <% end -%>
 <%= form_for(@user, url: stylist_path(@user), html: { method: :patch }) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2 style="color: red;"><%= pluralize(@user.errors.count, "つのエラーにより") %>更新に失敗しました。</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li style="color: red;"><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <% if @user.provider.blank? %>
     <div class="form-group col-sm-6 col-md-4">

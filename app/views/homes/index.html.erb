@@ -8,6 +8,19 @@
 <%
 =end
 %>
+<div class="news_or_follows">
+  <% if controller.action_name == 'index' %>
+    <p class="active">新着</p>
+  <% else %>
+    <%= link_to '新着', homes_index_path, class: 'un_active' %>
+  <% end -%>
+  <% if controller.action_name == 'follows' %>
+    <p class="active">フォロー中</p>    
+  <% else %>
+    <%= link_to 'フォロー中', homes_follows_path, class: 'un_active' %>
+  <% end -%>
+</div>
+
 <div class="text-center" >
   <% unless user_signed_in? %>
     <div class="col-12 my-1">
@@ -119,11 +132,6 @@
     </div>
     <h3>新着</h3>
   <% end -%>
-
-  <div class="news_or_follows">
-    <%= link_to_unless((controller.action_name == 'index'), '新着', homes_index_path) %>
-    <%= link_to_unless((controller.action_name == 'follows'), 'フォロー中', homes_follows_path) %>
-  </div>
 
   <%= render 'homes/news', pictures: @pictures %>
 </div>
