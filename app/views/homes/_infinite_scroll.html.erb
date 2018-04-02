@@ -3,7 +3,7 @@
     $('#top_contents').infiniteScroll({
       path: '.navigation a[rel=next]',
       append: '.news',
-      history: false,
+      history: 'push',
       checkLastPage: true,
       responseType: 'document'
     });

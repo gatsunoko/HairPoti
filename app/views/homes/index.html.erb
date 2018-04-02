@@ -8,18 +8,20 @@
 <%
 =end
 %>
-<div class="news_or_follows">
-  <% if controller.action_name == 'index' %>
-    <p class="active">新着</p>
-  <% else %>
-    <%= link_to '新着', homes_index_path, class: 'un_active' %>
-  <% end -%>
-  <% if controller.action_name == 'follows' %>
-    <p class="active">フォロー中</p>    
-  <% else %>
-    <%= link_to 'フォロー中', homes_follows_path, class: 'un_active' %>
-  <% end -%>
-</div>
+<% if controller.controller_name == 'homes' %>
+  <div class="news_or_follows">
+    <% if controller.action_name == 'index' %>
+      <p class="active">新着</p>
+    <% else %>
+      <%= link_to '新着', homes_index_path, class: 'un_active' %>
+    <% end -%>
+    <% if controller.action_name == 'follows' %>
+      <p class="active">フォロー中</p>    
+    <% else %>
+      <%= link_to 'フォロー中', homes_follows_path, class: 'un_active' %>
+    <% end -%>
+  </div>
+<% end -%>
 
 <div class="text-center" >
   <% unless user_signed_in? %>
