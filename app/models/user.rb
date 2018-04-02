@@ -37,6 +37,20 @@ class User < ApplicationRecord
     user
   end
 
+  def self.find_for_google(auth)
+    user = User.where(uid: auth.uid, provider: auth.provider).first
+    unless user
+      user = User.create(name:     'ユーザーネーム未設定',
+                         provider: auth.provider,
+                         email:    User.dummy_email(auth),
+                         uid:      auth.uid,
+                         token:    auth.credentials.token,
+                         password: Devise.friendly_token[0, 20],
+                         confirmed_at: Date.today)
+    end
+    user
+  end
+
   def follow_user(user_id)
     return follower.exists?(user_id: user_id)
   end

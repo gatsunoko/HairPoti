@@ -39,6 +39,16 @@
         </table>
       <% end -%>
     </div>
+
+    <div class="col-12 my-1">
+      <%= link_to(user_google_omniauth_authorize_path, class: 'twitter_signed_link btn btn-danger btn-lg') do %>
+        <table border="0" width="100%">
+          <tr>
+            <th><p>Googleで登録/ログイン</p></th>
+          </tr>
+        </table>
+      <% end -%>
+    </div>
   <% end -%>
 <%
 =begin

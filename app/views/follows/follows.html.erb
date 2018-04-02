@@ -6,7 +6,7 @@
           <%= image_tag(user_image_display(path: follower.stylist.picture, size: "m", dir: 'PROFILE_PICTURE_DIR')) %>
         </div>
         <div class="text_area">
-          <p class="name">名前:<%= follower.stylist.name %></p>
+          <p class="name"><%= follower.stylist.name %></p>
         </div>
       <% end -%>
       <% if current_user.id == follower.user.id %>
