@@ -21,7 +21,7 @@ gem 'coffee-rails', '~> 4.2'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -36,20 +36,20 @@ gem 'jbuilder', '~> 2.5'
 gem 'therubyracer', platforms: :ruby #本番環境に必要
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 
-gem 'dotenv-rails'
+gem 'dotenv-rails', '~> 2.2', '>= 2.2.1'
 gem 'kaminari', '~> 0.17.0'
-gem 'elo'
-gem 'devise'
-gem 'nokogiri'
-gem "jquery-turbolinks"
+gem 'elo', '~> 0.1.0'
+gem 'devise', '~> 4.4', '>= 4.4.3'
+gem 'nokogiri', '~> 1.8', '>= 1.8.2'
+gem 'jquery-turbolinks', '~> 2.1'
 gem 'bootstrap', '~> 4.0.0.beta2.1'
-gem 'browser'
-gem 'rmagick'
+gem 'browser', '~> 2.5', '>= 2.5.3'
+gem 'rmagick', '~> 2.16'
 gem 'counter_culture', '~> 1.8'
-gem 'omniauth'
-gem 'omniauth-twitter'
+gem 'omniauth', '~> 1.8', '>= 1.8.1'
+gem 'omniauth-twitter', '~> 1.4'
 # gem 'omniauth-instagram'
-gem 'omniauth-google-oauth2'
+gem 'omniauth-google-oauth2', '~> 0.5.3'
 
 group :production do
   gem 'aws-sdk', '1.61'
