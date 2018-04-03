@@ -4,6 +4,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   before_create :build_default_profile
+  before_validation :profile_validation_gsub
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable
@@ -73,5 +74,9 @@ class User < ApplicationRecord
       if self.picture.present?
         picture_destroy(dir: ENV['PROFILE_PICTURE_DIR'], picture: self.picture)
       end
+    end
+
+    def profile_validation_gsub
+      self.profile = self.profile.gsub("\r\n", "\n") if self.profile != nil
     end
 end

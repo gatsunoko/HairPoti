@@ -1,8 +1,10 @@
 class Picture < ApplicationRecord
   include ImageDestroy
   before_destroy :detail_destroy
+  before_validation :text_validation_gsub
   # validates :url, presence: true
   # validates :url, :uniqueness => {:scope => :user_id}
+
   validates :detail_count, numericality: { only_integer: true, greater_than_or_equal_to: 1, message: 'は一枚以上必要です。' }
   validates :text, length: { maximum: 400 }
 
@@ -71,5 +73,9 @@ class Picture < ApplicationRecord
       self.picture_details.each do |detail|
         picture_destroy(dir: ENV['HAIR_PICTURE_DIR'], picture: detail.name)
       end
+    end
+
+    def text_validation_gsub
+      self.text = self.text.gsub("\r\n", "\n") if self.text != nil
     end
 end
