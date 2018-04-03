@@ -20,19 +20,48 @@
 }
 
 .followers_area {
-  text-align: center;
-  .follower_area {
+  margin: 0 auto;
+  max-width: 700px;
+}
+.follower_area {
+  width: 100%;
+  border-bottom: 1px solid #D9D9D9;
+  margin: 5px 0;
+  text-align: left;
+  img {
     display: inline-block;
-    width: 31%;
-    .picture_area {
-      width: 100%;
-      img {
-        max-width: 100%;
-        height: auto;
-      }
+    width: 15%;
+    max-width: 90px;
+    height: auto;
+  }
+  p {
+    margin: 0;
+  }
+  .name_area {
+    text-align: left;
+    display: inline-block;
+    width: 83%;
+    overflow: hidden;
+    p.name {
+      float: left;
+      font-size: 16px;
+      font-weight: bold;
+      color: black;
     }
-    .text_area {
-      width: 100%;
+    .un_follow_button {
+      float: right;
+      font-size: 12px;
+    }
+  }
+  .profile {
+    padding-left: 90px;
+    display: block;
+    width: 100%;
+    @media screen and (max-width: 460px){
+      padding: 0;
+    }
+    p {
+      font-size: 14px;
     }
   }
 }

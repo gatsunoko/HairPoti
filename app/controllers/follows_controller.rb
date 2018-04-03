@@ -4,7 +4,7 @@ class FollowsController < ApplicationController
   end
 
   def follows
-    @followers = Follow.where(user_id: params[:id]).includes(:user).order(id: :desc).page(params[:page]).per(24)
+    @followers = Follow.where(user_id: params[:id]).includes(:user).includes(:stylist).order(id: :desc).page(params[:page]).per(24)
   end
 
   def follow

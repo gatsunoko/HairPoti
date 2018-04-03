@@ -1,19 +1,13 @@
-<div class="followers_area">
-  <% @followers.each do |follower| %>
-    <div class="follower_area">
-      <%= link_to user_path(follower.stylist.id) do %>
-        <div class="picture_area">
-          <%= image_tag(user_image_display(path: follower.stylist.picture, size: "m", dir: 'PROFILE_PICTURE_DIR')) %>
-        </div>
-        <div class="text_area">
-          <p class="name"><%= follower.stylist.name %></p>
-        </div>
-      <% end -%>
-      <% if current_user.id == follower.user.id %>
-        <%= link_to stop_follow_follow_path(id: follower.stylist.id) do %>
-          <P class="un_follow_button">フォローをやめる</P>
-        <% end -%>
-      <% end -%>
-    </div>
-  <% end -%>
+<div id="top_contents">
+  <%= render 'follows/follow_list', followers: @followers %>
 </div>
+
+<div class="navigation" style="display: none;">
+  <%= paginate @followers %>
+  <%# infinite_scrollでの無限スクロールではリンクパラメータの最後がページ番号でないといけない為、ページ番号の後のパラメータを削除するjs %>
+  <script>
+    $(".navigation a[rel=next]")[0]['href'] = $(".navigation a[rel=next]")[0]['href'].replace(/&utf.*/,"");
+  </script>
+</div>
+
+<%= render 'follows/infinite_scroll', followers: @followers, read_class: '.followers_area' %>

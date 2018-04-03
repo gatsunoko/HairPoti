@@ -1,0 +1,13 @@
+<div class="followers_area" id="top_contents">
+  <% followers.each.with_index(1) do |follower, i| %>
+    <div class="follower_area">
+      <%= link_to user_path(follower.user.id) do %>
+        <%= image_tag(user_image_display(path: follower.user.picture, size: "s", dir: 'PROFILE_PICTURE_DIR')) %>
+        <div class="name_area">
+          <p class="name"><%= follower.user.name %></p>
+        </div>
+      <% end -%>
+      <div class="profile"><%= simple_format(truncate(follower.user.profile, length: 100)) %></div>
+    </div>
+  <% end -%>
+</div>
