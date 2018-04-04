@@ -70,8 +70,11 @@ $(document).on('turbolinks:load', function() {
   });
 });
 
-// ページ遷移前にinfinit scrollをdestroyしておかないとターボリンクのせいでスクロールするたびにバックでリクエストが飛ぶので、ページ遷移前に破棄する
+
 $(document).on('turbolinks:request-start', function() {
+  //ページ遷移前にモーダルを閉じる
+  $(".modal").modal('hide');
+  // ページ遷移前にinfinit scrollをdestroyしておかないとターボリンクのせいでスクロールするたびにバックでリクエストが飛ぶので、ページ遷移前に破棄する
   $('#top_contents').infiniteScroll('destroy');
   $('#top_contents').remove();
 });

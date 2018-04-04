@@ -35,12 +35,22 @@ $(document).on('turbolinks:load', function() {
   // modalの閉じる機能が動作した時
   $(".modal").on("hidden.bs.modal", function () {
     if(location.hash == "#" + $(this).attr('id')) {
-      history.back()
+      history.back();
     }
   })
 
   // 「戻る」ボタンが押された時
   $(window).on('popstate', function() { 
-    $(".modal").modal('hide')
+    if($(".modal").is(":hidden") == false) {
+      // console.log("a");
+      $(".modal").modal('hide');
+    } else {
+      location.reload();
+      // if(location.href.match(/#modal_area/)) {
+      //   console.log("c");
+      //   history.back();
+      // }
+      // console.log("b");
+    }
   })
 </script>
