@@ -37,6 +37,12 @@
 
       <%= render 'likes/like', picture: picture %>
 
+      <div id="share_button_area<%= picture.id.to_s %>">
+        <% if (defined? number) != nil || controller.action_name == "show" %>
+          <%= render 'pictures/share_button', picture_id: picture.id %>
+        <% end -%>
+      </div>
+
       <div class="picture_show_stylist_profile_area">
         <p class="stylist_name">スタイリスト:<%= picture.user.name %></p>
         <% if picture.user.picture.present? %>

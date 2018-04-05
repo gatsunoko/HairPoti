@@ -1,0 +1,12 @@
+<% shareUrl = ENV['SHARE_URL'].to_s + picture_id.to_s %>
+<%# ツイートボタン %>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="へあぽち投稿画像" data-size="large" data-url="<%= shareUrl %>">Tweet</a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<%# フェイスブックシェア %>
+<% facebook_share_url = shareUrl.gsub(':','%3A') %>
+<% facebook_share_url = facebook_share_url.gsub('/','%2F') %>
+<% facebook_share_url = "https://www.facebook.com/plugins/share_button.php?href=" + facebook_share_url + "&layout=button&size=large&mobile_iframe=true&width=75&height=28&appId" %>
+<iframe src=<%= facebook_share_url.to_s %> width="75" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+<%# LINEシェアボタン %>
+<div class="line-it-button" data-lang="ja" data-type="share-a" data-url="<%= shareUrl %>" style="display: none;"></div>
+<script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
