@@ -9,6 +9,8 @@
       <P>ユーザータイプ:<%= user.role %></P>
       <P>プロバイダー :<%= user.provider %></P>
       <P>メールアドレス:<%= user.email %></P>
+      <P>フォロワー:<%= user.follower_count %></P>
+      <P>フォロー:<%= user.follows_count %></P>
     </div>
 
     <%= link_to '詳細', user_path(user) %>

@@ -1,9 +1,15 @@
-<% if pictures.total_pages > 1 %>
+<% if contants.total_pages > 1 %>
+  <div class="page-load-status">
+    <p class="infinite-scroll-request text-center"><%= image_tag 'loading.gif', alt: 'Loading…' %></p>
+    <!-- <p class="infinite-scroll-last">これ以上画像はありません。</p> -->
+    <!-- <p class="infinite-scroll-error">No more pages to load</p> -->
+  </div>
   <script>
     $('#top_contents').infiniteScroll({
       path: '.navigation a[rel=next]',
-      append: '.news',
+      append: '<%= read_class %>',
       history: 'replace',
+      status: '.page-load-status',
       // checkLastPage: true,
       responseType: 'document'
     });
@@ -11,28 +17,31 @@
     <%# kaminari と infinite scroll の組み合わせだとcheckLastPageが正常に機能せず、最後のページになっても次のページのリクエストを飛ばし続けるので、力業で終了させる %>
     $('#top_contents').on( 'load.infiniteScroll', function(event, response, path) {
       page = path.replace(/.*page=/, "")
-      if(Number(page) > <%= pictures.total_pages %>) {
+      if(Number(page) > <%= contants.total_pages %>) {
         $('#top_contents').infiniteScroll('destroy');
+        $('.page-load-status').remove();
         return;
       }
     });
 
-    $('#top_contents').on( 'append.infiniteScroll', function(event, response, path, items) {
-      prev_page = Number(page)-1;
+    <% if read_class == '.news' %>
+      $('#top_contents').on( 'append.infiniteScroll', function(event, response, path, items) {
+        prev_page = Number(page)-1;
 
-      <%# 新着が前にある場合、新着のひとつ前をセットする、新着の一番最初だった場合おすすめの最後の数をセットする %>
-      if(prev_page == 0) {
-        prev_last = 9
-      } else {
-        prev_last = 24
-      }
-      <%# 追加される要素の最初のprevに前回のループの最後のIDを入れて、前回のループの最後のnextに今回の最初のIDをいれる %>
-      prev = $("#news_"+prev_page+" ."+prev_last+" ._current").text();
-      current = $("#news_"+page+" .1 ._current").text()
-      $("#news_"+page+" .1 ._prev").text(prev);
-      $("#news_"+prev_page+" ."+prev_last+" ._next").text(current);
-      $("#picture_link_"+current).attr('data-href', $("#picture_link_"+current).attr('data-href')+"&prev_id="+prev)
-      $("#picture_link_"+prev).attr('data-href', $("#picture_link_"+prev).attr('data-href')+"&next_id="+current)
-    });
+        <%# 新着が前にある場合、新着のひとつ前をセットする、新着の一番最初だった場合おすすめの最後の数をセットする %>
+        if(prev_page == 0) {
+          prev_last = 9
+        } else {
+          prev_last = 24
+        }
+        <%# 追加される要素の最初のprevに前回のループの最後のIDを入れて、前回のループの最後のnextに今回の最初のIDをいれる %>
+        prev = $("#news_"+prev_page+" ."+prev_last+" ._current").text();
+        current = $("#news_"+page+" .1 ._current").text()
+        $("#news_"+page+" .1 ._prev").text(prev);
+        $("#news_"+prev_page+" ."+prev_last+" ._next").text(current);
+        $("#picture_link_"+current).attr('data-href', $("#picture_link_"+current).attr('data-href')+"&prev_id="+prev)
+        $("#picture_link_"+prev).attr('data-href', $("#picture_link_"+prev).attr('data-href')+"&next_id="+current)
+      });
+    <% end -%>
   </script>
 <% end -%>

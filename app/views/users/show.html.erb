@@ -39,5 +39,5 @@
     <%= paginate @pictures %>
   </div>
   <%# 無限スクロールのJS path の中の append の部分を追加する %>
-  <%= render 'homes/infinite_scroll', pictures: @pictures %>
+  <%= render 'homes/infinite_scroll', contants: @pictures, read_class: '.news' %>
 <% end -%>
