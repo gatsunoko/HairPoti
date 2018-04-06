@@ -50,6 +50,7 @@ gem 'omniauth', '~> 1.8', '>= 1.8.1'
 gem 'omniauth-twitter', '~> 1.4'
 # gem 'omniauth-instagram'
 gem 'omniauth-google-oauth2', '~> 0.5.3'
+gem 'clipboard-rails', '~> 1.7', '>= 1.7.1'
 
 group :production do
   gem 'aws-sdk', '1.61'

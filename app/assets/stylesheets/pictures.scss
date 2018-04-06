@@ -99,3 +99,33 @@
     }
   }
 }
+
+.share_button_area {
+  display: block;
+  .tweet,
+  .facebook,
+  .line,
+  .url {
+    display: inline;
+  }  
+}
+@media screen and (max-width: 768px) {
+  .share_button_area {
+    display: table;
+    .tweet,
+    .facebook,
+    .line,
+    .url {
+      display: table-cell;
+      vertical-align: top;
+      btn {
+        display: inline;
+      }
+    }  
+  }
+}
+.url_copy_text {
+  font-size: 2px;
+  margin: 0;
+  display: none;
+}

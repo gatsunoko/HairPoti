@@ -69,6 +69,7 @@ GEM
       xpath (>= 2.0, < 4.0)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
+    clipboard-rails (1.7.1)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -327,6 +328,7 @@ DEPENDENCIES
   browser (~> 2.5, >= 2.5.3)
   byebug
   capybara
+  clipboard-rails (~> 1.7, >= 1.7.1)
   coffee-rails (~> 4.2)
   counter_culture (~> 1.8)
   database_cleaner

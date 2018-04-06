@@ -16,7 +16,16 @@
   </div>
 <% end -%>
 <div class="picture_area row picture_<%= picture.id %>">
-  <div class="show_information_area col-sm-3 order-2 order-md-1">
+  <div class="show_picture_area col-md-9 order-1 order-md-2">
+    <div class="current_picture_area">
+      <% picture.picture_details.each do |detail| %>
+        <p><%= picture_genre(detail.genre) %></p>
+        <%= image_tag(display_picture(size: "l", name: detail.name, dir: 'HAIR_PICTURE_DIR'), id: "show_picture_#{picture.id}", class: 'show_picture', alt: '画像') %>
+      <% end -%>
+    </div>
+  </div>
+
+  <div class="show_information_area col-md-3 order-2 order-md-1">
     <p class="mx-2 my-1"><%= gender_view(picture.gender) %></p>
     <p class="length mx-2">長さ:<%= length_view(picture.length) %></p>
     <p class="color mx-2">カラー:<%= color_view(picture.color) %></p>
@@ -37,7 +46,7 @@
 
       <%= render 'likes/like', picture: picture %>
 
-      <div id="share_button_area<%= picture.id.to_s %>">
+      <div class="share_button_area" id="share_button_area<%= picture.id.to_s %>">
         <% if (defined? number) != nil || controller.action_name == "show" %>
           <%= render 'pictures/share_button', picture_id: picture.id %>
         <% end -%>
@@ -61,14 +70,6 @@
           <p>電話番号:<%= picture.user.stylist.shop_phone_number %></p>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="show_picture_area col-sm-9 order-1 order-sm-2">
-    <div class="current_picture_area">
-      <% picture.picture_details.each do |detail| %>
-        <p><%= picture_genre(detail.genre) %></p>
-        <%= image_tag(display_picture(size: "l", name: detail.name, dir: 'HAIR_PICTURE_DIR'), id: "show_picture_#{picture.id}", class: 'show_picture', alt: '画像') %>
-      <% end -%>
     </div>
   </div>
 </div>

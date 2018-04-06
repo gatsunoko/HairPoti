@@ -14,6 +14,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require infinite-scroll.pkgd.min
+//= require clipboard
 //= require turbolinks
 //= require popper
 //= require bootstrap-sprockets

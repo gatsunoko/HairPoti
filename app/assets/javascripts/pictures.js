@@ -14,3 +14,15 @@ function previewFile(name) {
     $('img[name="' + name + '"]')[0].alt = ""//何も選択されなかったらプレビュー空白にする
   }
 }
+
+$(document).ready(function(){  
+  var clipboard = new Clipboard('.clipboard-btn');
+
+  clipboard.on('success', function(e) {
+    alert('URLをコピーしました。');
+  });
+
+  clipboard.on('error', function(e) {
+    alert('お使いの端末では対応していません。');
+  });
+});
