@@ -2,6 +2,6 @@
   <% if controller.action_name != 'show' %>
     <%= render 'show_modal' %>
   <% else %>
-    <%= render 'show_modal_picture_area', picture: @picture %>
+    <%= render 'show_detail', picture: @picture %>
   <% end -%>
 </div>

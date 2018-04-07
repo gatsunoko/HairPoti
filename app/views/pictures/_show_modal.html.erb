@@ -6,7 +6,7 @@
     <% end -%>
 
     <li id="current_picture" class="swiper-slide">
-      <%= render 'show_modal_picture_area', picture: @picture, number: 1 %>
+      <%= render 'show_detail', picture: @picture, number: 1 %>
     </li>
 
     <% if @next_picture.present? %>
@@ -49,12 +49,12 @@
 
   $('#current_picture .current_picture_area img').ready(function() {
     <% if @prev_picture.present? %>
-      $("#prev_picture").html("<%= escape_javascript(render 'show_modal_picture_area', picture: @prev_picture, number: 0) %>");
+      $("#prev_picture").html("<%= escape_javascript(render 'show_detail', picture: @prev_picture, number: 0) %>");
       swiper.slideNext(0, false);
       swiper.update();
     <% end -%>
     <% if @next_picture.present? %>
-      $("#next_picture").html("<%= escape_javascript(render 'show_modal_picture_area', picture: @next_picture, number: 2) %>");
+      $("#next_picture").html("<%= escape_javascript(render 'show_detail', picture: @next_picture, number: 2) %>");
       swiper.update();
     <% end -%>
   });

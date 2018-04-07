@@ -1,5 +1,5 @@
 <% if @picture.present? %>
-  swiper.appendSlide("<li class='swiper-slide'><%= escape_javascript(render 'show_modal_picture_area', picture: @picture) %></li>");
+  swiper.appendSlide("<li class='swiper-slide'><%= escape_javascript(render 'show_detail', picture: @picture) %></li>");
   $('#share_button_area<%= @picture.id %>').append("<%= escape_javascript(render 'pictures/share_button', picture_id: @picture.id) %>");
 
   next = $("#prev_next_<%= @picture.id %> ._next").text();
