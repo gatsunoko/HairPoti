@@ -1,7 +1,12 @@
 <h2>ログイン</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
+  <% if alert %>
+    <div class="user_errors_area">
+      <p class="alert alert-error"><%= alert %></p>
+    </div>
+  <% end %>
+  
   <div class="form-group col-sm-6 col-md-4">
     <%= f.label :email %>
     <%= f.email_field :email, autofocus: true, class: 'form-control' %>

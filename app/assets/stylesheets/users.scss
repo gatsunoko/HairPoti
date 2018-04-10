@@ -10,3 +10,9 @@
 .stylist_show img {
   max-width: 100%;
 }
+
+.user_errors_area {
+  h2, li, p {
+    color: red;
+  }
+}
