@@ -54,14 +54,14 @@ RSpec.describe PicturesController, type: :controller do
         let(:length1) { 'short' }
         let(:length2) { 'long' }
 
-        it 'エリアパラメーターが愛知で検索結果が12件以上ある場合は12件(kaminari 1ページ分)を取得してindexが表示できる' do
+        it 'エリアパラメーターが愛知で検索結果が24件以上ある場合は24件(kaminari 1ページ分)を取得してindexが表示できる' do
           subject
           get 'search', params: { area: '愛知', length: [ 'short', 'long'] }
           expect(assigns(:pictures).count).to eq per
           expect(response).to render_template 'homes/index'
         end
 
-        it '長さがショートの件数が10件でエリア未指定の場合、ショートで検索すると15件表示される' do
+        it 'lengthがショートの件数が15件でエリア未指定の場合、ショートで検索すると15件表示される' do
           subject
           get 'search', params: { area: '愛知', length: [ 'short'] }
           expect(assigns(:pictures).count).to eq 15
@@ -99,6 +99,28 @@ RSpec.describe PicturesController, type: :controller do
         get 'new'
         expect(response.status).to eq 200
         expect(response).to render_template :new
+      end
+    end
+
+    context 'update' do
+      it '自分が投稿した画像ならばupdateできる' do
+        @picture = create(:picture, user_id: @user.id)
+        expect(@picture.text).to_not eq 'after update'
+        patch 'update', params: { id: @picture.id, picture: { text: 'after update' } }
+        expect(assigns(:picture)).to eq @picture
+        expect(assigns(:picture).text).to eq 'after update'
+        expect(Picture.find(@picture.id).text).to eq 'after update'
+      end
+
+      it '他者が投稿した画像はupdateできずroot_patにリダイレクトされる' do
+        @picture = create(:picture, user_id: @user2.id, text: 'text')
+        expect(@picture.text).to eq 'text'
+        patch 'update', params: { id: @picture.id, picture: { text: 'after update' } }
+        expect(Picture.find(@picture.id).text).to_not eq 'after update'
+
+        expect(response.status).to be >= 300
+        expect(response.status).to be < 400
+        expect(response).to redirect_to root_path
       end
     end
   end
